@@ -12,6 +12,7 @@ export default defineNuxtConfig({
         '@nuxt/image'
         // '@nuxt/test-utils',
     ],
+
     devtools: { enabled: true },
 
     css: ['~/assets/css/main.css'],
@@ -28,6 +29,7 @@ export default defineNuxtConfig({
     devServer: {
         port: 3001
     },
+
     compatibilityDate: '2024-11-01',
 
     vite: {
