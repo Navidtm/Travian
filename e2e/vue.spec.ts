@@ -1,10 +1,4 @@
-import { test, expect, chromium } from '@playwright/test';
-
-// const s = await chromium.connect('');
-// const sx = await s.newPage();
-
-// See here how to get started:
-// https://playwright.dev/docs/intro
+import { test, expect } from '@playwright/test';
 
 function timeToMilliseconds(timeString: string) {
   const [hours, minutes, seconds] = timeString.split(':').map(Number);
@@ -15,7 +9,7 @@ test('visits the app root url', async ({ page }) => {
   await page.context().addCookies([
     {
       name: 'COOKEMAIL',
-      value: 'navidt81%40gmail.com',
+      value: '123%40gmail.com',
       domain: 'travianwars.ir',
       path: '/',
       secure: true,
@@ -29,29 +23,32 @@ test('visits the app root url', async ({ page }) => {
     },
     {
       name: 'PHPSESSID',
-      value: 'a7b9e3c73ac76e2d87f23e983f9aaf3b',
+      value: '7cbaeb588fb9f555791451e8dc5fcab8',
       domain: 'travianwars.ir',
       path: '/',
       secure: true,
     },
   ]);
 
-  for (let i = 16; i <= 18; i++) {
-    for (let j = 0; j < 8; j++) {
-      try {
-        await page.goto(`https://travianwars.ir/ts1/build.php?id=${i}`);
+  await page.goto(`https://travianwars.ir/ts2/build.php?id=${1}`);
+  // for (let i = 3; i <= 18; i++) {
+  //   for (let j = 0; j < 6; j++) {
+  //     try {
+  //       await page.goto(`https://travianwars.ir/ts2/build.php?id=${i}`);
+  //       // await page.goto(`https://threedify.org`);
 
-        const text = await page.locator('.clocks').textContent();
-        await page.locator(`button[value="Upgrade level"]`).click();
+  //       const text = await page.locator('.clocks').textContent();
 
-        // eslint-disable-next-line playwright/no-conditional-in-test
-        if (text) {
-          // eslint-disable-next-line playwright/no-wait-for-timeout
-          await page.waitForTimeout(timeToMilliseconds(text));
-        }
-      } catch (error) {}
-    }
-  }
+  //       await page.locator(`button[value="Upgrade level"]`).click();
+
+  //       // eslint-disable-next-line playwright/no-conditional-in-test
+  //       if (text) {
+  //         // eslint-disable-next-line playwright/no-wait-for-timeout
+  //         await page.waitForTimeout(timeToMilliseconds(text) / 2);
+  //       }
+  //     } catch (error) {}
+  //   }
+  // }
 
   expect(2 + 2).toBe(4);
 });
