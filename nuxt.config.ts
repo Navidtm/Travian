@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 
     devtools: { enabled: true },
 
-    css: ['~/assets/css/main.css'],
+    css: ['./assets/css/main.css'],
 
     runtimeConfig: {
         id: process.env.PHPSESSID,
@@ -28,6 +28,10 @@ export default defineNuxtConfig({
 
     devServer: {
         port: 3001
+    },
+
+    future: {
+        compatibilityVersion: 4
     },
 
     compatibilityDate: '2024-11-01',
