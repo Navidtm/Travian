@@ -8,6 +8,7 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@nuxt/fonts',
         '@nuxt/icon',
+        '@nuxt/ui',
         '@vueuse/nuxt',
         '@nuxt/image',
         '@nuxt/test-utils'
@@ -15,7 +16,11 @@ export default defineNuxtConfig({
 
     devtools: { enabled: true },
 
-    css: ['./assets/css/main.css'],
+    css: ['~/assets/css/main.css'],
+
+    ui: {
+        colorMode: false
+    },
 
     runtimeConfig: {
         id: process.env.PHPSESSID,
