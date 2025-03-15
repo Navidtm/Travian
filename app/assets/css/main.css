@@ -7,8 +7,3 @@
     direction: rtl;
   }
 }
-
-@theme {
-  --font-weight-extrablack: 950;
-  --font-weight-heavy: 1000;
-}
