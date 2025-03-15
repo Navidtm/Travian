@@ -12,5 +12,8 @@
   },
   "editor.quickSuggestions": {
     "strings": "on"
+  },
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
