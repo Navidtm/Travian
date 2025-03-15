@@ -14,6 +14,8 @@ export default defineNuxtConfig({
         '@nuxt/test-utils'
     ],
 
+    ssr: false,
+
     components: [
         {
             path: '~/components',
