@@ -14,6 +14,22 @@ export default defineNuxtConfig({
         '@nuxt/test-utils'
     ],
 
+    components: [
+        {
+            path: '~/components',
+            pathPrefix: false
+        }
+    ],
+
+    imports: {
+        presets: [
+            {
+                from: 'es-toolkit',
+                imports: ['es-toolkit']
+            }
+        ]
+    },
+
     devtools: { enabled: true },
 
     css: ['~/assets/css/main.css'],
@@ -55,5 +71,16 @@ export default defineNuxtConfig({
                 commaDangle: 'never'
             }
         }
+    },
+
+    fonts: {
+        families: [
+            {
+                provider: 'local',
+                name: 'iransans',
+                weights: [100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000],
+                src: './public/fonts/Woff2'
+            }
+        ]
     }
 });

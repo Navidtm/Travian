@@ -1,2 +1,14 @@
-@import "tailwindcss" theme(static);
-@import "@nuxt/ui";
+@import 'tailwindcss' theme(static);
+@import '@nuxt/ui';
+
+@layer base {
+  body {
+    font-family: 'iransans';
+    direction: rtl;
+  }
+}
+
+@theme {
+  --font-weight-extrablack: 950;
+  --font-weight-heavy: 1000;
+}
