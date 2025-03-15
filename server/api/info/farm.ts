@@ -4,10 +4,14 @@ export default defineEventHandler(async (event) => {
 
     const levels = await getFarmLevels(page, baseURL);
     const products = await getFarmProducts(page, baseURL);
+    const troops = await getTroops(page, baseURL);
+    const resourses = await getResourses(page, baseURL);
 
     return {
         levels,
+        troops,
         products,
+        resourses,
         meta: {
             url: page.url(),
             date: Date.now()

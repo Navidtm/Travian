@@ -9,7 +9,7 @@ export const withoutBuilding = 'بدون ساختمان';
 
 export const numOfFarmsItems = 18;
 
-export const farmTypes: Record<number, string> = {
+export const farmTypes: Record<number, Resourse> = {
     1: 'wood',
     2: 'wheat',
     3: 'wood',

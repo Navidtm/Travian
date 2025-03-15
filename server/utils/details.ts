@@ -22,3 +22,48 @@ export const getFarmProducts = async (page: Page, baseURL: string) => {
 
     return products;
 };
+
+export const getTroops = async (page: Page, baseURL: string) => {
+    const farmURL = baseURL + FarmPath;
+
+    if (page.url() != farmURL) {
+        await page.goto(farmURL);
+    }
+
+    const detailsTable = page.locator('#troops');
+
+    const numbersLocator = await detailsTable.locator('.num').all();
+    const titlesLocator = await detailsTable.locator('.un').all();
+
+    const titles = await Promise.all(titlesLocator.map(v => v.innerText()));
+    const numbers = await Promise.all(numbersLocator.map(v => v.innerText()));
+
+    const troops = Array.from({ length: titles.length }).map((_, i) => ({
+        name: titles[i],
+        amount: +numbers[i]
+    }));
+
+    return troops;
+};
+
+export const getResourses = async (page: Page, baseURL: string) => {
+    const farmURL = baseURL + FarmPath;
+
+    if (page.url() != farmURL) {
+        await page.goto(farmURL);
+    }
+
+    const resoursesLocator = page.locator('#res');
+
+    const resourseOrders: Resourse[] = ['wood', 'clay', 'iron', 'wheat', 'population'];
+
+    const resourseText = await Promise.all(resourseOrders.map((_, i) => resoursesLocator.locator(`#l${i + 1}`).innerText()));
+
+    const resourses = resourseText.map((v, i) => ({
+        name: resourseOrders[i] ?? 'clay',
+        amount: +v.split('/')[0],
+        max: +v.split('/')[1]
+    }));
+
+    return resourses;
+};

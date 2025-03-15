@@ -17,7 +17,7 @@ export const getFarmLevels = async (page: Page, baseURL: string) => {
     const levels = farmLevels.map((v, i) => ({
         level: +`${v}`,
         id: i + 1,
-        type: farmTypes[i + 1]
+        type: farmTypes[i + 1] ?? 'clay'
     }));
 
     return levels;
@@ -41,8 +41,9 @@ export const getVillageLevels = async (page: Page, baseURL: string) => {
     const levels = levelElements.map(v => v ?? '').map((v, i) => ({
         level: isEmpty(v) ? 0 : extractNumber(v),
         name: isEmpty(v) ? withoutBuilding : extractName(v),
-        id: i + numOfFarmsItems + 1
+        id: i + numOfFarmsItems + 1,
+        isEmpty: isEmpty(v)
     }));
 
-    return { levels };
+    return levels;
 };
