@@ -5,5 +5,7 @@
   body {
     font-family: 'iransans';
     direction: rtl;
+    font-weight: 500;
+    background-color: #000;
   }
 }
