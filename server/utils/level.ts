@@ -1,5 +1,5 @@
 import type { Page } from 'playwright-core';
-import { emptyBuilding, farmLevelsId, FarmPath, numOfFarmsItems, villagePath, withoutBuilding } from '../constants/consts';
+import { emptyBuilding, farmLevelsId, FarmPath, farmTypes, numOfFarmsItems, villagePath, withoutBuilding } from '../constants/consts';
 
 export const getFarmLevels = async (page: Page, baseURL: string) => {
     const farmURL = baseURL + FarmPath;
@@ -12,11 +12,15 @@ export const getFarmLevels = async (page: Page, baseURL: string) => {
 
     const items = await village.locator('.level').all();
 
-    const levels = await Promise.all(items.map(v => v.textContent()));
+    const farmLevels = await Promise.all(items.map(v => v.textContent()));
 
-    return {
-        levels: levels.map(Number)
-    };
+    const levels = farmLevels.map((v, i) => ({
+        level: +`${v}`,
+        id: i + 1,
+        type: farmTypes[i + 1]
+    }));
+
+    return levels;
 };
 
 export const getVillageLevels = async (page: Page, baseURL: string) => {
