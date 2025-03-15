@@ -2,10 +2,10 @@ export default defineEventHandler(async (event) => {
     const { baseURL } = useRuntimeConfig(event);
     const page = await launchTravian(event);
 
-    const villageLevels = await getVillageLevels(page, baseURL);
+    const levels = await getVillageLevels(page, baseURL);
 
     return {
-        villageLevels,
+        levels,
         meta: {
             url: page.url(),
             date: Date.now()
