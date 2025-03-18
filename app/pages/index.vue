@@ -6,6 +6,7 @@
                 <VillageCard />
                 <ProductCard />
                 <ResourseCard />
+                <TroopsCard />
             </div>
         </div>
     </div>
