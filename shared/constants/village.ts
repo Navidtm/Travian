@@ -1,4 +1,4 @@
-import type { Building, PlaceId } from '../types/village';
+import type { Building, BuildingId } from '../types/village';
 
 export const BuildingList: Building[] = [
     'Main_Building',
@@ -26,7 +26,7 @@ export const BuildingList: Building[] = [
     'Brick_Kiln'
 ];
 
-export const villageAddress: Record<Building, PlaceId> = {
+export const villageAddress: Record<Building, BuildingId> = {
     Town_Hall: 19,
     Warehouse: 20,
     Food_Storage: 21,
