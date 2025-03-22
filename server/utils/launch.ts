@@ -32,5 +32,9 @@ export const launchTravian = async (event: H3Event) => {
         }
     ]);
 
-    return page;
+    const closeBrowser = async () => {
+        await browser.close();
+    };
+
+    return { page, closeBrowser };
 };
