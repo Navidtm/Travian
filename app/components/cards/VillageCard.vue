@@ -21,9 +21,23 @@
                 {{ level }}
             </span>
         </div>
+        <UButton
+            class="px-8"
+            :loading="status =='pending'"
+            label="ارتقا همه"
+            @click="execute()"
+        />
     </UCard>
 </template>
 
 <script setup lang="ts">
-const { data } = useFetch('/api/info/village');
+const { data, refresh: updateFarmData } = useFetch('/api/info/village');
+
+const { status, execute } = useFetch('/api/upgrade/building', {
+    method: 'post',
+    immediate: false,
+    onResponse: async () => {
+        await updateFarmData();
+    }
+});
 </script>
