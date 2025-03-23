@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-sm w-full">
+    <div class="max-w-lg w-full">
         <UCard
             v-if="data?.levels"
             variant="solid"
@@ -7,9 +7,9 @@
             <div class="text-center text-xl mb-4">
                 مزرعه
             </div>
-            <div class="space-y-4">
+            <div class="space-y-4 mb-6">
                 <UCard
-                    v-for="(value, key) in groupBy(data.levels, ({ type }) => type)"
+                    v-for="(items, key) in groupBy(data.levels, ({ type }) => type)"
                     :key
                     variant="solid"
                     class="bg-blue-400/10 *:py-3"
@@ -19,23 +19,20 @@
                     </div>
                     <div class="grid grid-cols-4 gap-2 mb-5">
                         <UButton
-                            v-for="{ id, level } in value"
+                            v-for="{ id, level, type } in items"
                             :key="id"
+                            :loading="status =='pending'"
+                            :label="`سطح ${level}`"
                             variant="soft"
-                            @click="upgradeFarm(id)"
-                        >
-                            سطح
-                            {{ level }}
-                        </UButton>
+                            @click="upgradeFarm([{ id, level, type }])"
+                        />
                     </div>
                     <UButton
-                        class="w-full"
-                        @click="upgradeTypeFarm(key)"
-                    >
-                        <div class="text-center w-full">
-                            ارتقا همه
-                        </div>
-                    </UButton>
+                        class="px-8"
+                        :loading="status =='pending'"
+                        label="ارتقا همه"
+                        @click="upgradeFarm(items)"
+                    />
                 </UCard>
             </div>
         </UCard>
@@ -46,14 +43,26 @@
 import { groupBy } from 'es-toolkit';
 import { resourses } from '~/constants/farm';
 import { useFarm } from '~/stores/useFarm';
+import type { FarmItem } from '~~/shared/types/farm';
 
-const { data } = useFarm();
+const { data, refresh: updateFarmData } = useFarm();
 
-const upgradeFarm = (id: number) => {
-    console.log(id);
-};
+const body = ref();
 
-const upgradeTypeFarm = (id: Farm) => {
-    console.log(id);
+const { status } = useFetch('/api/upgrade/farm', {
+    body,
+    method: 'post',
+    immediate: false,
+    watch: [body],
+    onResponse: async () => {
+        await updateFarmData();
+    }
+});
+
+const upgradeFarm = async (items: FarmItem[]) => {
+    body.value = {
+        items,
+        toLevel: 12
+    };
 };
 </script>
