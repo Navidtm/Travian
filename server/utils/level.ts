@@ -1,6 +1,7 @@
 import type { Page } from 'playwright-core';
 import { emptyBuilding, farmLevelsId, FarmPath, farmTypes, numOfFarmsItems, villagePath, withoutBuilding } from '../constants/consts';
 import type { FarmItem, FarmLevel } from '~~/shared/types/farm';
+import { villageAddress } from '~~/shared/constants/village';
 
 export const getFarmLevels = async (page: Page, baseURL: string) => {
     const farmURL = baseURL + FarmPath;
@@ -36,7 +37,7 @@ export const getVillageLevels = async (page: Page, baseURL: string) => {
     const levelElements = await Promise.all(villageLevelsTag.map(v => v.getAttribute('alt')));
 
     const isEmpty = (v: string) => v == emptyBuilding;
-    const extractNumber = (v: string) => v.match(/[0-9]/g)?.join('');
+    const extractNumber = (v: string) => Number(v.match(/[0-9]/g)?.join(''));
     const extractName = (v: string) => v.split('سطح').at(0);
 
     const levels = levelElements.map(v => v ?? '').map((v, i) => ({
@@ -46,5 +47,24 @@ export const getVillageLevels = async (page: Page, baseURL: string) => {
         isEmpty: isEmpty(v)
     }));
 
-    return levels;
+    const elLevels = page.locator('#levels');
+
+    const camp = await elLevels.locator('.l39').first().textContent();
+    const wall = await elLevels.locator('.aid40').first().textContent();
+
+    return [
+        ...levels,
+        {
+            level: Number(camp),
+            name: 'اردوگاه',
+            id: villageAddress['Camp'],
+            isEmpty: isNaN(Number(camp))
+        },
+        {
+            level: Number(wall),
+            name: 'دیوار',
+            id: villageAddress['Wall'],
+            isEmpty: isNaN(Number(wall))
+        }
+    ];
 };
