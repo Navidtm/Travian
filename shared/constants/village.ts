@@ -7,23 +7,22 @@ export const BuildingList: Building[] = [
     'Wall',
     'Camp',
     'Embassy',
-    'Hero_Mansion',
-    'Academy',
-    'Training_Ground',
-    'Blacksmith',
-    'Palace',
     'Barracks',
     'Market',
+    'Hero_Mansion',
+    'Academy',
+    'Palace',
+    'Blacksmith',
+    'Treasury',
     'Stable',
     'Town_Hall',
-    'Treasury',
     'Workshop',
+    'Training_Ground',
     'Mill',
-    'Blacksmith',
-    'Bakery',
     'Iron_Foundry',
     'Sawmill',
-    'Brick_Kiln'
+    'Brick_Kiln',
+    'Bakery'
 ];
 
 export const villageAddress: Record<Building, BuildingId> = {
@@ -50,3 +49,30 @@ export const villageAddress: Record<Building, BuildingId> = {
     Camp: 39,
     Wall: 40
 };
+
+export const villageId: Record<Building, number> = {
+    Main_Building: 0,
+    Sawmill: 5,
+    Brick_Kiln: 6,
+    Iron_Foundry: 7,
+    Mill: 8,
+    Bakery: 9,
+    Warehouse: 10,
+    Food_Storage: 11,
+    Blacksmith: 12,
+    Training_Ground: 14,
+    Camp: 16,
+    Market: 17,
+    Embassy: 18,
+    Stable: 20,
+    Workshop: 21,
+    Academy: 22,
+    Town_Hall: 24,
+    Palace: 26,
+    Treasury: 27,
+    Barracks: 19,
+    Wall: 32,
+    Hero_Mansion: 37
+};
+
+export const max5Levels: Building[] = ['Bakery', 'Mill', 'Iron_Foundry', 'Brick_Kiln', 'Sawmill'];
