@@ -1,7 +1,7 @@
 <template>
     <UCard
         v-if="data?.products"
-        class="max-w-xs h-max"
+        class="max-w-42 w-full h-max"
         variant="solid"
     >
         <template #header>
@@ -12,9 +12,9 @@
         <div
             v-for="{ name, amount } in data.troops"
             :key="name"
-            class="grid grid-cols-2"
+            class="flex justify-between w-full"
         >
-            <span>{{ name }}:</span>
+            <span>{{ name }}</span>
             <span>
                 {{ amount.toLocaleString() }}
             </span>

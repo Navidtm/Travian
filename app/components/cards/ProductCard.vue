@@ -1,7 +1,7 @@
 <template>
     <UCard
         v-if="data?.products"
-        class="max-w-xs h-max"
+        class="w-1/2"
         variant="solid"
     >
         <template #header>
@@ -9,15 +9,18 @@
                 تولید ها
             </div>
         </template>
-        <div
-            v-for="{ name, amount } in data.products"
-            :key="name"
-            class="grid grid-cols-2"
-        >
-            <span>{{ name }}:</span>
-            <span>
-                {{ amount.toLocaleString() }}
-            </span>
+        <div class="grid grid-cols-2 gap-4 w-full">
+            <div
+                v-for="{ name, amount } in data.products"
+                :key="name"
+                class="w-full text-center"
+            >
+                <div>
+                    {{ (amount / 3600).toFixed().toLocaleString() }}
+                    <span class="text-blue-400">{{ name }}</span>
+                    در ثانیه
+                </div>
+            </div>
         </div>
     </UCard>
 </template>

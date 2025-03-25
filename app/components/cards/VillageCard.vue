@@ -1,7 +1,7 @@
 <template>
     <UCard
         v-if="data"
-        class="max-w-xs"
+        class="w-full"
         variant="solid"
     >
         <template #header>
@@ -9,20 +9,24 @@
                 ساختمان ها
             </div>
         </template>
-        <div
-            v-for="{ id, level, name, isEmpty } in data.levels"
-            :key="id"
-            class="data-[empty=true]:opacity-40"
-            :data-empty="isEmpty"
-        >
-            <span>{{ name }}</span>
-            :
-            <span>
-                {{ level }}
-            </span>
+        <div class="grid grid-cols-6 gap-2 text-center mb-4">
+            <div
+                v-for="{ id, level, name, isEmpty } in data.levels"
+                :key="id"
+                class="data-[empty=true]:opacity-40"
+                :data-empty="isEmpty"
+            >
+                <span>
+                    {{ name }}
+                </span>
+                :
+                <span>
+                    {{ level }}
+                </span>
+            </div>
         </div>
         <UButton
-            class="px-8"
+            class="px-8 mx-auto block"
             :loading="status =='pending'"
             label="ارتقا همه"
             @click="execute()"

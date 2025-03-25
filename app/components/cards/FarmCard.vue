@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-lg w-full">
+    <div class="w-full">
         <UCard
             v-if="data?.levels"
             variant="solid"
@@ -7,32 +7,37 @@
             <div class="text-center text-xl mb-4">
                 مزرعه
             </div>
-            <div class="space-y-4 mb-6">
+            <div class="flex justify-around mb-6 gap-6">
                 <UCard
                     v-for="(items, key) in groupBy(data.levels, ({ type }) => type)"
                     :key
                     variant="solid"
-                    class="bg-blue-400/10 *:py-3"
+                    class="bg-blue-400/10 *:py-3 w-full"
+                    :class="{ 'max-w-86 brightness-105': key !== 'wheat' }"
                 >
-                    <div class="text-center font-bold mb-3">
-                        {{ resourses[key] }}
-                    </div>
-                    <div class="grid grid-cols-4 gap-2 mb-5">
+                    <template #header>
+                        <div class="text-center font-bold">
+                            {{ resourses[key] }}
+                        </div>
+                    </template>
+                    <div class="flex flex-col items-center justify-between size-full">
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <UButton
+                                v-for="{ id, level, type } in items"
+                                :key="id"
+                                :loading="status =='pending'"
+                                :label="`سطح ${level}`"
+                                variant="soft"
+                                @click="upgradeFarm([{ id, level, type }])"
+                            />
+                        </div>
                         <UButton
-                            v-for="{ id, level, type } in items"
-                            :key="id"
+                            class="px-8"
                             :loading="status =='pending'"
-                            :label="`سطح ${level}`"
-                            variant="soft"
-                            @click="upgradeFarm([{ id, level, type }])"
+                            label="ارتقا همه"
+                            @click="upgradeFarm(items)"
                         />
                     </div>
-                    <UButton
-                        class="px-8"
-                        :loading="status =='pending'"
-                        label="ارتقا همه"
-                        @click="upgradeFarm(items)"
-                    />
                 </UCard>
             </div>
         </UCard>

@@ -1,7 +1,7 @@
 <template>
     <UCard
         v-if="data?.products"
-        class="max-w-xs h-max"
+        class="w-full py-0"
         variant="solid"
     >
         <template #header>
@@ -9,16 +9,23 @@
                 منابع
             </div>
         </template>
-        <div
-            v-for="{ name, amount, max } in data.resourses"
-            :key="name"
-            class="grid grid-cols-2"
-        >
-            <span>{{ resourses[name] }}:</span>
-            <span>
-                {{ amount.toLocaleString() }}
-            </span>
-            {{ max }}
+        <div class="flex w-full gap-4">
+            <div
+                v-for="{ name, amount, max } in data.resourses"
+                :key="name"
+                class="w-full text-center"
+            >
+                <div>
+                    {{ resourses[name] }}:
+
+                    {{ amount.toLocaleString() }}
+                </div>
+                <UProgress
+                    :model-value="amount"
+                    status
+                    :max
+                />
+            </div>
         </div>
     </UCard>
 </template>
