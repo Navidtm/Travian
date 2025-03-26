@@ -1,8 +1,7 @@
 import { sum } from 'es-toolkit';
 import { BuildingList, max5Levels, villageAddress, villageId } from '~~/shared/constants/village';
-import type { farmSchemaType } from '~~/shared/schemas/farm.schema';
 
-export default defineEventHandler<farmSchemaType>(async (event) => {
+export default defineEventHandler(async (event) => {
     const { baseURL } = useRuntimeConfig(event);
     const { page, closeBrowser } = await launchTravian(event);
 
