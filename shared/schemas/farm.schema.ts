@@ -12,3 +12,4 @@ export const farmSchema = z.object({
 });
 
 export type farmSchemaType = z.infer<typeof farmSchema>;
+export type upgradeFarmSchemaType = farmSchemaType['body'];

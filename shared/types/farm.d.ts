@@ -1,10 +1,12 @@
-export type Resourse = 'iron' | 'wheat' | 'wood' | 'clay' | 'population';
+import type { farmIds, farmLevels, resourseTypes } from '../constants/farm';
 
-export type Farm = 'iron' | 'wheat' | 'wood' | 'clay';
+export type Resourse = typeof resourseTypes[number] | 'population';
 
-export type FarmId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18;
+export type Farm = typeof resourseTypes[number];
 
-export type FarmLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+export type FarmId = typeof farmIds[number];
+
+export type FarmLevel = typeof farmLevels[number];
 
 export type FarmItem = {
     id: FarmId;

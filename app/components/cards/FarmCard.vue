@@ -48,11 +48,12 @@
 import { groupBy } from 'es-toolkit';
 import { resourses } from '~/constants/farm';
 import { useFarm } from '~/stores/useFarm';
+import type { upgradeFarmSchemaType } from '~~/shared/schemas/farm.schema';
 import type { FarmItem } from '~~/shared/types/farm';
 
 const { data, refresh: updateFarmData } = useFarm();
 
-const body = ref();
+const body = ref<upgradeFarmSchemaType>();
 
 const { status } = useFetch('/api/upgrade/farm', {
     body,
