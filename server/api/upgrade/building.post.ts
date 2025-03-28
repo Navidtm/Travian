@@ -1,11 +1,12 @@
 import { sum } from 'es-toolkit';
+import { villagePath } from '~~/server/constants/consts';
 import { BuildingList, max5Levels, villageAddress, villageId } from '~~/shared/constants/village';
 
 export default defineEventHandler(async (event) => {
     const { baseURL } = useRuntimeConfig(event);
-    const { page, closeBrowser } = await launchTravian(event);
+    const { page, closeBrowser } = await launchTravian(event, villagePath);
 
-    const levels = await getVillageLevels(page, baseURL);
+    const levels = await getVillageLevels(page);
 
     const toLevel = 15;
 

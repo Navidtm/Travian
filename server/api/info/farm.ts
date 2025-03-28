@@ -1,11 +1,12 @@
-export default defineEventHandler(async (event) => {
-    const { baseURL } = useRuntimeConfig(event);
-    const { page, closeBrowser } = await launchTravian(event);
+import { FarmPath } from '~~/server/constants/consts';
 
-    const levels = await getFarmLevels(page, baseURL);
-    const products = await getFarmProducts(page, baseURL);
-    const troops = await getTroops(page, baseURL);
-    const resourses = await getResourses(page, baseURL);
+export default defineEventHandler(async (event) => {
+    const { page, closeBrowser } = await launchTravian(event, FarmPath);
+
+    const levels = await getFarmLevels(page);
+    const products = await getFarmProducts(page);
+    const troops = await getTroops(page);
+    const resourses = await getResourses(page);
 
     await closeBrowser();
     return {

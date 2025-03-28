@@ -3,11 +3,9 @@ import { emptyBuilding, farmLevelsId, FarmPath, farmTypes, numOfFarmsItems, vill
 import type { FarmItem, FarmLevel } from '~~/shared/types/farm';
 import { villageAddress } from '~~/shared/constants/village';
 
-export const getFarmLevels = async (page: Page, baseURL: string) => {
-    const farmURL = baseURL + FarmPath;
-
-    if (page.url() != farmURL) {
-        await page.goto(farmURL);
+export const getFarmLevels = async (page: Page) => {
+    if (!page.url().includes(FarmPath)) {
+        return [];
     }
 
     const village = page.locator(farmLevelsId).first();
@@ -25,11 +23,9 @@ export const getFarmLevels = async (page: Page, baseURL: string) => {
     return levels;
 };
 
-export const getVillageLevels = async (page: Page, baseURL: string) => {
-    const VillageURL = baseURL + villagePath;
-
-    if (page.url() != VillageURL) {
-        await page.goto(VillageURL);
+export const getVillageLevels = async (page: Page) => {
+    if (!page.url().includes(villagePath)) {
+        return [];
     }
 
     const villageLevelsTag = await page.locator(`img[class~="building"]`).all();

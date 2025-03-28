@@ -1,9 +1,10 @@
 import { sum } from 'es-toolkit';
+import { FarmPath } from '~~/server/constants/consts';
 import type { farmSchemaType } from '~~/shared/schemas/farm.schema';
 
 export default defineEventHandler<farmSchemaType>(async (event) => {
     const { baseURL } = useRuntimeConfig(event);
-    const { page, closeBrowser } = await launchTravian(event);
+    const { page, closeBrowser } = await launchTravian(event, FarmPath);
     const { items, toLevel } = await readBody(event);
 
     for (const { id, level, type } of items) {

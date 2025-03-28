@@ -1,11 +1,9 @@
 import type { Page } from 'playwright-core';
 import { FarmPath } from '../constants/consts';
 
-export const getFarmProducts = async (page: Page, baseURL: string) => {
-    const farmURL = baseURL + FarmPath;
-
-    if (page.url() != farmURL) {
-        await page.goto(farmURL);
+export const getFarmProducts = async (page: Page) => {
+    if (!page.url().includes(FarmPath)) {
+        return [];
     }
 
     const detailsTable = page.locator('#production');
@@ -23,11 +21,9 @@ export const getFarmProducts = async (page: Page, baseURL: string) => {
     return products;
 };
 
-export const getTroops = async (page: Page, baseURL: string) => {
-    const farmURL = baseURL + FarmPath;
-
-    if (page.url() != farmURL) {
-        await page.goto(farmURL);
+export const getTroops = async (page: Page) => {
+    if (!page.url().includes(FarmPath)) {
+        return [];
     }
 
     const detailsTable = page.locator('#troops');
@@ -46,11 +42,9 @@ export const getTroops = async (page: Page, baseURL: string) => {
     return troops;
 };
 
-export const getResourses = async (page: Page, baseURL: string) => {
-    const farmURL = baseURL + FarmPath;
-
-    if (page.url() != farmURL) {
-        await page.goto(farmURL);
+export const getResourses = async (page: Page) => {
+    if (!page.url().includes(FarmPath)) {
+        return [];
     }
 
     const resoursesLocator = page.locator('#res');

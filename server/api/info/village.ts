@@ -1,8 +1,9 @@
-export default defineEventHandler(async (event) => {
-    const { baseURL } = useRuntimeConfig(event);
-    const { page, closeBrowser } = await launchTravian(event);
+import { villagePath } from '~~/server/constants/consts';
 
-    const levels = await getVillageLevels(page, baseURL);
+export default defineEventHandler(async (event) => {
+    const { page, closeBrowser } = await launchTravian(event, villagePath);
+
+    const levels = await getVillageLevels(page);
 
     await closeBrowser();
     return {
