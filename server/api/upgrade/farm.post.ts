@@ -4,7 +4,7 @@ import type { farmSchemaType } from '~~/shared/schemas/farm.schema';
 
 export default defineEventHandler<farmSchemaType>(async (event) => {
     const { baseURL } = useRuntimeConfig(event);
-    const { page, closeBrowser } = await launchTravian(event, FarmPath);
+    const page = await launchTravian(event, FarmPath);
     const { items, toLevel } = await readBody(event);
 
     for (const { id, level, type } of items) {
@@ -41,7 +41,7 @@ export default defineEventHandler<farmSchemaType>(async (event) => {
     }
 
     console.log('finished upgrading');
-    await closeBrowser();
+    await page.close();
 
     return {};
 });

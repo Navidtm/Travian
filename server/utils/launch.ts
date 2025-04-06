@@ -33,10 +33,6 @@ export const launchTravian = async (event: H3Event, path: string) => {
 
     await page.goto(baseURL + path);
 
-    const closeBrowser = async () => {
-        await browser.close();
-    };
-
     if (page.url().includes('/login')) {
         throw createError({
             statusCode: 401,
@@ -44,5 +40,5 @@ export const launchTravian = async (event: H3Event, path: string) => {
         });
     }
 
-    return { page, closeBrowser };
+    return page;
 };

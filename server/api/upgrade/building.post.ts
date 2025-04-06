@@ -4,7 +4,7 @@ import { BuildingList, max5Levels, villageAddress, villageId } from '~~/shared/c
 
 export default defineEventHandler(async (event) => {
     const { baseURL } = useRuntimeConfig(event);
-    const { page, closeBrowser } = await launchTravian(event, villagePath);
+    const page = await launchTravian(event, villagePath);
 
     const levels = await getVillageLevels(page);
 
@@ -71,7 +71,7 @@ export default defineEventHandler(async (event) => {
     }
 
     console.log('finished upgrading');
-    await closeBrowser();
+    await page.close();
 
     return {};
 });
