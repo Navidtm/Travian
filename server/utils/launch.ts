@@ -2,7 +2,16 @@ import { chromium } from 'playwright-core';
 import type { H3Event } from 'h3';
 
 export const launchTravian = async (event: H3Event, path: string) => {
-    const { email, username, id, domain, baseURL } = useRuntimeConfig(event);
+    const id = getHeader(event, 'Token');
+
+    if (!id) {
+        throw createError({
+            statusCode: 401,
+            message: 'You Are Not Login'
+        });
+    }
+
+    const { email, username, domain, baseURL } = useRuntimeConfig(event);
 
     const browser = await chromium.launch();
     const context = await browser.newContext();
