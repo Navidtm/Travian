@@ -17,29 +17,19 @@ export const launchTravian = async (event: H3Event, path: string) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
-    await page.context().addCookies([
-        {
-            name: 'COOKEMAIL',
-            value: email,
-            domain,
-            path: '/',
-            secure: true
-        },
-        {
-            name: 'COOKUSR',
-            value: username,
-            domain,
-            path: '/',
-            secure: true
-        },
-        {
-            name: 'PHPSESSID',
-            value: id,
-            domain,
-            path: '/',
-            secure: true
-        }
-    ]);
+    const cookies = {
+        COOKEMAIL: email,
+        COOKUSR: username,
+        PHPSESSID: id
+    };
+
+    await page.context().addCookies(Object.entries(cookies).map(([name, value]) => ({
+        name,
+        value,
+        domain,
+        path: '/',
+        secure: true
+    })));
 
     await page.goto(baseURL + path);
 
