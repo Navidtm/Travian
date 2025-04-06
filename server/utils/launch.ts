@@ -6,8 +6,8 @@ export const launchTravian = async (event: H3Event, path: string) => {
 
     if (!id) {
         throw createError({
-            statusCode: 401,
-            message: 'You Are Not Login'
+            statusCode: 400,
+            message: 'Token Header is required'
         });
     }
 
