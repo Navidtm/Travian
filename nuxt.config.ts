@@ -41,10 +41,10 @@ export default defineNuxtConfig({
     },
 
     runtimeConfig: {
-        id: process.env.PHPSESSID,
         baseURL: `https://${process.env.DOMAIN}/${process.env.SERVER_TYPE}`,
-        username: process.env.COOKUSR,
-        email: process.env.COOKEMAIL,
+        username: process.env.USER,
+        email: process.env.EMAIL,
+        password: process.env.PASSWORD,
         serverType: process.env.SERVER_TYPE,
         domain: process.env.DOMAIN
     },
