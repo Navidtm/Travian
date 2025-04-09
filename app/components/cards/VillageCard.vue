@@ -35,13 +35,7 @@
 </template>
 
 <script setup lang="ts">
-const token = useCookie('token');
-
-const { data, refresh: updateFarmData } = useFetch('/api/info/village', {
-    headers: {
-        token: token.value ?? ''
-    }
-});
+const { data, refresh: updateFarmData } = useFetch('/api/info/village');
 
 const { status, execute } = useFetch('/api/upgrade/building', {
     method: 'post',

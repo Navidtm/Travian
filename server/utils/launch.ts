@@ -2,7 +2,7 @@ import { chromium } from 'playwright-core';
 import type { H3Event } from 'h3';
 
 export const launchTravian = async (event: H3Event, path: string) => {
-    const id = getHeader(event, 'Token');
+    const id = getCookie(event, 'Authorization');
 
     if (!id) {
         throw createError({

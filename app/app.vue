@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-const cookie = useCookie('token');
+const cookie = useCookie('Authorization');
 
 useFetch('/api/auth/login', {
     immediate: !cookie.value,
