@@ -1,40 +1,44 @@
 import { chromium } from 'playwright-core';
 import type { H3Event } from 'h3';
 
-export const launchTravian = async (event: H3Event) => {
-    const { email, username, id, domain } = useRuntimeConfig(event);
+export const launchTravian = async (event: H3Event, path: string) => {
+    const id = getCookie(event, 'Authorization');
+
+    if (!id) {
+        throw createError({
+            statusCode: 400,
+            message: 'Token Header is required'
+        });
+    }
+
+    const { email, username, domain, baseURL } = useRuntimeConfig(event);
 
     const browser = await chromium.launch();
     const context = await browser.newContext();
     const page = await context.newPage();
 
-    await page.context().addCookies([
-        {
-            name: 'COOKEMAIL',
-            value: email,
-            domain,
-            path: '/',
-            secure: true
-        },
-        {
-            name: 'COOKUSR',
-            value: username,
-            domain,
-            path: '/',
-            secure: true
-        },
-        {
-            name: 'PHPSESSID',
-            value: id,
-            domain,
-            path: '/',
-            secure: true
-        }
-    ]);
-
-    const closeBrowser = async () => {
-        await browser.close();
+    const cookies = {
+        COOKEMAIL: email,
+        COOKUSR: username,
+        PHPSESSID: id
     };
 
-    return { page, closeBrowser };
+    await page.context().addCookies(Object.entries(cookies).map(([name, value]) => ({
+        name,
+        value,
+        domain,
+        path: '/',
+        secure: true
+    })));
+
+    await page.goto(baseURL + path);
+
+    if (page.url().includes('/login')) {
+        throw createError({
+            statusCode: 401,
+            message: 'You Are Not Login'
+        });
+    }
+
+    return page;
 };
