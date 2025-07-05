@@ -19,7 +19,7 @@
         "vue": "^3.5.13",
         "vue-router": "^4.5.1",
         "zod": "^3.24.3",
-        "zod-openapi": "^4.2.4",
+        "zod-openapi": "^5.0.0",
       },
       "devDependencies": {
         "@nuxt/eslint": "^1.3.0",
@@ -2101,7 +2101,7 @@
 
     "zod": ["zod@3.24.3", "", {}, "sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg=="],
 
-    "zod-openapi": ["zod-openapi@4.2.4", "", { "peerDependencies": { "zod": "^3.21.4" } }, "sha512-tsrQpbpqFCXqVXUzi3TPwFhuMtLN3oNZobOtYnK6/5VkXsNdnIgyNr4r8no4wmYluaxzN3F7iS+8xCW8BmMQ8g=="],
+    "zod-openapi": ["zod-openapi@5.0.0", "", { "peerDependencies": { "zod": "^3.25.74" } }, "sha512-fNwuOsflpILVVsx+3e8ODA0AnI60xGtMVWcvzv733ggEj7fVvE4NQMoOlQGbqIleyOdFQuc5N6cpO1BevApQig=="],
 
     "@antfu/install-pkg/package-manager-detector": ["package-manager-detector@0.2.11", "", { "dependencies": { "quansync": "^0.2.7" } }, "sha512-BEnLolu+yuz22S56CU1SUKq3XC3PkwD5wv4ikR4MfGvnRVcmzXR9DwSlW2fEamyTPyXHomBJRzgapeuBvRNzJQ=="],
 
