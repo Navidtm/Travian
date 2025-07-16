@@ -1,4 +1,5 @@
 {
+  "prettier.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
@@ -15,5 +16,8 @@
   },
   "[tailwindcss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }
