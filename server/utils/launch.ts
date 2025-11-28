@@ -1,4 +1,4 @@
-import { chromium } from 'playwright-core';
+import { webkit } from 'playwright-core';
 import type { H3Event } from 'h3';
 
 export const launchTravian = async (event: H3Event, path: string) => {
@@ -13,7 +13,7 @@ export const launchTravian = async (event: H3Event, path: string) => {
 
     const { email, username, domain, baseURL } = useRuntimeConfig(event);
 
-    const browser = await chromium.launch();
+    const browser = await webkit.launch();
     const context = await browser.newContext();
     const page = await context.newPage();
 

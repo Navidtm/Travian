@@ -1,10 +1,10 @@
-import { chromium } from 'playwright-core';
+import { webkit } from 'playwright-core';
 import { loginPath } from '~~/server/constants/consts';
 
 export default defineEventHandler(async (event) => {
     const { username, baseURL, password, domain } = useRuntimeConfig(event);
 
-    const browser = await chromium.launch({
+    const browser = await webkit.launch({
         headless: false
     });
 
