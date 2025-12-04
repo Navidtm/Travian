@@ -76,19 +76,19 @@ export default defineNuxtConfig({
                 commaDangle: 'never'
             }
         }
-    },
-
-    fonts: {
-        provider: 'local',
-        assets: {
-            strategy: 'public'
-        },
-        families: [
-            {
-                provider: 'local',
-                name: 'iransans',
-                weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
-            }
-        ]
     }
+
+    // fonts: {
+    //     provider: 'local',
+    //     assets: {
+    //         strategy: 'public'
+    //     },
+    //     families: [
+    //         {
+    //             provider: 'local',
+    //             name: 'iransans',
+    //             weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+    //         }
+    //     ]
+    // }
 });

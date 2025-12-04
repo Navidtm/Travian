@@ -3,7 +3,7 @@
 
 @layer base {
   body {
-    font-family: 'iransans';
+    font-family: Arial, Helvetica, sans-serif;
     direction: rtl;
     font-weight: 500;
     background-color: #000;
