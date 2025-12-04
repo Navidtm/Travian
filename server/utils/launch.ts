@@ -17,6 +17,12 @@ export const launchTravian = async (event: H3Event, path: string) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
+    await page.route('**/*', (route) => {
+        if (['image', 'stylesheet', 'font'].includes(route.request().resourceType()))
+            route.abort();
+        else route.continue();
+    });
+
     const cookies = {
         COOKEMAIL: email,
         COOKUSR: username,
