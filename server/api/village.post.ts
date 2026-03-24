@@ -1,4 +1,3 @@
-import { sum } from 'es-toolkit';
 import { villagePath } from '~~/server/constants/consts';
 import { BuildingList, max5Levels, villageAddress, villageId } from '~~/shared/constants/village';
 
@@ -8,7 +7,7 @@ export default defineEventHandler(async (event) => {
 
     const levels = await getVillageLevels(page);
 
-    const toLevel = 15;
+    const toLevel = 20;
 
     for (const name of BuildingList) {
         const id = villageAddress[name];
@@ -46,16 +45,11 @@ export default defineEventHandler(async (event) => {
                     if (name == 'Embassy')
                         break;
 
-                    const clock = await page.locator('.clocks').first().innerText();
-
                     await page.locator('.button-contents').first().click();
 
                     console.log(`Upgraded ${template} to ${currentLevel + 1}`);
 
-                    const sec = sum(clock.split(':')
-                        .reverse()
-                        .map((v, i) => +v * Math.pow(60, i))
-                    );
+                    const sec = await getSecFromClock(page);
 
                     await sleep(sec * 1000);
                 }

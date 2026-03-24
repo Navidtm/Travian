@@ -1,5 +1,5 @@
 export const useFarm = defineStore('farm', () => {
-    const { data, refresh, status, error } = useFetch('/api/info/farm', {
+    const { data, refresh, status, error } = useFetch('/api/farm', {
         lazy: true
     });
 

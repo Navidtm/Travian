@@ -7,11 +7,10 @@ export const farmSchema = z.object({
             z.object({
                 id: z.number().int().meta({ description: "The farm id" }),
                 type: z.enum(resourseTypes).meta({ description: "The farm type to upgrade " }),
-                level: z.number().int().meta({ description: "The farm current level" }),
+                level: z.number().int().optional().meta({ description: "The farm current level" })
             })
-        ),
-        toLevel: z.number().meta({ description: "The farm level to upgrade to" }),
-    }),
+        )
+    })
 });
 
 export type farmSchemaType = z.infer<typeof farmSchema>;

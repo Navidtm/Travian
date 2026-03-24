@@ -35,9 +35,9 @@
 </template>
 
 <script setup lang="ts">
-const { data, refresh: updateFarmData } = useFetch('/api/info/village');
+const { data, refresh: updateFarmData } = useFetch('/api/village');
 
-const { status, execute } = useFetch('/api/upgrade/building', {
+const { status, execute } = useFetch('/api/village', {
     method: 'post',
     immediate: false,
     onResponse: async () => {

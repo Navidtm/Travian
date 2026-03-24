@@ -25,7 +25,7 @@
                             <UButton
                                 v-for="{ id, level, type } in items"
                                 :key="id"
-                                :loading="status =='pending'"
+                                :loading="status =='pending' && body?.items.map(v => v.id).includes(id)"
                                 :label="`سطح ${level}`"
                                 variant="soft"
                                 @click="upgradeFarm([{ id, level, type }])"
@@ -33,13 +33,17 @@
                         </div>
                         <UButton
                             class="px-8"
-                            :loading="status =='pending'"
                             label="ارتقا همه"
                             @click="upgradeFarm(items)"
                         />
                     </div>
                 </UCard>
             </div>
+            <UButton
+                class="px-8"
+                label="ارتقا همه"
+                @click="upgradeFarm(data.levels)"
+            />
         </UCard>
     </div>
 </template>
@@ -55,11 +59,10 @@ const { data, refresh: updateFarmData } = useFarm();
 
 const body = ref<upgradeFarmSchemaType>();
 
-const { status } = useFetch('/api/upgrade/farm', {
+const { status, refresh } = useFetch('/api/farm', {
     body,
     method: 'post',
     immediate: false,
-    watch: [body],
     onResponse: async () => {
         await updateFarmData();
     }
@@ -67,8 +70,8 @@ const { status } = useFetch('/api/upgrade/farm', {
 
 const upgradeFarm = async (items: FarmItem[]) => {
     body.value = {
-        items,
-        toLevel: 12
+        items
     };
+    await refresh();
 };
 </script>
