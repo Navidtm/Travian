@@ -12,59 +12,51 @@ export default defineEventHandler(async (event) => {
     for (const name of BuildingList) {
         const id = villageAddress[name];
 
-        const template = `${name}(id: ${id})`;
-        console.log(`started upgrading ${template} to ${toLevel}`);
-
         let currentLevel = levels.find(v => v.id === id)?.level ?? 0;
-
-        console.log(`Upgraded ${template} from ${currentLevel} to ${toLevel}`);
+        const template = `${name}(id: ${id})`;
+        console.log(`Started upgrading ${template} from ${currentLevel} to ${toLevel}`);
 
         while (currentLevel < toLevel) {
-            try {
-                if (max5Levels.includes(name) && currentLevel == 5)
-                    break;
+            if (max5Levels.includes(name) && currentLevel == 5)
+                break;
 
-                await page.goto(`${baseURL}/build.php?id=${id}`);
+            await page.goto(`${baseURL}/build.php?id=${id}`);
 
-                if (currentLevel == 0) {
-                    const links = await page.locator('.contractLink button').all();
+            if (currentLevel == 0) {
+                const buttons = await page.locator('button.build').all();
 
-                    for (const link of links) {
-                        const onclickAttr = await link.getAttribute('onclick');
+                for (const button of buttons) {
+                    const onclickAttr = await button.getAttribute('onclick');
 
-                        const id = onclickAttr?.split(/'/)[1].match(/a=(\d+)/)?.[1] ?? 0;
+                    const id = onclickAttr?.split(/'/)[1].match(/a=(\d+)/)?.[1] ?? 0;
 
-                        if (villageId[name] == id) {
-                            console.log(`Building ${template}`);
-                            await link.click();
-                            break;
-                        }
+                    if (villageId[name] == id) {
+                        console.log(`Building ${template}`);
+                        await button.click();
+                        break;
                     }
                 }
-                else {
-                    if (name == 'Embassy')
-                        break;
-
-                    await page.locator('.button-contents').first().click();
-
-                    console.log(`Upgraded ${template} to ${currentLevel + 1}`);
-
-                    const sec = await getSecFromClock(page);
-
-                    await sleep(sec * 1000);
-                }
-
-                if (page.url().includes('/dorf2')) {
-                    currentLevel++;
-                }
             }
-            catch {
-                console.log('Got Error');
+            else {
+                if (name == 'Embassy')
+                    break;
+
+                const button = page.locator('button.build').first();
+                const sec = await getSecFromClock(page);
+
+                await button.click();
+                await sleep(sec * 1000);
+
+                console.log(`Upgrading ${template} to ${currentLevel + 1}(${sec} sec)`);
+            }
+
+            if (page.url().includes('/dorf2')) {
+                currentLevel++;
             }
         };
     }
 
-    console.log('finished upgrading');
+    console.log('Finished upgrading');
     await page.close();
 
     return {};
