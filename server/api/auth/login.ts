@@ -1,5 +1,5 @@
 import { webkit } from 'playwright-core';
-import { loginPath } from '~~/server/constants/consts';
+import { loginPath } from '~~/shared/constants/common';
 
 export default defineEventHandler(async (event) => {
     const { username, baseURL, password, domain } = useRuntimeConfig(event);

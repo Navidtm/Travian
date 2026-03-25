@@ -1,7 +1,7 @@
-import { FarmPath } from '~~/server/constants/consts';
+import { farmPath } from "~~/shared/constants/common";
 
 export default defineEventHandler(async (event) => {
-    const page = await launchTravian(event, FarmPath);
+    const page = await launchTravian(event, farmPath);
 
     const levels = await getFarmLevels(page);
     const products = await getFarmProducts(page);

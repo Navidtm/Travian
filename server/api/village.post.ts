@@ -1,4 +1,4 @@
-import { villagePath } from '~~/server/constants/consts';
+import { villagePath } from '~~/shared/constants/common';
 import { BuildingList, max5Levels, villageAddress, villageId } from '~~/shared/constants/village';
 
 export default defineEventHandler(async (event) => {

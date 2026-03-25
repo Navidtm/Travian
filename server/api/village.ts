@@ -1,4 +1,4 @@
-import { villagePath } from '~~/server/constants/consts';
+import { villagePath } from "~~/shared/constants/common";
 
 export default defineEventHandler(async (event) => {
     const page = await launchTravian(event, villagePath);

@@ -1,9 +1,9 @@
-import { FarmPath } from '~~/server/constants/consts';
+import { farmPath } from '~~/shared/constants/common';
 import type { farmSchemaType } from '~~/shared/schemas/farm.schema';
 
 export default defineEventHandler<farmSchemaType>(async (event) => {
     const { baseURL } = useRuntimeConfig(event);
-    const page = await launchTravian(event, FarmPath);
+    const page = await launchTravian(event, farmPath);
     const { items } = await readBody(event);
 
     for (const { id, type } of items) {

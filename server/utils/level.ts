@@ -1,8 +1,8 @@
 import type { Page } from 'playwright-core';
-import { farmLevelsId, FarmPath, farmTypes, villagePath } from '../constants/consts';
+import { farmPath, farmLevelsId, farmTypes, villagePath } from '~~/shared/constants/common';
 
 export const getFarmLevels = async (page: Page) => {
-    if (!page.url().includes(FarmPath)) {
+    if (!page.url().includes(farmPath)) {
         return [];
     }
 
