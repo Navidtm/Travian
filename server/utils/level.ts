@@ -1,16 +1,12 @@
 import type { Page } from 'playwright-core';
-import { emptyBuilding, farmLevelsId, FarmPath, farmTypes, numOfFarmsItems, villagePath, withoutBuilding } from '../constants/consts';
-import type { FarmItem, FarmLevel } from '~~/shared/types/farm';
-import { villageAddress } from '~~/shared/constants/village';
+import { farmLevelsId, FarmPath, farmTypes, villagePath } from '../constants/consts';
 
 export const getFarmLevels = async (page: Page) => {
     if (!page.url().includes(FarmPath)) {
         return [];
     }
 
-    const village = page.locator(farmLevelsId).first();
-
-    const items = await village.locator('.level').all();
+    const items = await page.locator(farmLevelsId).locator('.level').all();
 
     const farmLevels = await Promise.all(items.map(v => v.textContent()));
 
@@ -28,39 +24,27 @@ export const getVillageLevels = async (page: Page) => {
         return [];
     }
 
-    const villageLevelsTag = await page.locator(`img[class~="building"]`).all();
+    const villageNames = await page.locator(`img.building`).all();
 
-    const levelElements = await Promise.all(villageLevelsTag.map(v => v.getAttribute('alt')));
+    const names = await Promise.all(villageNames.map(async v =>
+        await v.getAttribute('alt')
+            .then(String)
+            .then(v => /[0-9]/.test(v) ? v.split('سطح').at(0) : '')
+    )).then(v => v.filter(Boolean));
 
-    const isEmpty = (v: string) => v == emptyBuilding;
-    const extractNumber = (v: string) => Number(v.match(/[0-9]/g)?.join(''));
-    const extractName = (v: string) => v.split('سطح').at(0);
+    const villageLevels = await page.locator('#levels').locator('div').all();
 
-    const levels = levelElements.map(v => v ?? '').map((v, i) => ({
-        level: isEmpty(v) ? 0 : extractNumber(v),
-        name: isEmpty(v) ? withoutBuilding : extractName(v),
-        id: i + numOfFarmsItems + 1,
-        isEmpty: isEmpty(v)
+    const levels = await Promise.all(villageLevels.map(async (item, i) => {
+        const level = await item.textContent().then(Number);
+        const id = await item.getAttribute('class')
+            .then(extractNumber)
+            .then(id => id < 39 ? id + 18 : id);
+
+        names.push('اردوگاه', 'دیوار');
+
+        return { level, id, name: names[i] };
     }));
 
-    const elLevels = page.locator('#levels');
-
-    const camp = await elLevels.locator('.l39').first().textContent();
-    const wall = await elLevels.locator('.aid40').first().textContent();
-
-    return [
-        ...levels,
-        {
-            level: Number(camp),
-            name: 'اردوگاه',
-            id: villageAddress['Camp'],
-            isEmpty: isNaN(Number(camp))
-        },
-        {
-            level: Number(wall),
-            name: 'دیوار',
-            id: villageAddress['Wall'],
-            isEmpty: isNaN(Number(wall))
-        }
-    ];
+    console.log(levels);
+    return levels;
 };
