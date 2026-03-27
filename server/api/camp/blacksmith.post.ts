@@ -11,33 +11,28 @@ export default defineEventHandler(async (event) => {
         let level = parseInt(title.replace('سطح', ''));
 
         while (level < 20) {
-            try {
-                const buttons = await research.locator('button.build').all();
+            const buttons = await research.locator('button.build').all();
 
-                if (buttons.length == 1) {
-                    const sec = await getSecFromClock(research);
+            if (buttons.length == 1) {
+                const sec = await getSecFromClock(research);
 
-                    await buttons[0].click();
+                await buttons[0].click();
 
-                    console.log(`Upgrading: ${level} -> ${level + 1} (${sec} sec)`);
+                console.log(`Upgrading: ${level} -> ${level + 1} (${sec} sec)`);
 
-                    await sleep(sec * 1000);
-                    level++;
-                }
-                else {
-                    await sleep(500);
-                    console.log('waiting for Upgrading');
-                }
-                await page.reload();
+                await sleep(sec * 1000);
+                level++;
             }
-            catch {
-                console.log('Error');
+            else {
+                await sleep(500);
+                console.log('500 ms waiting...');
             }
+            await page.reload();
         }
     }
 
     console.log('Finished Upgrading');
     await page.close();
 
-    return {};
+    return;
 });
