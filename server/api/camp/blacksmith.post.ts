@@ -7,9 +7,8 @@ export default defineEventHandler(async (event) => {
     console.log(`Upgrading ${researches.length} Troops`);
 
     for (const research of researches) {
-        const title = research.locator('.title').first();
-        const levelStr = await title.locator('.level').textContent() ?? '';
-        let level = parseInt(levelStr.replace('سطح', ''));
+        const title = await research.locator('.title').first().locator('.level').textContent() ?? '';
+        let level = parseInt(title.replace('سطح', ''));
 
         while (level < 20) {
             try {
@@ -22,14 +21,14 @@ export default defineEventHandler(async (event) => {
 
                     console.log(`Upgrading: ${level} -> ${level + 1} (${sec} sec)`);
 
-                    await sleep(sec * 1000 + 500);
+                    await sleep(sec * 1000);
+                    level++;
                 }
                 else {
                     await sleep(500);
                     console.log('waiting for Upgrading');
                 }
                 await page.reload();
-                level++;
             }
             catch {
                 console.log('Error');

@@ -19,6 +19,6 @@ export default defineEventHandler(async (event) => {
     }
 
     console.log('Finished Researching');
-
+    await page.close();
     return;
 });

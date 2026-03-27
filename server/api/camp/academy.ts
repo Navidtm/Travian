@@ -6,5 +6,6 @@ export default defineEventHandler(async (event) => {
         images.map(async v => await v.getAttribute('alt') ?? '')
     );
 
+    await page.close();
     return titles;
 });
