@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
                 await button.click();
                 await sleep(sec * 1000);
 
-                console.log(`Upgrading ${template} to ${currentLevel + 1}(${sec} sec)`);
+                console.log(`Upgrading ${name} to ${currentLevel + 1}(${sec} sec)`);
             }
 
             if (page.url().includes('/dorf2')) {

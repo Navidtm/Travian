@@ -45,6 +45,5 @@ export const getVillageLevels = async (page: Page) => {
         return { level, id, name: names[i] };
     }));
 
-    console.log(levels);
     return levels;
 };

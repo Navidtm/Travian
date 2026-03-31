@@ -34,7 +34,7 @@ export default defineEventHandler<farmSchemaType>(async (event) => {
 
                 await page.locator('.button-contents').click();
 
-                console.log(`Upgrading ${level} -> ${level + 1}`);
+                console.log(`Upgrading ${level} -> ${level + 1} (${sec} sec)`);
 
                 await sleep(sec * 1000);
 

@@ -2,7 +2,8 @@ import { webkit } from 'playwright-core';
 import type { H3Event } from 'h3';
 
 export const launchTravian = async (event: H3Event, path: string) => {
-    const id = getCookie(event, 'Authorization');
+    // const id = getCookie(event, 'Authorization');
+    const { id } = useRuntimeConfig(event);
 
     if (!id) {
         throw createError({

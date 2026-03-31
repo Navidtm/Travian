@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
 
                 console.log(`Upgrading: ${level} -> ${level + 1} (${sec} sec)`);
 
-                await sleep(sec * 1000);
+                await sleep(sec * 1000 + 400);
                 level++;
             }
             else {

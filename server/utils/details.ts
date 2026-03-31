@@ -1,8 +1,8 @@
 import type { Page } from 'playwright-core';
-import { FarmPath } from '../constants/consts';
+import { farmPath } from '~~/shared/constants/common';
 
 export const getFarmProducts = async (page: Page) => {
-    if (!page.url().includes(FarmPath)) {
+    if (!page.url().includes(farmPath)) {
         return [];
     }
 
@@ -22,7 +22,7 @@ export const getFarmProducts = async (page: Page) => {
 };
 
 export const getTroops = async (page: Page) => {
-    if (!page.url().includes(FarmPath)) {
+    if (!page.url().includes(farmPath)) {
         return [];
     }
 
@@ -43,7 +43,7 @@ export const getTroops = async (page: Page) => {
 };
 
 export const getResourses = async (page: Page) => {
-    if (!page.url().includes(FarmPath)) {
+    if (!page.url().includes(farmPath)) {
         return [];
     }
 
