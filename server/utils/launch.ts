@@ -12,7 +12,7 @@ export const launchTravian = async (event: H3Event, path: string) => {
         });
     }
 
-    const { email, username, domain, baseURL } = useRuntimeConfig(event);
+    const { username, domain, baseURL } = useRuntimeConfig(event);
 
     const browser = await webkit.launch();
     const context = await browser.newContext();
@@ -25,7 +25,6 @@ export const launchTravian = async (event: H3Event, path: string) => {
     });
 
     const cookies = {
-        COOKEMAIL: email,
         COOKUSR: username,
         PHPSESSID: id
     };

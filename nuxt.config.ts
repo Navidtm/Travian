@@ -43,7 +43,6 @@ export default defineNuxtConfig({
     runtimeConfig: {
         baseURL: `https://${process.env.DOMAIN}/${process.env.SERVER_TYPE}`,
         username: process.env.USER,
-        email: `${process.env.USER}@gmail.com`,
         password: process.env.PASSWORD,
         serverType: process.env.SERVER_TYPE,
         domain: process.env.DOMAIN,
