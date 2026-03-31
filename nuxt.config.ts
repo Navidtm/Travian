@@ -43,10 +43,11 @@ export default defineNuxtConfig({
     runtimeConfig: {
         baseURL: `https://${process.env.DOMAIN}/${process.env.SERVER_TYPE}`,
         username: process.env.USER,
-        email: process.env.EMAIL,
+        email: `${process.env.USER}@gmail.com`,
         password: process.env.PASSWORD,
         serverType: process.env.SERVER_TYPE,
-        domain: process.env.DOMAIN
+        domain: process.env.DOMAIN,
+        id: process.env.PHPSESSID
     },
 
     devServer: {
@@ -56,10 +57,7 @@ export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
 
     nitro: {
-        preset: 'bun',
-        experimental: {
-            openAPI: true
-        }
+        preset: 'bun'
     },
 
     vite: {
@@ -76,19 +74,19 @@ export default defineNuxtConfig({
                 commaDangle: 'never'
             }
         }
-    }
+    },
 
-    // fonts: {
-    //     provider: 'local',
-    //     assets: {
-    //         strategy: 'public'
-    //     },
-    //     families: [
-    //         {
-    //             provider: 'local',
-    //             name: 'iransans',
-    //             weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
-    //         }
-    //     ]
-    // }
+    fonts: {
+        provider: 'local',
+        assets: {
+            strategy: 'public'
+        },
+        families: [
+            {
+                provider: 'local',
+                name: 'iransans',
+                weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+            }
+        ]
+    }
 });
