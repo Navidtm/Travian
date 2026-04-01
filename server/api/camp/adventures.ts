@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
         const difficulty: 'hard' | 'normal' = difficultyEl == 'adventureDifficulty0' ? 'hard' : 'normal';
         return { moveTime: calculateSec(moveTime), link, difficulty };
     }));
-    console.log(adventures.length);
 
     return adventures.sort((a, b) => a.moveTime - b.moveTime);
 });

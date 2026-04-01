@@ -1,0 +1,28 @@
+export default defineEventHandler(async (event) => {
+    const page = await launchTravian(event, '/hero_inventory.php');
+
+    const buttons = await page.locator('.regeneratebtn').count();
+    const isDead = buttons == 1;
+
+    const power = !isDead
+        ? await page.locator('.health').locator('span').textContent().then(Number)
+        : 0;
+
+    const resources = await page.locator('#setResource').locator('input').all();
+
+    const i = (await Promise.all(resources.map(async v => await v.isChecked()))).indexOf(true);
+    const resourceHero = await resources[i]?.getAttribute('id').then(v => Number(v?.replace('resourceHero', ''))) ?? 0;
+
+    const experience = await page.locator('.experience').locator('.power').textContent().then(Number) ?? 0;
+    const level = await page.locator('.level').locator('.power').first().textContent().then(Number) ?? 0;
+    const speed = await page.locator('.level').locator('.speed').locator('span').textContent().then(extractNumber) ?? 0;
+
+    return {
+        experience,
+        level,
+        speed,
+        isDead,
+        power,
+        resourceHero
+    };
+});

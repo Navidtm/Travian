@@ -1,6 +1,13 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
+@theme  {
+  --color-wood: #874C28;
+  --color-wheat: #d2a802;
+  --color-clay: #A44E3D;
+  --color-iron: #868585;
+}
+
 @layer base {
   body {
     font-family: 'iransans';
