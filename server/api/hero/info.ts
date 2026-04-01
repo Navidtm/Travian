@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
     const level = await page.locator('.level').locator('.power').first().textContent().then(Number) ?? 0;
     const speed = await page.locator('.level').locator('.speed').locator('span').textContent().then(extractNumber) ?? 0;
 
+    await page.close();
     return {
         experience,
         level,

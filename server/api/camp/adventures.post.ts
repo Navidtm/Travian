@@ -10,5 +10,6 @@ export default defineEventHandler<{
     console.log('Started Adventure!');
     await sleep(1000);
 
+    await page.close();
     return;
 });
