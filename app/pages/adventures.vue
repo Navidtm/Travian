@@ -1,38 +1,48 @@
 <script setup lang="ts">
-const { data, refresh } = useFetch('/api/camp/adventures');
-const query = ref();
-const { execute } = await useFetch('/api/camp/adventures', {
+const { data, refresh, status } = useFetch('/api/camp/adventures');
+
+const query = ref({
+    link: ''
+});
+const { execute, status: adventureStatus } = await useFetch('/api/camp/adventures', {
     method: 'post',
     immediate: false,
-    query
+    query,
+    onResponse: async () => {
+        await refresh();
+    }
 });
-
-const goToAdventure = async (link: string) => {
-    query.value = {
-        link
-    };
-    await execute();
-    await refresh();
-};
 </script>
 
 <template>
-    <div class="max-w-md bg-primary/20 flex flex-col items-center gap-4 p-4 rounded-xl">
+    <div
+        v-if="data"
+        class="max-w-md bg-primary/20 flex flex-col items-center gap-4 p-4 rounded-xl"
+    >
         <h2>
             ماجراجویی
         </h2>
-        <div class="grid grid-cols-2 gap-4">
+
+        <template v-if="status == 'pending'">
+            در حال دریافت داده...
+        </template>
+        <template v-if="adventureStatus == 'pending'">
+            در حال ارسال...
+        </template>
+        <div
+            v-else-if="status == 'success'"
+            class="grid grid-cols-3 gap-4"
+        >
             <div
                 v-for="{ link, moveTime, difficulty } in data"
                 :key="link"
             >
                 <UButton
                     :color="difficulty == 'hard' ? 'warning':'success' "
-                    @click="goToAdventure(link)"
+                    @click="query.link = link; execute()"
                 >
-                    ماجراجویی
                     <span>
-                        ({{ moveTime }} ثانیه)
+                        {{ moveTime }} ثانیه
                     </span>
                 </UButton>
             </div>
