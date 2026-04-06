@@ -1,7 +1,7 @@
 <template>
     <UCard
         v-if="data?.products"
-        class="max-w-42 w-full h-max"
+        class="w-full h-max"
         variant="solid"
     >
         <template #header>

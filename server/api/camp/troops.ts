@@ -1,8 +1,13 @@
 export default defineEventHandler(async (event) => {
     const army = [];
+    const page = await launchTravian(event, `/dorf2.php`);
+    const { baseURL } = useRuntimeConfig(event);
 
-    for (const id of [35, 27, 29]) {
-        const page = await launchTravian(event, `/build.php?id=${id}`);
+    const levels = await getVillageLevels(page);
+    const troopsIdList = [35, 27, 29].filter(v => levels.map(v => v.id).includes(v));
+
+    for (const id of troopsIdList) {
+        await page.goto(`${baseURL}/build.php?id=${id}`);
         const troops = await page.locator('.details').all();
 
         for (const troop of troops) {
@@ -19,5 +24,6 @@ export default defineEventHandler(async (event) => {
         }
     }
 
+    await page.close();
     return army;
 });
