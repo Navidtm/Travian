@@ -83,7 +83,7 @@ const { execute, status: regenerationStatus } = await useFetch('/api/hero/regene
                     </div>
                     <div class="">
                         تجربه:
-                        <span>{{ data.experience }}</span>
+                        <span>{{ data.experience.toLocaleString() }}</span>
                     </div>
                     <div class="">
                         سرعت:
