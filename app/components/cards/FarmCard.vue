@@ -39,11 +39,19 @@
                     </div>
                 </UCard>
             </div>
-            <UButton
-                class="px-8"
-                label="ارتقا همه"
-                @click="upgradeFarm(data.levels)"
-            />
+            <div class="flex w-full gap-4 items-center justify-center">
+                <UButton
+                    class="px-8 self-start"
+                    :loading="status =='pending'"
+                    label="بروزرسانی"
+                    @click="refresh()"
+                />
+                <UButton
+                    class="px-8"
+                    label="ارتقا همه"
+                    @click="upgradeFarm(data.levels)"
+                />
+            </div>
         </UCard>
     </div>
 </template>

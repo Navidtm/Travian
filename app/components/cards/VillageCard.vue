@@ -9,12 +9,18 @@
                 ساختمان ها
             </div>
         </template>
-        <div class="grid grid-cols-6 gap-2 text-center mb-4">
+        <div v-if="dataStatus == 'pending'">
+            <div class="text-center">
+                در حال بروزرسانی...
+            </div>
+        </div>
+        <div
+            v-if="dataStatus == 'success'"
+            class="grid grid-cols-6 gap-2 text-center"
+        >
             <div
-                v-for="{ id, level, name, isEmpty } in data.levels"
+                v-for="{ id, level, name } in data.levels"
                 :key="id"
-                class="data-[empty=true]:opacity-40"
-                :data-empty="isEmpty"
             >
                 <span>
                     {{ name }}
@@ -25,23 +31,31 @@
                 </span>
             </div>
         </div>
-        <UButton
-            class="px-8 mx-auto block"
-            :loading="status =='pending'"
-            label="ارتقا همه"
-            @click="execute()"
-        />
+        <div class="flex w-full gap-4 items-center justify-center mt-4">
+            <UButton
+                class="px-8"
+                :loading="status =='pending'"
+                label="بروزرسانی"
+                @click="refresh()"
+            />
+            <UButton
+                class="px-8"
+                :loading="status =='pending'"
+                label="ارتقا همه"
+                @click="execute()"
+            />
+        </div>
     </UCard>
 </template>
 
 <script setup lang="ts">
-const { data, refresh: updateFarmData } = useFetch('/api/village');
+const { data, status: dataStatus, refresh } = useFetch('/api/village');
 
 const { status, execute } = useFetch('/api/village', {
     method: 'post',
     immediate: false,
     onResponse: async () => {
-        await updateFarmData();
+        await refresh();
     }
 });
 </script>

@@ -9,19 +9,12 @@
                     </div>
                     <FarmCard />
                     <VillageCard />
-                    <UButton
-                        class="px-8 self-start"
-                        :loading="status =='pending'"
-                        label="بروزرسانی"
-                        @click="refresh()"
-                    />
                 </div>
-                <TroopsCard />
+                <div class="flex flex-col gap-4 basis-3xs">
+                    <TroopsCard />
+                    <Town />
+                </div>
             </div>
         </div>
     </div>
 </template>
-
-<script setup lang="ts">
-const { status, refresh } = useFarm();
-</script>
