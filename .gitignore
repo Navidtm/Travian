@@ -24,3 +24,10 @@ logs
 !.env.example
 
 Woff2
+
+# Test coverage
+coverage/
+
+# Playwright
+playwright-report/
+test-results/
