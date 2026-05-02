@@ -53,6 +53,10 @@ export default defineNuxtConfig({
         port: 3001
     },
 
+    experimental: {
+        viteEnvironmentApi: true
+    },
+
     compatibilityDate: '2024-11-01',
 
     nitro: {
@@ -60,7 +64,12 @@ export default defineNuxtConfig({
     },
 
     vite: {
-        plugins: [tailwindcss()]
+        plugins: [tailwindcss()],
+        optimizeDeps: {
+            include: [
+                'es-toolkit'
+            ]
+        }
     },
 
     eslint: {
