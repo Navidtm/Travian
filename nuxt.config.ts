@@ -3,85 +3,83 @@
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineNuxtConfig({
-    modules: [
-        '@pinia/nuxt',
-        '@nuxt/fonts',
-        '@nuxt/icon',
-        '@nuxt/ui',
-        '@vueuse/nuxt',
-        '@nuxt/image',
-        '@nuxt/test-utils'
-    ],
+	modules: [
+		'@pinia/nuxt',
+		'@nuxt/fonts',
+		'@nuxt/icon',
+		'@nuxt/ui',
+		'@vueuse/nuxt',
+		'@nuxt/image',
+		'@nuxt/test-utils',
+	],
 
-    ssr: false,
+	ssr: false,
 
-    components: [
-        {
-            path: '~/components',
-            pathPrefix: false
-        }
-    ],
+	components: [
+		{
+			path: '~/components',
+			pathPrefix: false,
+		},
+	],
 
-    imports: {
-        presets: [
-            {
-                from: 'es-toolkit',
-                imports: ['es-toolkit']
-            }
-        ]
-    },
+	imports: {
+		presets: [
+			{
+				from: 'es-toolkit',
+				imports: ['es-toolkit'],
+			},
+		],
+	},
 
-    devtools: { enabled: true },
+	devtools: { enabled: true },
 
-    css: ['~/assets/css/main.css'],
+	css: ['~/assets/css/main.css'],
 
-    ui: {
-        colorMode: false
-    },
+	ui: {
+		colorMode: false,
+	},
 
-    runtimeConfig: {
-        baseURL: `https://${process.env.DOMAIN}/${process.env.SERVER_TYPE}`,
-        username: process.env.USER,
-        password: process.env.PASSWORD,
-        serverType: process.env.SERVER_TYPE,
-        domain: process.env.DOMAIN,
-        id: process.env.PHPSESSID
-    },
+	runtimeConfig: {
+		baseURL: `https://${process.env.DOMAIN}/${process.env.SERVER_TYPE}`,
+		username: process.env.USER,
+		password: process.env.PASSWORD,
+		serverType: process.env.SERVER_TYPE,
+		domain: process.env.DOMAIN,
+		id: process.env.PHPSESSID,
+	},
 
-    devServer: {
-        port: 3001
-    },
+	devServer: {
+		port: 3001,
+	},
 
-    experimental: {
-        viteEnvironmentApi: true
-    },
+	experimental: {
+		viteEnvironmentApi: true,
+	},
 
-    compatibilityDate: '2024-11-01',
+	compatibilityDate: '2024-11-01',
 
-    nitro: {
-        preset: 'bun'
-    },
+	nitro: {
+		preset: 'bun',
+	},
 
-    vite: {
-        plugins: [tailwindcss()],
-        optimizeDeps: {
-            include: [
-                'es-toolkit'
-            ]
-        }
-    },
+	vite: {
+		plugins: [tailwindcss()],
+		optimizeDeps: {
+			include: ['es-toolkit'],
+		},
+	},
 
-    fonts: {
-        provider: 'local',
-        assets: {
-            strategy: 'public'
-        },
-        families: [
-            {
-                provider: 'local',
-                name: 'iransans',
-                weights: [100, 200, 300, 400, 500, 600, 700, 800, 900]
-            }
-        ]
-    }
+	fonts: {
+		provider: 'local',
+		assets: {
+			strategy: 'public',
+		},
+		families: [
+			{
+				provider: 'local',
+				name: 'iransans',
+				weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+			},
+		],
+	},
 });

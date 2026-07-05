@@ -1,44 +1,47 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "version": "1.0.1",
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "release": "changelogen --release",
-    "lint": "oxlint .",
-    "lint:fix": "oxlint . --fix",
-    "format": "oxfmt .",
-    "format:check": "oxfmt . --check"
-  },
-  "dependencies": {
-    "@nuxt/fonts": "^0.14.0",
-    "@nuxt/icon": "^2.3.1",
-    "@nuxt/image": "^2.0.0",
-    "@nuxt/ui": "^4.9.0",
-    "@pinia/nuxt": "^0.11.3",
-    "@tailwindcss/vite": "^4.3.2",
-    "@vueuse/core": "^14.3.0",
-    "@vueuse/nuxt": "^14.3.0",
-    "es-toolkit": "^1.49.0",
-    "nuxt": "^4.4.8",
-    "tailwindcss": "^4.3.2",
-    "vue": "^3.5.39",
-    "vue-router": "^5.1.0",
-    "zod": "^4.4.3"
-  },
-  "devDependencies": {
-    "@nuxt/test-utils": "^4.0.3",
-    "@vue/test-utils": "^2.4.11",
-    "happy-dom": "^20.10.6",
-    "oxfmt": "^0.57.0",
-    "oxlint": "^1.72.0",
-    "playwright-core": "^1.61.1",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
-  }
+	"name": "nuxt-app",
+	"version": "1.0.1",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"release": "changelogen --release",
+		"lint": "oxlint .",
+		"lint:fix": "oxlint . --fix",
+		"fmt": "oxfmt",
+		"fmt:check": "oxfmt --check"
+	},
+	"dependencies": {
+		"@nuxt/fonts": "^0.14.0",
+		"@nuxt/icon": "^2.3.1",
+		"@nuxt/image": "^2.0.0",
+		"@nuxt/ui": "^4.9.0",
+		"@pinia/nuxt": "^0.11.3",
+		"@tailwindcss/vite": "^4.3.2",
+		"@vueuse/core": "^14.3.0",
+		"@vueuse/nuxt": "^14.3.0",
+		"es-toolkit": "^1.49.0",
+		"nuxt": "^4.4.8",
+		"tailwindcss": "^4.3.2",
+		"vue": "^3.5.39",
+		"vue-router": "^5.1.0",
+		"zod": "^4.4.3"
+	},
+	"devDependencies": {
+		"@nuxt/test-utils": "^4.0.3",
+		"@vue/test-utils": "^2.4.11",
+		"happy-dom": "^20.10.6",
+		"oxfmt": "^0.57.0",
+		"oxlint": "^1.72.0",
+		"playwright-core": "^1.61.1",
+		"typescript": "^6.0.3",
+		"vitest": "^4.1.9"
+	},
+	"lint-staged": {
+		"*": "oxfmt --no-error-on-unmatched-pattern"
+	}
 }

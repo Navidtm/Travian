@@ -1,30 +1,30 @@
 import { webkit } from 'playwright-core';
 import { loginPath } from '~~/shared/constants/common';
 
-export default defineEventHandler(async (event) => {
-    const { username, baseURL, password, domain } = useRuntimeConfig(event);
+export default defineEventHandler(async event => {
+	const { username, baseURL, password, domain } = useRuntimeConfig(event);
 
-    const browser = await webkit.launch({
-        headless: false
-    });
+	const browser = await webkit.launch({
+		headless: false,
+	});
 
-    const context = await browser.newContext();
-    const page = await context.newPage();
+	const context = await browser.newContext();
+	const page = await context.newPage();
 
-    await page.goto(baseURL + loginPath);
+	await page.goto(baseURL + loginPath);
 
-    await page.fill('input[name=user]', username);
-    await page.fill('input[name=pw]', password);
+	await page.fill('input[name=user]', username);
+	await page.fill('input[name=pw]', password);
 
-    await page.waitForURL(/dorf1/);
+	await page.waitForURL(/dorf1/);
 
-    const cookies = await page.context().cookies(`https://${domain}`);
+	const cookies = await page.context().cookies(`https://${domain}`);
 
-    const token = cookies.find(v => v.name == 'PHPSESSID')?.value ?? '';
+	const token = cookies.find(v => v.name == 'PHPSESSID')?.value ?? '';
 
-    page.close();
+	page.close();
 
-    return {
-        token
-    };
+	return {
+		token,
+	};
 });

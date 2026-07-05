@@ -1,23 +1,23 @@
-import { farmPath } from "~~/shared/constants/common";
+import { farmPath } from '~~/shared/constants/common';
 
-export default defineEventHandler(async (event) => {
-    const page = await launchTravian(event, farmPath);
+export default defineEventHandler(async event => {
+	const page = await launchTravian(event, farmPath);
 
-    const levels = await getFarmLevels(page);
-    const products = await getFarmProducts(page);
-    const troops = await getTroops(page);
-    const resourses = await getResourses(page);
+	const levels = await getFarmLevels(page);
+	const products = await getFarmProducts(page);
+	const troops = await getTroops(page);
+	const resourses = await getResourses(page);
 
-    await page.close();
+	await page.close();
 
-    return {
-        levels,
-        troops,
-        products,
-        resourses,
-        meta: {
-            url: page.url(),
-            date: Date.now()
-        }
-    };
+	return {
+		levels,
+		troops,
+		products,
+		resourses,
+		meta: {
+			url: page.url(),
+			date: Date.now(),
+		},
+	};
 });

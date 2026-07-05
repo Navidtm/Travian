@@ -1,7 +1,7 @@
 <template>
-    <UApp>
-        <NuxtLayout>
-            <NuxtPage :keepalive="true" />
-        </NuxtLayout>
-    </UApp>
+	<UApp>
+		<NuxtLayout>
+			<NuxtPage :keepalive="true" />
+		</NuxtLayout>
+	</UApp>
 </template>

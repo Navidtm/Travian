@@ -1,29 +1,29 @@
-export default defineEventHandler(async (event) => {
-    const army = [];
-    const page = await launchTravian(event, `/dorf2.php`);
-    const { baseURL } = useRuntimeConfig(event);
+export default defineEventHandler(async event => {
+	const army = [];
+	const page = await launchTravian(event, `/dorf2.php`);
+	const { baseURL } = useRuntimeConfig(event);
 
-    const levels = await getVillageLevels(page);
-    const troopsIdList = [35, 27, 29].filter(v => levels.map(v => v.id).includes(v));
+	const levels = await getVillageLevels(page);
+	const troopsIdList = [35, 27, 29].filter(v => levels.map(v => v.id).includes(v));
 
-    for (const id of troopsIdList) {
-        await page.goto(`${baseURL}/build.php?id=${id}`);
-        const troops = await page.locator('.details').all();
+	for (const id of troopsIdList) {
+		await page.goto(`${baseURL}/build.php?id=${id}`);
+		const troops = await page.locator('.details').all();
 
-        for (const troop of troops) {
-            const name = await troop.locator('img.unit').first().getAttribute('alt') ?? '';
-            const maxTrain = await troop.locator('a').last().textContent() ?? '';
-            const count = await troop.locator('.furtherInfo').textContent() ?? '0';
+		for (const troop of troops) {
+			const name = (await troop.locator('img.unit').first().getAttribute('alt')) ?? '';
+			const maxTrain = (await troop.locator('a').last().textContent()) ?? '';
+			const count = (await troop.locator('.furtherInfo').textContent()) ?? '0';
 
-            army.push({
-                name,
-                maxTrain,
-                id,
-                count: extractNumber(count)
-            });
-        }
-    }
+			army.push({
+				name,
+				maxTrain,
+				id,
+				count: extractNumber(count),
+			});
+		}
+	}
 
-    await page.close();
-    return army;
+	await page.close();
+	return army;
 });

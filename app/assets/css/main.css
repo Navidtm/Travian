@@ -1,19 +1,19 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
-@theme  {
-  --color-all: #75009f;
-  --color-wood: #874C28;
-  --color-wheat: #d2a802;
-  --color-clay: #A44E3D;
-  --color-iron: #868585;
+@theme {
+	--color-all: #75009f;
+	--color-wood: #874c28;
+	--color-wheat: #d2a802;
+	--color-clay: #a44e3d;
+	--color-iron: #868585;
 }
 
 @layer base {
-  body {
-    font-family: 'iransans';
-    direction: rtl;
-    font-weight: 500;
-    background-color: #000;
-  }
+	body {
+		font-family: 'iransans';
+		direction: rtl;
+		font-weight: 500;
+		background-color: #000;
+	}
 }
