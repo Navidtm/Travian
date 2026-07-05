@@ -1,7 +1,12 @@
+<script setup lang="ts">
+import AppSidebar from '~/components/AppSidebar.vue';
+</script>
+
 <template>
-	<UApp>
-		<NuxtLayout>
-			<NuxtPage :keepalive="true" />
-		</NuxtLayout>
-	</UApp>
+	<div class="min-h-screen bg-bg lg:flex">
+		<AppSidebar />
+		<div class="min-w-0 flex-1">
+			<NuxtPage />
+		</div>
+	</div>
 </template>

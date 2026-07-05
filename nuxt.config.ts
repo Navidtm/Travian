@@ -3,11 +3,11 @@
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineNuxtConfig({
+	dev: true,
 	modules: [
 		'@pinia/nuxt',
 		'@nuxt/fonts',
 		'@nuxt/icon',
-		'@nuxt/ui',
 		'@vueuse/nuxt',
 		'@nuxt/image',
 		'@nuxt/test-utils',
@@ -34,10 +34,6 @@ export default defineNuxtConfig({
 	devtools: { enabled: true },
 
 	css: ['~/assets/css/main.css'],
-
-	ui: {
-		colorMode: false,
-	},
 
 	runtimeConfig: {
 		baseURL: `https://${process.env.DOMAIN}/${process.env.SERVER_TYPE}`,

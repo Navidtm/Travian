@@ -1,9 +1,16 @@
 {
 	"eslint.format.enable": true,
+	"unocss.disable": true,
 	"oxc.fmt.configPath": ".oxfmtrc.json",
 	"editor.defaultFormatter": "oxc.oxc-vscode",
 	"editor.formatOnSave": true,
 	"files.associations": {
 		"*.css": "tailwindcss"
+	},
+	"[vue]": {
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "oxc.oxc-vscode"
 	}
 }

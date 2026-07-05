@@ -10,8 +10,8 @@
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
 		"release": "changelogen --release",
-		"lint": "oxlint .",
-		"lint:fix": "oxlint . --fix",
+		"lint": "oxlint",
+		"lint:fix": "oxlint --fix",
 		"fmt": "oxfmt",
 		"fmt:check": "oxfmt --check"
 	},
@@ -19,7 +19,6 @@
 		"@nuxt/fonts": "^0.14.0",
 		"@nuxt/icon": "^2.3.1",
 		"@nuxt/image": "^2.0.0",
-		"@nuxt/ui": "^4.9.0",
 		"@pinia/nuxt": "^0.11.3",
 		"@tailwindcss/vite": "^4.3.2",
 		"@vueuse/core": "^14.3.0",
