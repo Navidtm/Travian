@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import StatusBadge from '~/components/ui/StatusBadge.vue';
-import ToggleSwitch from '~/components/ui/ToggleSwitch.vue';
-import type { AttackTemplate, FarmingJob, TargetGroup } from '~/types';
-
 const props = defineProps<{
 	jobs: FarmingJob[];
 	groups: TargetGroup[];

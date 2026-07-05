@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import ProgressBar from '~/components/ui/ProgressBar.vue';
 import { formatDuration } from '~/composables/useVillageData';
-import type { AutomationRunState, AutomationTask, ResourceType } from '~/types';
 
 const props = defineProps<{
 	currentTask?: AutomationTask;

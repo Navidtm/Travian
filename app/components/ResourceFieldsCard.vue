@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import ProgressBar from '~/components/ui/ProgressBar.vue';
-import type { ResourceField, ResourceType } from '~/types';
 
 const props = defineProps<{
-	fields: ResourceField[];
+	fields?: ResourceField[];
 }>();
 
 defineEmits<{ (e: 'upgrade-all'): void }>();
@@ -27,23 +23,21 @@ const labelFor: Record<ResourceType, string> = {
 const groups = computed(() => {
 	const order: ResourceType[] = ['wood', 'clay', 'iron', 'crop'];
 	return order.map(type => {
-		const items = props.fields.filter(f => f.type === type);
-		const pending = items.filter(f => f.currentLevel < f.targetLevel).length;
+		const items = props.fields?.filter(f => f.type === type);
+		const pending = items?.filter(f => f.currentLevel < f.targetLevel).length;
 		return { type, items, pending };
 	});
 });
 
 const totalPending = computed(
-	() => props.fields.filter(f => f.currentLevel < f.targetLevel).length,
+	() => props.fields?.filter(f => f.currentLevel < f.targetLevel).length,
 );
 
 const progress = (field: ResourceField) => Math.min(1, field.currentLevel / field.targetLevel);
 </script>
 
 <template>
-	<section
-		class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5"
-	>
+	<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
 		<div class="mb-4 flex items-center justify-between gap-3">
 			<div>
 				<h2 class="text-sm font-semibold text-text">Resource Fields</h2>
@@ -81,9 +75,7 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 						:style="{ backgroundColor: colorFor[group.type] }"
 					/>
 					<h3 class="text-xs font-medium text-text">{{ labelFor[group.type] }}</h3>
-					<span class="text-[11px] text-text-faint"
-						>{{ group.items.length }} fields</span
-					>
+					<span class="text-[11px] text-text-faint">{{ group.items?.length }} fields</span>
 				</div>
 
 				<ul class="space-y-2">

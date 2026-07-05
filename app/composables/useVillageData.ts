@@ -1,14 +1,3 @@
-import { computed, reactive, ref } from 'vue';
-
-import type {
-	ActivityLogEntry,
-	AutomationRunState,
-	AutomationTask,
-	Building,
-	ResourceField,
-	Village,
-} from '~/types';
-
 // ---------------------------------------------------------------------------
 // Mock data. In a real deployment this file would be replaced by calls into
 // the automation engine's API / websocket feed.
@@ -54,303 +43,6 @@ const villages = reactive<Village[]>([
 ]);
 
 const activeVillageId = ref(villages[0]!.id);
-
-const resourceFieldsByVillage: Record<string, ResourceField[]> = {
-	v1: [
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v1-wood-${i}`,
-			type: 'wood' as const,
-			slot: i + 1,
-			currentLevel: [8, 7, 6, 8][i],
-			targetLevel: 10,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v1-clay-${i}`,
-			type: 'clay' as const,
-			slot: i + 5,
-			currentLevel: [7, 8, 6, 7][i],
-			targetLevel: 10,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v1-iron-${i}`,
-			type: 'iron' as const,
-			slot: i + 9,
-			currentLevel: [9, 8, 8, 7][i],
-			targetLevel: 10,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 6 }, (_, i) => ({
-			id: `v1-crop-${i}`,
-			type: 'crop' as const,
-			slot: i + 13,
-			currentLevel: [5, 6, 5, 4, 6, 5][i],
-			targetLevel: 8,
-			maxLevel: 20,
-		})),
-	],
-	v2: [
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v2-wood-${i}`,
-			type: 'wood' as const,
-			slot: i + 1,
-			currentLevel: [4, 3, 4, 3][i],
-			targetLevel: 8,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v2-clay-${i}`,
-			type: 'clay' as const,
-			slot: i + 5,
-			currentLevel: [5, 4, 4, 5][i],
-			targetLevel: 8,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v2-iron-${i}`,
-			type: 'iron' as const,
-			slot: i + 9,
-			currentLevel: [3, 3, 4, 3][i],
-			targetLevel: 8,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 6 }, (_, i) => ({
-			id: `v2-crop-${i}`,
-			type: 'crop' as const,
-			slot: i + 13,
-			currentLevel: [6, 7, 6, 5, 6, 7][i],
-			targetLevel: 8,
-			maxLevel: 20,
-		})),
-	],
-	v3: [
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v3-wood-${i}`,
-			type: 'wood' as const,
-			slot: i + 1,
-			currentLevel: [2, 1, 2, 1][i],
-			targetLevel: 5,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v3-clay-${i}`,
-			type: 'clay' as const,
-			slot: i + 5,
-			currentLevel: [1, 2, 1, 2][i],
-			targetLevel: 5,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 4 }, (_, i) => ({
-			id: `v3-iron-${i}`,
-			type: 'iron' as const,
-			slot: i + 9,
-			currentLevel: [2, 1, 1, 2][i],
-			targetLevel: 5,
-			maxLevel: 20,
-		})),
-		...Array.from({ length: 6 }, (_, i) => ({
-			id: `v3-crop-${i}`,
-			type: 'crop' as const,
-			slot: i + 13,
-			currentLevel: [3, 2, 3, 2, 3, 2][i],
-			targetLevel: 5,
-			maxLevel: 20,
-		})),
-	],
-};
-
-const buildingsByVillage: Record<string, Building[]> = {
-	v1: [
-		{
-			id: 'v1-b1',
-			name: 'Main Building',
-			slot: 26,
-			currentLevel: 12,
-			targetLevel: 20,
-			maxLevel: 20,
-			status: 'upgrading',
-			etaSeconds: 5120,
-		},
-		{
-			id: 'v1-b2',
-			name: 'Warehouse',
-			slot: 20,
-			currentLevel: 14,
-			targetLevel: 20,
-			maxLevel: 20,
-			status: 'queued',
-		},
-		{
-			id: 'v1-b3',
-			name: 'Granary',
-			slot: 21,
-			currentLevel: 10,
-			targetLevel: 20,
-			maxLevel: 20,
-			status: 'queued',
-		},
-		{
-			id: 'v1-b4',
-			name: 'Marketplace',
-			slot: 22,
-			currentLevel: 8,
-			targetLevel: 10,
-			maxLevel: 20,
-			status: 'idle',
-		},
-		{
-			id: 'v1-b5',
-			name: 'Barracks',
-			slot: 23,
-			currentLevel: 5,
-			targetLevel: 5,
-			maxLevel: 20,
-			status: 'target-reached',
-		},
-		{
-			id: 'v1-b6',
-			name: 'Academy',
-			slot: 24,
-			currentLevel: 3,
-			targetLevel: 10,
-			maxLevel: 20,
-			status: 'idle',
-		},
-		{
-			id: 'v1-b7',
-			name: 'Rally Point',
-			slot: 25,
-			currentLevel: 6,
-			targetLevel: 6,
-			maxLevel: 20,
-			status: 'target-reached',
-		},
-		{
-			id: 'v1-b8',
-			name: 'City Wall',
-			slot: 27,
-			currentLevel: 9,
-			targetLevel: 15,
-			maxLevel: 20,
-			status: 'idle',
-		},
-		{
-			id: 'v1-b9',
-			name: 'Residence',
-			slot: 28,
-			currentLevel: 4,
-			targetLevel: 10,
-			maxLevel: 20,
-			status: 'error',
-		},
-		{
-			id: 'v1-b10',
-			name: 'Cranny',
-			slot: 29,
-			currentLevel: 2,
-			targetLevel: 5,
-			maxLevel: 10,
-			status: 'idle',
-		},
-	],
-	v2: [
-		{
-			id: 'v2-b1',
-			name: 'Main Building',
-			slot: 26,
-			currentLevel: 8,
-			targetLevel: 15,
-			maxLevel: 20,
-			status: 'upgrading',
-			etaSeconds: 2380,
-		},
-		{
-			id: 'v2-b2',
-			name: 'Warehouse',
-			slot: 20,
-			currentLevel: 9,
-			targetLevel: 15,
-			maxLevel: 20,
-			status: 'queued',
-		},
-		{
-			id: 'v2-b3',
-			name: 'Granary',
-			slot: 21,
-			currentLevel: 8,
-			targetLevel: 15,
-			maxLevel: 20,
-			status: 'idle',
-		},
-		{
-			id: 'v2-b4',
-			name: 'Marketplace',
-			slot: 22,
-			currentLevel: 4,
-			targetLevel: 8,
-			maxLevel: 20,
-			status: 'idle',
-		},
-		{
-			id: 'v2-b5',
-			name: 'Barracks',
-			slot: 23,
-			currentLevel: 1,
-			targetLevel: 3,
-			maxLevel: 20,
-			status: 'idle',
-		},
-		{
-			id: 'v2-b6',
-			name: 'Rally Point',
-			slot: 25,
-			currentLevel: 2,
-			targetLevel: 2,
-			maxLevel: 20,
-			status: 'target-reached',
-		},
-	],
-	v3: [
-		{
-			id: 'v3-b1',
-			name: 'Main Building',
-			slot: 26,
-			currentLevel: 3,
-			targetLevel: 10,
-			maxLevel: 20,
-			status: 'upgrading',
-			etaSeconds: 960,
-		},
-		{
-			id: 'v3-b2',
-			name: 'Warehouse',
-			slot: 20,
-			currentLevel: 3,
-			targetLevel: 10,
-			maxLevel: 20,
-			status: 'idle',
-		},
-		{
-			id: 'v3-b3',
-			name: 'Granary',
-			slot: 21,
-			currentLevel: 2,
-			targetLevel: 10,
-			maxLevel: 20,
-			status: 'idle',
-		},
-		{
-			id: 'v3-b4',
-			name: 'Rally Point',
-			slot: 25,
-			currentLevel: 1,
-			targetLevel: 1,
-			maxLevel: 20,
-			status: 'target-reached',
-		},
-	],
-};
 
 const tasks = reactive<AutomationTask[]>([
 	{
@@ -489,14 +181,35 @@ export function formatDuration(seconds?: number): string {
 
 export function useVillageData() {
 	const activeVillage = computed<Village>(
-		() => villages.find(v => v.id === activeVillageId.value) ?? villages[0],
+		() => villages.find(v => v.id === activeVillageId.value)! ?? villages[0],
 	);
 
-	const resourceFields = computed<ResourceField[]>(
-		() => resourceFieldsByVillage[activeVillageId.value] ?? [],
-	);
+	const resourceFields = computed(() => {
+		const { data } = useFetch('/api/farm');
 
-	const buildings = computed<Building[]>(() => buildingsByVillage[activeVillageId.value] ?? []);
+		return data.value?.levels.map<ResourceField>(({ id, level, type }) => ({
+			id: `${id}`,
+			maxLevel: 20,
+			currentLevel: level,
+			slot: id,
+			type,
+			targetLevel: 20,
+			etaSeconds: 2,
+		}));
+	});
+
+	const buildings = computed<Building[] | undefined>(() => {
+		const { data } = useFetch('/api/village');
+		return data.value?.levels.map<Building>(({ id, level, name }) => ({
+			currentLevel: level,
+			id: `${name}`,
+			name: name!,
+			maxLevel: 20,
+			slot: id,
+			status: 'idle',
+			targetLevel: 20,
+		}));
+	});
 
 	const villageTasks = computed<AutomationTask[]>(() =>
 		tasks.filter(t => t.villageName === activeVillage.value.name),
@@ -522,37 +235,9 @@ export function useVillageData() {
 		activeVillageId.value = id;
 	};
 
-	const upgradeAllFields = () => {
-		const list = resourceFieldsByVillage[activeVillageId.value];
-		if (!list) return;
-		list.forEach(f => {
-			if (f.currentLevel < f.targetLevel) f.currentLevel += 1;
-		});
-		activityLog.unshift({
-			id: `log-${Date.now()}`,
-			time: new Date().toLocaleTimeString('en-US', { hour12: false }),
-			level: 'info',
-			message: `Queued upgrades for all resource fields below target in ${activeVillage.value.name}.`,
-			villageName: activeVillage.value.name,
-		});
-	};
+	const upgradeAllFields = () => {};
 
-	const upgradeEverything = () => {
-		upgradeAllFields();
-		const list = buildingsByVillage[activeVillageId.value];
-		if (list) {
-			list.forEach(b => {
-				if (b.currentLevel < b.targetLevel && b.status === 'idle') b.status = 'queued';
-			});
-		}
-		activityLog.unshift({
-			id: `log-${Date.now() + 1}`,
-			time: new Date().toLocaleTimeString('en-US', { hour12: false }),
-			level: 'success',
-			message: `"Upgrade Everything to Target Level" triggered for ${activeVillage.value.name}.`,
-			villageName: activeVillage.value.name,
-		});
-	};
+	const upgradeEverything = () => {};
 
 	const togglePause = () => {
 		runState.value = runState.value === 'running' ? 'paused' : 'running';

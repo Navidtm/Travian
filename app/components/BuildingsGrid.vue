@@ -1,17 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import ProgressBar from '~/components/ui/ProgressBar.vue';
-import StatusBadge from '~/components/ui/StatusBadge.vue';
 import { formatDuration } from '~/composables/useVillageData';
-import type { Building } from '~/types';
 
-const props = defineProps<{ buildings: Building[] }>();
+const props = defineProps<{ buildings?: Building[] }>();
 
 const progress = (b: Building) => Math.min(1, b.currentLevel / b.targetLevel);
 
 const activeCount = computed(
-	() => props.buildings.filter(b => b.status === 'upgrading' || b.status === 'queued').length,
+	() => props.buildings?.filter(b => b.status === 'upgrading' || b.status === 'queued').length,
 );
 </script>
 
@@ -31,9 +28,9 @@ const activeCount = computed(
 				class="flex flex-col gap-3 rounded-lg border border-border-soft bg-surface-2 p-3.5"
 			>
 				<div class="flex items-start justify-between gap-2">
-					<div class="min-w-0">
-						<p class="truncate text-sm font-medium text-text">{{ b.name }}</p>
-						<p class="font-mono text-[11px] text-text-faint">Slot #{{ b.slot }}</p>
+					<div class="min-w-0 flex items-baseline gap-2">
+						<span class="truncate text-sm font-medium text-text">{{ b.name }}</span>
+						<span class="font-mono text-xs text-text-faint">#{{ b.slot }}</span>
 					</div>
 					<StatusBadge :status="b.status" />
 				</div>
