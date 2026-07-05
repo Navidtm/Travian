@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {},
+  "plugins": [
+    "typescript",
+    "vue",
+    "import"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "pedantic": "off",
+    "style": "off"
+  },
+  "ignorePatterns": [
+    ".nuxt/",
+    ".output/",
+    "dist/",
+    "node_modules/"
+  ]
+}

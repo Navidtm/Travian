@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineNuxtConfig({
     modules: [
-        '@nuxt/eslint',
         '@pinia/nuxt',
         '@nuxt/fonts',
         '@nuxt/icon',
@@ -69,18 +68,6 @@ export default defineNuxtConfig({
             include: [
                 'es-toolkit'
             ]
-        }
-    },
-
-    eslint: {
-        config: {
-            stylistic: {
-                semi: true,
-                quotes: 'single',
-                indent: 4,
-                quoteProps: 'as-needed',
-                commaDangle: 'never'
-            }
         }
     },
 
