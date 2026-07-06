@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { hero, experienceProgress, experienceRemaining, revive } = useHeroData();
+const { data: hero } = useFetch('/api/hero/info');
 </script>
 <template>
 	<div>
@@ -8,20 +8,15 @@ const { hero, experienceProgress, experienceRemaining, revive } = useHeroData();
 				class="mx-auto flex max-w-350 flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-4"
 			>
 				<div>
-					<p class="text-sm font-semibold leading-tight text-text">Army</p>
-					<p class="text-[11px] leading-tight text-text-muted">Display Army</p>
+					<p class="text-sm font-semibold leading-tight text-text">Hero</p>
+					<p class="text-[11px] leading-tight text-text-muted"></p>
 				</div>
 				<MilitaryTabs active="operations" />
 			</div>
 		</header>
 
-		<main class="mx-auto flex max-w-350 flex-col gap-5 px-4 py-5 lg:px-8 lg:py-6">
-			<HeroProfileCard
-				:hero
-				:experience-progress
-				:experience-remaining
-				@revive="revive"
-			/>
+		<main class="flex max-w-150 flex-col gap-5 px-4 py-5 lg:px-8 lg:py-6">
+			<HeroProfileCard :hero />
 		</main>
 	</div>
 </template>

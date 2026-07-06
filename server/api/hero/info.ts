@@ -16,6 +16,18 @@ export default defineEventHandler(async event => {
 
 	const experience =
 		(await page.locator('.experience').locator('.power').textContent().then(Number)) ?? 0;
+
+	await page.locator('.attribute.experience.tooltip').hover();
+
+	const experienceRemaining = await page
+		.locator('.text.elementText font')
+		.first()
+		.textContent()
+		.then(Number);
+
+	const experienceForNextLevel = experienceRemaining + experience;
+	const experienceProgress = experience / experienceForNextLevel;
+
 	const level =
 		(await page.locator('.level').locator('.power').first().textContent().then(Number)) ?? 0;
 	const speed =
@@ -26,13 +38,25 @@ export default defineEventHandler(async event => {
 			.textContent()
 			.then(extractNumber)) ?? 0;
 
+	const { baseURL } = useRuntimeConfig(event);
+	const heroImage = await page
+		.locator('#heroImage')
+		.getAttribute('src')
+		.then(v => baseURL + '/' + v);
+
 	await page.close();
+
 	return {
+		name: 'Navid',
+		experienceRemaining,
+		experienceForNextLevel,
+		experienceProgress,
 		experience,
 		level,
 		speed,
-		isDead,
+		isAlive: !isDead,
+		heroImage,
 		power,
-		resourceHero,
-	};
+		resourceBonusPercent: resourceHero,
+	} satisfies Hero;
 });

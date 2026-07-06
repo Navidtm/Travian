@@ -1,7 +1,3 @@
-import { computed, ref } from 'vue';
-
-import type { BlacksmithState, MilitaryOverviewStat, Tribe, TroopDefinition } from '~/types/army';
-
 // TODO: replace mock rosters with the real army/research endpoint per tribe.
 const troopsByTribe: Record<Tribe, TroopDefinition[]> = {
 	romans: [

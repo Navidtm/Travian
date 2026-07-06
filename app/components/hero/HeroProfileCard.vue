@@ -1,25 +1,16 @@
 <script setup lang="ts">
 import { formatNumber } from '~/composables/useVillageData';
 
-defineProps<{
-	hero: Hero;
-	experienceProgress: number;
-	experienceRemaining: number;
-}>();
+const { hero } = defineProps<{ hero?: Hero }>();
 
-defineEmits<{ (e: 'revive'): void }>();
-
-const tribeLabel: Record<Hero['tribe'], string> = {
-	romans: 'Romans',
-	gauls: 'Gauls',
-	teutons: 'Teutons',
-	egyptians: 'Egyptians',
-	huns: 'Huns',
-};
+const { execute: revive } = useFetch('/api/hero/revive');
 </script>
 
 <template>
-	<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
+	<section
+		v-if="hero"
+		class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5"
+	>
 		<div class="flex flex-col gap-4 sm:flex-row sm:items-center">
 			<!-- Portrait -->
 			<div class="relative mx-auto sm:mx-0">
@@ -30,11 +21,15 @@ const tribeLabel: Record<Hero['tribe'], string> = {
 					}"
 				/>
 				<div
-					class="flex h-24 w-24 items-center justify-center rounded-full border-2"
+					class="flex h-24 w-24 items-center justify-center rounded-full border-2 overflow-hidden"
 					:class="hero.isAlive ? 'border-run' : 'border-error'"
 					:style="{ backgroundColor: 'var(--color-surface-2)' }"
 				>
+					<div v-if="hero.heroImage">
+						<img :src="hero.heroImage" />
+					</div>
 					<svg
+						v-else
 						viewBox="0 0 24 24"
 						class="h-11 w-11"
 						:class="hero.isAlive ? 'text-run' : 'text-error'"
@@ -70,10 +65,6 @@ const tribeLabel: Record<Hero['tribe'], string> = {
 						label="Danger"
 						tone="red"
 					/>
-					<span
-						class="rounded-full bg-surface-3 px-2 py-0.5 text-[10px] font-medium text-(--color-text-muted)"
-						>{{ tribeLabel[hero.tribe] }}</span
-					>
 				</div>
 
 				<div class="mt-3">
@@ -85,11 +76,11 @@ const tribeLabel: Record<Hero['tribe'], string> = {
 						>
 					</div>
 					<ProgressBar
-						:progress="experienceProgress"
+						:progress="hero.experienceProgress"
 						color="var(--color-run)"
 					/>
 					<p class="mt-1 text-[11px] text-text-faint"
-						>{{ formatNumber(experienceRemaining) }} XP to next level</p
+						>{{ formatNumber(hero.experienceRemaining) }} XP to next level</p
 					>
 				</div>
 			</div>
@@ -114,7 +105,7 @@ const tribeLabel: Record<Hero['tribe'], string> = {
 			v-if="!hero.isAlive"
 			type="button"
 			class="mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-error px-3 py-2 text-xs font-medium text-white transition-opacity hover:opacity-90"
-			@click="$emit('revive')"
+			@click="revive()"
 		>
 			Revive Hero
 		</button>

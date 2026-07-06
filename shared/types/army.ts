@@ -60,10 +60,12 @@ export interface Movement {
 
 export interface Hero {
 	name: string;
-	tribe: Tribe;
 	level: number;
 	experience: number;
 	experienceForNextLevel: number;
+	experienceRemaining: number;
+	experienceProgress: number;
+	heroImage: string | null;
 	power: number;
 	speed: number;
 	resourceBonusPercent: number;
