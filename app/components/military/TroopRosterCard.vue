@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import ProgressBar from '~/components/ui/ProgressBar.vue';
-import ToggleSwitch from '~/components/ui/ToggleSwitch.vue';
 import { formatNumber } from '~/composables/useVillageData';
-import type { TroopCategory, TroopType } from '~/types';
 
 const props = defineProps<{
 	troops: TroopType[];

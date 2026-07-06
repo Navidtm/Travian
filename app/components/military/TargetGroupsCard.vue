@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TargetGroup } from '~/types';
-
 defineProps<{
 	groups: TargetGroup[];
 	villageCount: (group: TargetGroup) => number;

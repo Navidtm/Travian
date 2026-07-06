@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { formatNumber } from '~/composables/useVillageData';
-import type { Village } from '~/types';
 
 const props = defineProps<{ village: Village }>();
 
@@ -114,7 +111,8 @@ const population = computed(() => ({
 			</span>
 			<div class="min-w-0">
 				<p class="truncate font-mono text-sm font-semibold leading-tight text-text">
-					{{ formatNumber(item.value) }}
+					{{ formatNumber(item.value)
+					}}<span class="text-text-faint">/{{ formatNumber(item.cap) }}</span>
 				</p>
 				<p class="truncate text-[11px] text-(--color-text-muted)">
 					{{ item.label }} · <span class="font-mono">+{{ formatNumber(item.rate) }}/h</span>

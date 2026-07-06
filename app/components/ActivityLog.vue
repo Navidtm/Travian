@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-import type { ActivityLogEntry, LogLevel } from '~/types';
-
 defineProps<{ entries: ActivityLogEntry[] }>();
 
 const isOpen = ref(true);

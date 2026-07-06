@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { AttackTemplate } from '~/types';
-
 defineProps<{ templates: AttackTemplate[] }>();
 
 defineEmits<{ (e: 'create-template'): void }>();

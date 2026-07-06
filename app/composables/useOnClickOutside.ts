@@ -1,5 +1,3 @@
-import { onBeforeUnmount, onMounted, type Ref } from 'vue';
-
 export function onClickOutside(target: Ref<HTMLElement | null>, callback: () => void) {
 	const handler = (event: MouseEvent) => {
 		const el = target.value;

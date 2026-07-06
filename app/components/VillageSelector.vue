@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import { onClickOutside } from '~/composables/useOnClickOutside';
-import type { Village } from '~/types';
 
 const props = defineProps<{
 	villages: Village[];

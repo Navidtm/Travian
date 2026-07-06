@@ -1,9 +1,9 @@
-import { villagePath } from '~~/shared/constants/common';
+import { BuildingPath } from '~~/shared/constants/common';
 
 export default defineEventHandler(async event => {
-	const page = await launchTravian(event, villagePath);
+	const page = await launchTravian(event, BuildingPath);
 
-	const levels = await getVillageLevels(page);
+	const levels = await getBuildings(page);
 
 	await page.close();
 

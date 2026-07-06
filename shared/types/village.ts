@@ -1,71 +1,40 @@
-// export type Building_Fa =
-// 	| 'ساختمان اصلي'
-// 	| 'دیوار'
-// 	| 'انبار'
-// 	| 'انبار عذا'
-// 	| 'اردوگاه'
-// 	| 'سفارتخانه'
-// 	| 'عمارت قهرمان'
-// 	| 'سربازخانه'
-// 	| 'بازار'
-// 	| 'دارالفنون'
-// 	| 'قصر'
-// 	| 'آهنگري'
-// 	| 'اصطبل'
-// 	| 'خزانه داري'
-// 	| 'آجرپزي'
-// 	| 'چوب بری'
-// 	| 'ذوب آهن'
-// 	| 'کارگاه'
-// 	| 'آسياب'
-// 	| 'ميدان تمرين'
-// 	| 'نانوايي'
-// 	| 'تالار شهر';
-
-// export type Building =
-// 	| 'Main_Building'
-// 	| 'Wall'
-// 	| 'Warehouse'
-// 	| 'Food_Storage'
-// 	| 'Camp'
-// 	| 'Embassy'
-// 	| 'Hero_Mansion'
-// 	| 'Barracks'
-// 	| 'Market'
-// 	| 'Academy'
-// 	| 'Palace'
-// 	| 'Blacksmith'
-// 	| 'Stable'
-// 	| 'Treasury'
-// 	| 'Brick_Kiln'
-// 	| 'Sawmill'
-// 	| 'Iron_Foundry'
-// 	| 'Workshop'
-// 	| 'Mill'
-// 	| 'Training_Ground'
-// 	| 'Bakery'
-// 	| 'Town_Hall';
-
-// export type BuildingId =
-// 	| 19
-// 	| 20
-// 	| 21
-// 	| 22
-// 	| 23
-// 	| 24
-// 	| 25
-// 	| 26
-// 	| 27
-// 	| 28
-// 	| 29
-// 	| 30
-// 	| 31
-// 	| 32
-// 	| 33
-// 	| 34
-// 	| 35
-// 	| 36
-// 	| 37
-// 	| 38
-// 	| 39
-// 	| 40;
+export type BuildingName =
+	| 'Woodcutter'
+	| 'Clay_Pit'
+	| 'Iron_Mine'
+	| 'Cropland'
+	| 'Sawmill'
+	| 'Brickyard'
+	| 'Iron_Foundry'
+	| 'Grain_Mill'
+	| 'Bakery'
+	| 'Warehouse'
+	| 'Granary'
+	| 'Blacksmith'
+	| 'Armoury'
+	| 'Tournament_Square'
+	| 'Main_Building'
+	| 'Camp'
+	| 'Marketplace'
+	| 'Embassy'
+	| 'Barracks'
+	| 'Stable'
+	| 'Workshop'
+	| 'Academy'
+	| 'Cranny'
+	| 'Town_Hall'
+	| 'Residence'
+	| 'Palace'
+	| 'Treasury'
+	| 'Trade_Office'
+	| 'Great_Barracks'
+	| 'Great_Stable'
+	| 'Stonemason_Lodge'
+	| 'Brewery'
+	| 'Trapper'
+	| 'Hero_Mansion'
+	| 'Great_Warehouse'
+	| 'Great_Granary'
+	| 'World_Wonder'
+	| 'Horse_Drinking_Trough'
+	| 'Wall';

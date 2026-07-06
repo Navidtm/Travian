@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import ProgressBar from '~/components/ui/ProgressBar.vue';
-import StatusBadge from '~/components/ui/StatusBadge.vue';
-import type { Operation } from '~/types';
-
 defineProps<{ operations: Operation[] }>();
 
 defineEmits<{

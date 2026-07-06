@@ -180,18 +180,26 @@ export function formatDuration(seconds?: number): string {
 // ---------------------------------------------------------------------------
 
 export function useVillageData() {
+	// const profile = computed(() => {
+	// 	const { data } = useFetch('/api/profile');
+	// 	return data.value;
+	// });
+
+	const farm = computed(() => {
+		const { data } = useFetch('/api/farm');
+		return data.value;
+	});
+
 	const activeVillage = computed<Village>(
 		() => villages.find(v => v.id === activeVillageId.value)! ?? villages[0],
 	);
 
 	const resourceFields = computed(() => {
-		const { data } = useFetch('/api/farm');
-
-		return data.value?.levels.map<ResourceField>(({ id, level, type }) => ({
-			id: `${id}`,
+		return farm.value?.levels.map<ResourceField>(({ slot, level, type }) => ({
+			id: String(slot),
 			maxLevel: 20,
 			currentLevel: level,
-			slot: id,
+			slot,
 			type,
 			targetLevel: 20,
 			etaSeconds: 2,
@@ -199,13 +207,13 @@ export function useVillageData() {
 	});
 
 	const buildings = computed<Building[] | undefined>(() => {
-		const { data } = useFetch('/api/village');
-		return data.value?.levels.map<Building>(({ id, level, name }) => ({
+		const { data } = useFetch('/api/building');
+		return data.value?.levels.map<Building>(({ slot, level, name }) => ({
 			currentLevel: level,
 			id: `${name}`,
 			name: name!,
 			maxLevel: 20,
-			slot: id,
+			slot,
 			status: 'idle',
 			targetLevel: 20,
 		}));

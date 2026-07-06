@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import ActivityLog from '~/components/ActivityLog.vue';
-import AutomationPanel from '~/components/AutomationPanel.vue';
-import BuildingsGrid from '~/components/BuildingsGrid.vue';
-import ResourceFieldsCard from '~/components/ResourceFieldsCard.vue';
-import TopBar from '~/components/TopBar.vue';
 import { useVillageData } from '~/composables/useVillageData';
 
 const {

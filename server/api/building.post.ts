@@ -1,18 +1,18 @@
 import { villagePath } from '~~/shared/constants/common';
-import { BuildingList, max5Levels, villageAddress, villageId } from '~~/shared/constants/village';
+import { BuildingList, max5Levels, BuildingAddress, villageId } from '~~/shared/constants/village';
 
 export default defineEventHandler(async event => {
 	const { baseURL } = useRuntimeConfig(event);
 	const page = await launchTravian(event, villagePath);
 
-	const levels = await getVillageLevels(page);
+	const levels = await getBuildings(page);
 
-	const toLevel = 20;
+	const toLevel = 10;
 
 	for (const name of BuildingList) {
-		const id = villageAddress[name];
+		const id = BuildingAddress[name];
 
-		let currentLevel = levels.find(v => v.id === id)?.level ?? 0;
+		let currentLevel = levels.find(v => v.slot === id)?.level ?? 0;
 		const template = `${name}(id: ${id})`;
 		console.log(`Started upgrading ${template} from ${currentLevel} to ${toLevel}`);
 
@@ -27,9 +27,9 @@ export default defineEventHandler(async event => {
 				for (const button of buttons) {
 					const onclickAttr = await button.getAttribute('onclick');
 
-					const id = onclickAttr?.split(/'/)[1].match(/a=(\d+)/)?.[1] ?? 0;
+					const iid = onclickAttr?.split(/'/)[1]?.match(/a=(\d+)/)?.[1] ?? 0;
 
-					if (villageId[name] == id) {
+					if (villageId[name] == iid) {
 						console.log(`Building ${template}`);
 						await button.click();
 						break;

@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import type { BuildingStatus, MilitaryBadgeStatus, TaskStatus } from '~/types';
-
 const props = defineProps<{
 	status: BuildingStatus | TaskStatus | MilitaryBadgeStatus;
 }>();

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { formatDuration } from '~/composables/useVillageData';
 
 const props = defineProps<{ buildings?: Building[] }>();

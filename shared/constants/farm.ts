@@ -1,6 +1,7 @@
 import type { Farm, FarmId } from '../types/farm';
 
 export const resourseTypes = ['iron', 'crop', 'wood', 'clay'] as const;
+export const RESOURCES = ['wood', 'clay', 'iron', 'crop'] as const;
 
 export const farmIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] as const;
 

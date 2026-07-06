@@ -1,16 +1,3 @@
-import { computed, reactive, ref } from 'vue';
-
-import type {
-	ActivityLogEntry,
-	AttackTemplate,
-	FarmTarget,
-	FarmingJob,
-	Operation,
-	TargetGroup,
-	TrainingQueueItem,
-	TroopType,
-} from '~/types';
-
 // ---------------------------------------------------------------------------
 // Mock data. Swap for real API/websocket calls when the backend is wired up.
 // ---------------------------------------------------------------------------

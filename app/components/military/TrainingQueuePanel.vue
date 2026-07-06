@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import ProgressBar from '~/components/ui/ProgressBar.vue';
 import { formatDuration } from '~/composables/useVillageData';
-import type { TrainingQueueItem } from '~/types';
 
 defineProps<{
 	current?: TrainingQueueItem;

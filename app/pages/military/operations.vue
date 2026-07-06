@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ActivityLog from '~/components/ActivityLog.vue';
 import { useMilitaryData } from '~/composables/useMilitaryData';
 
 const {
