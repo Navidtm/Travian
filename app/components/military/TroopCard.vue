@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
-import ProgressBar from '~/components/ui/ProgressBar.vue';
-import StatusPill from '~/components/ui/StatusPill.vue';
 import { formatDuration, formatNumber } from '~/composables/useVillageData';
-import type { TroopDefinition, TroopRole } from '~/types/army';
 
 const props = defineProps<{ troop: TroopDefinition }>();
 
@@ -54,13 +49,13 @@ const trainingStatusLabel = computed(() => {
 
 <template>
 	<article
-		class="group flex flex-col gap-3 rounded-lg border border-[var(--color-border-soft)] bg-[var(--color-surface-2)] p-3.5 transition-transform hover:-translate-y-0.5"
+		class="group flex flex-col gap-3 rounded-lg border border-border-soft bg-surface-2 p-3.5 transition-transform hover:-translate-y-0.5"
 	>
 		<div class="flex items-start justify-between gap-2">
 			<div class="flex items-center gap-3">
 				<!-- Illustration placeholder (icon-based avatar in lieu of artwork) -->
 				<span
-					class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--color-surface-3)] text-[var(--color-text-muted)]"
+					class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-surface-3 text-text-muted"
 				>
 					<svg
 						viewBox="0 0 24 24"
@@ -74,7 +69,7 @@ const trainingStatusLabel = computed(() => {
 					</svg>
 				</span>
 				<div class="min-w-0">
-					<p class="truncate text-sm font-medium text-[var(--color-text)]">{{ troop.name }}</p>
+					<p class="truncate text-sm font-medium text-text">{{ troop.name }}</p>
 					<StatusPill
 						:label="roleMeta[troop.role].label"
 						:tone="roleMeta[troop.role].tone"
@@ -86,10 +81,10 @@ const trainingStatusLabel = computed(() => {
 		<!-- Locked / research-not-done state -->
 		<template v-if="!troop.isResearched">
 			<div
-				class="flex flex-col items-center gap-2 rounded-lg border border-dashed border-[var(--color-border)] px-3 py-5 text-center"
+				class="flex flex-col items-center gap-2 rounded-lg border border-dashed border-border px-3 py-5 text-center"
 			>
 				<span
-					class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-surface-3)] text-[var(--color-text-faint)]"
+					class="flex h-10 w-10 items-center justify-center rounded-full bg-surface-3 text-text-faint"
 				>
 					<svg
 						viewBox="0 0 24 24"
@@ -108,10 +103,10 @@ const trainingStatusLabel = computed(() => {
 						<path d="M8 10V7a4 4 0 0 1 8 0v3" />
 					</svg>
 				</span>
-				<p class="text-xs font-medium text-[var(--color-text)]">Not Researched</p>
+				<p class="text-xs font-medium text-text">Not Researched</p>
 				<ul
 					v-if="troop.requirements?.length"
-					class="space-y-0.5 text-[11px] text-[var(--color-text-muted)]"
+					class="space-y-0.5 text-[11px] text-text-muted"
 				>
 					<li
 						v-for="req in troop.requirements"
@@ -121,17 +116,17 @@ const trainingStatusLabel = computed(() => {
 				</ul>
 				<p
 					v-if="troop.requiredBuildings?.length"
-					class="text-[11px] text-[var(--color-text-faint)]"
+					class="text-[11px] text-text-faint"
 				>
 					Requires: {{ troop.requiredBuildings.join(', ') }}
 				</p>
-				<p class="font-mono text-[11px] text-[var(--color-text-faint)]">
+				<p class="font-mono text-[11px] text-text-faint">
 					Est. research time {{ formatDuration(troop.estimatedResearchSeconds) }}
 				</p>
 			</div>
 			<button
 				type="button"
-				class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[var(--color-text)] px-3 py-1.5 text-xs font-medium text-[var(--color-bg)] transition-opacity hover:opacity-90"
+				class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-text px-3 py-1.5 text-xs font-medium text-bg transition-opacity hover:opacity-90"
 				@click="$emit('research', troop.id)"
 			>
 				Research
@@ -140,43 +135,41 @@ const trainingStatusLabel = computed(() => {
 
 		<!-- Researched: stats + training -->
 		<template v-else>
-			<div class="grid grid-cols-3 gap-2 font-mono text-[11px] text-[var(--color-text-muted)]">
-				<div class="rounded-md bg-[var(--color-surface-3)] px-2 py-1.5 text-center">
-					<p class="text-[var(--color-text)]">{{ troop.attack }}</p>
+			<div class="grid grid-cols-3 gap-2 font-mono text-[11px] text-text-muted">
+				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+					<p class="text-text">{{ troop.attack }}</p>
 					<p class="text-[10px]">Attack</p>
 				</div>
-				<div class="rounded-md bg-[var(--color-surface-3)] px-2 py-1.5 text-center">
-					<p class="text-[var(--color-text)]">{{ troop.defenseInfantry }}</p>
+				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+					<p class="text-text">{{ troop.defenseInfantry }}</p>
 					<p class="text-[10px]">Def. Inf.</p>
 				</div>
-				<div class="rounded-md bg-[var(--color-surface-3)] px-2 py-1.5 text-center">
-					<p class="text-[var(--color-text)]">{{ troop.defenseCavalry }}</p>
+				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+					<p class="text-text">{{ troop.defenseCavalry }}</p>
 					<p class="text-[10px]">Def. Cav.</p>
 				</div>
-				<div class="rounded-md bg-[var(--color-surface-3)] px-2 py-1.5 text-center">
-					<p class="text-[var(--color-text)]">{{ troop.speed }}</p>
+				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+					<p class="text-text">{{ troop.speed }}</p>
 					<p class="text-[10px]">Speed</p>
 				</div>
-				<div class="rounded-md bg-[var(--color-surface-3)] px-2 py-1.5 text-center">
-					<p class="text-[var(--color-text)]">{{ troop.carryCapacity }}</p>
+				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+					<p class="text-text">{{ troop.carryCapacity }}</p>
 					<p class="text-[10px]">Carry</p>
 				</div>
-				<div class="rounded-md bg-[var(--color-surface-3)] px-2 py-1.5 text-center">
-					<p class="text-[var(--color-text)]">{{ troop.cropConsumption }}</p>
+				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+					<p class="text-text">{{ troop.cropConsumption }}</p>
 					<p class="text-[10px]">Crop</p>
 				</div>
 			</div>
 
 			<div class="flex items-center justify-between">
-				<span class="text-xs text-[var(--color-text-muted)]">Current count</span>
-				<span class="font-mono text-sm font-semibold text-[var(--color-text)]">{{
+				<span class="text-xs text-text-muted">Current count</span>
+				<span class="font-mono text-sm font-semibold text-text">{{
 					formatNumber(troop.currentCount)
 				}}</span>
 			</div>
 
-			<div
-				class="rounded-lg border border-[var(--color-border-soft)] bg-[var(--color-surface-3)]/40 p-2.5"
-			>
+			<div class="rounded-lg border border-border-soft bg-surface-3/40 p-2.5">
 				<div class="mb-1.5 flex items-center justify-between">
 					<StatusPill
 						:label="trainingStatusLabel"
@@ -184,13 +177,13 @@ const trainingStatusLabel = computed(() => {
 					/>
 					<span
 						v-if="troop.trainingStatus !== 'idle'"
-						class="font-mono text-[11px] text-[var(--color-text-muted)]"
+						class="font-mono text-[11px] text-text-muted"
 					>
 						Queue: {{ troop.queueSize }}
 					</span>
 				</div>
 				<template v-if="troop.trainingStatus === 'training'">
-					<p class="mb-1 text-[11px] text-[var(--color-text-muted)]"
+					<p class="mb-1 text-[11px] text-text-muted"
 						>Training {{ troop.currentBatchQuantity }} units</p
 					>
 					<ProgressBar
@@ -201,13 +194,13 @@ const trainingStatusLabel = computed(() => {
 						"
 						color="var(--color-run)"
 					/>
-					<p class="mt-1 font-mono text-[11px] text-[var(--color-run)]"
+					<p class="mt-1 font-mono text-[11px] text-run"
 						>ETA {{ formatDuration(troop.remainingTrainingSeconds) }}</p
 					>
 				</template>
 				<p
 					v-else
-					class="text-[11px] text-[var(--color-text-faint)]"
+					class="text-[11px] text-text-faint"
 					>No active training batch</p
 				>
 			</div>
@@ -215,14 +208,14 @@ const trainingStatusLabel = computed(() => {
 			<div class="grid grid-cols-2 gap-2">
 				<button
 					type="button"
-					class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-3)] px-2.5 py-1.5 text-xs font-medium text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface)]"
+					class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-3 px-2.5 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface"
 					@click="$emit('train', troop.id)"
 				>
 					Train
 				</button>
 				<button
 					type="button"
-					class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-3)] px-2.5 py-1.5 text-xs font-medium text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface)]"
+					class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-3 px-2.5 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface"
 					@click="$emit('upgrade', troop.id)"
 				>
 					Upgrade
@@ -231,7 +224,7 @@ const trainingStatusLabel = computed(() => {
 
 			<button
 				type="button"
-				class="flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-3)] hover:text-[var(--color-text)]"
+				class="flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-text-muted transition-colors hover:bg-surface-3 hover:text-text"
 				@click="isExpanded = !isExpanded"
 			>
 				View Details
@@ -249,32 +242,28 @@ const trainingStatusLabel = computed(() => {
 
 			<div
 				v-if="isExpanded"
-				class="space-y-2 border-t border-[var(--color-border-soft)] pt-3 text-[11px] text-[var(--color-text-muted)]"
+				class="space-y-2 border-t border-border-soft pt-3 text-[11px] text-text-muted"
 			>
 				<div class="flex justify-between"
 					><span>Upkeep</span
-					><span class="font-mono text-[var(--color-text)]"
-						>{{ troop.cropConsumption }} crop</span
-					></div
+					><span class="font-mono text-text">{{ troop.cropConsumption }} crop</span></div
 				>
 				<div class="flex justify-between"
-					><span>Training building</span
-					><span class="text-[var(--color-text)]">{{ trainingBuilding }}</span></div
+					><span>Training building</span><span class="text-text">{{ trainingBuilding }}</span></div
 				>
 				<div class="flex justify-between"
 					><span>Required buildings</span
-					><span class="text-[var(--color-text)]">{{
+					><span class="text-text">{{
 						troop.requiredBuildings?.join(', ') || trainingBuilding
 					}}</span></div
 				>
 				<!-- TODO: replace with real upgrade history once the blacksmith API is wired up -->
 				<div class="flex justify-between"
-					><span>Upgrade history</span
-					><span class="text-[var(--color-text)]">Last upgraded 3 days ago</span></div
+					><span>Upgrade history</span><span class="text-text">Last upgraded 3 days ago</span></div
 				>
 				<div class="flex justify-between"
 					><span>Current bonuses</span
-					><span class="text-[var(--color-text)]">Blacksmith attack bonus applied</span></div
+					><span class="text-text">Blacksmith attack bonus applied</span></div
 				>
 			</div>
 		</template>
