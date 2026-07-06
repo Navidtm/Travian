@@ -90,6 +90,17 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 			Army
 		</NuxtLink>
 		<NuxtLink
+			to="/military/hero"
+			class="ml-4 flex items-center gap-2.5 rounded-lg border-l border-border px-2.5 py-1.5 pl-3 text-sm transition-colors"
+			:class="
+				isActive('/military/hero')
+					? 'border-l-run bg-run-soft text-run'
+					: 'text-text-muted hover:bg-surface-2 hover:text-text'
+			"
+		>
+			Hero
+		</NuxtLink>
+		<NuxtLink
 			to="/military/training"
 			class="ml-4 flex items-center gap-2.5 rounded-lg border-l border-border px-2.5 py-1.5 pl-3 text-sm transition-colors"
 			:class="

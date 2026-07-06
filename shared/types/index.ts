@@ -68,7 +68,11 @@ export interface ActivityLogEntry {
 
 export type AutomationRunState = 'running' | 'paused' | 'stopped';
 
-export type TroopCategory = 'infantry' | 'scout' | 'cavalry' | 'siege';
+// ---------------------------------------------------------------------------
+// Military module
+// ---------------------------------------------------------------------------
+
+export type TroopCategory = 'infantry' | 'cavalry' | 'siege' | 'scout';
 
 export interface TroopType {
 	id: string;
@@ -81,41 +85,45 @@ export interface TroopType {
 
 export interface TrainingQueueItem {
 	id: string;
-	quantity: number;
 	troopName: string;
+	quantity: number;
 	progress: number;
-	etaSeconds: number | undefined;
+	etaSeconds: number;
 }
 
 export interface TargetGroup {
 	id: string;
 	name: string;
-	description: string;
+	description?: string;
 	villageIds: string[];
 }
 
-export type MilitaryBadgeStatus = 'available' | 'cooldown' | 'unreachable' | 'enabled' | 'disabled';
+export type FarmTargetStatus = 'available' | 'cooldown' | 'unreachable';
 
 export interface FarmTarget {
 	id: string;
 	villageName: string;
-	coordinates: `(${number}|${number})`;
+	coordinates: string;
 	distance: number;
-	lastLoot: number;
-	status: MilitaryBadgeStatus;
-	lastAttack: string;
-	nextAvailable: string;
+	lastLoot: number | null;
+	status: FarmTargetStatus;
+	lastAttack: string | null;
+	nextAvailable: string | null;
+}
+
+export interface TemplateTroopLine {
+	troopName: string;
+	quantity: number;
 }
 
 export interface AttackTemplate {
 	id: string;
 	name: string;
-	description: string;
-	troops: {
-		troopName: string;
-		quantity: number;
-	}[];
+	description?: string;
+	troops: TemplateTroopLine[];
 }
+
+export type FarmingJobStatus = 'running' | 'paused' | 'idle' | 'error';
 
 export interface FarmingJob {
 	id: string;
@@ -124,17 +132,22 @@ export interface FarmingJob {
 	templateId: string;
 	intervalMinutes: number;
 	enabled: boolean;
-	status: 'running' | 'idle' | 'paused';
-	lastRun: string;
-	nextRun: string;
+	status: FarmingJobStatus;
+	lastRun: string | null;
+	nextRun: string | null;
 }
+
+export type OperationStatus = 'running' | 'paused' | 'queued' | 'error' | 'done';
 
 export interface Operation {
 	id: string;
 	name: string;
-	progress: number;
+	status: OperationStatus;
 	currentTarget: string;
-	status: 'running' | 'queued' | 'paused';
+	progress: number;
 	startTime: string;
-	nextExecution: string;
+	nextExecution: string | null;
 }
+
+/** Extra status vocabulary used only by StatusBadge in the Military module. */
+export type MilitaryBadgeStatus = 'available' | 'cooldown' | 'unreachable' | 'enabled' | 'disabled';
