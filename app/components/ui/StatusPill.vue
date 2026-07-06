@@ -30,8 +30,8 @@ const toneClasses: Record<string, { bg: string; text: string; dot: string }> = {
 		dot: 'bg-[var(--color-done)]',
 	},
 	gray: {
-		bg: 'bg-[var(--color-surface-3)]',
-		text: 'text-[var(--color-text-faint)]',
+		bg: 'bg-surface-3',
+		text: 'text-text-faint',
 		dot: 'bg-[var(--color-text-faint)]',
 	},
 };
