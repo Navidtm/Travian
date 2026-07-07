@@ -43,7 +43,7 @@
 				</button> -->
 			</div>
 
-			<!-- <ResourceOverview :village="activeVillage" /> -->
+			<ResourceOverview />
 		</div>
 	</header>
 </template>

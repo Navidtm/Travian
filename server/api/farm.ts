@@ -3,8 +3,8 @@ import { farmPath } from '~~/shared/constants/common';
 export default defineEventHandler(async event => {
 	const page = await launchTravian(event, farmPath);
 
-	const levels = await getFarms(page);
-	const products = await getFarmProducts(page);
+	const levels = await getFarmLevels(page);
+	const production = await getFarmProduction(page);
 	const troops = await getTroops(page);
 	const resourses = await getResourses(page);
 
@@ -13,7 +13,7 @@ export default defineEventHandler(async event => {
 	return {
 		levels,
 		troops,
-		products,
+		production,
 		resourses,
 		meta: {
 			url: page.url(),

@@ -115,9 +115,27 @@ const runState = ref<AutomationRunState>('running');
 // Formatters
 // ---------------------------------------------------------------------------
 
-export function formatNumber(value: number): string {
-	return new Intl.NumberFormat('en-US').format(Math.round(value));
-}
+const formatter = new Intl.NumberFormat('en-US');
+
+export const formatNumber = (value?: number): string => {
+	if (!value) return '';
+	const sign = value < 0 ? '-' : '';
+	value = Math.abs(value);
+
+	if (value < 100_000) {
+		return sign + formatter.format(value);
+	}
+
+	const units = ['', 'K', 'M', 'B', 'T'];
+	let unit = 0;
+
+	while (value >= 1000 && unit < units.length - 1) {
+		value /= 1000;
+		unit++;
+	}
+
+	return `${sign}${Number(value.toFixed(1))}${units[unit]}`;
+};
 
 export function formatDuration(seconds?: number): string {
 	if (seconds === undefined || seconds === null) return '\u2014';

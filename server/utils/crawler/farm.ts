@@ -1,48 +1,60 @@
 import type { Page } from 'playwright-core';
 import { farmPath, farmTypes } from '~~/shared/constants/common';
-import { RESOURCES } from '~~/shared/constants/farm';
 import { troopMap } from '~~/shared/constants/village';
+import { Farm } from '~~/shared/types/farm';
 
-type Troop = (typeof troopMap)[keyof typeof troopMap];
+const RESOURCES = ['wood', 'clay', 'iron', 'crop', 'population'] as const;
+type Resourse = Farm | 'population';
 
-export const getFarmProducts = async (page: Page) => {
-	if (!page.url().includes(farmPath)) return [];
+type TroopKey = (typeof troopMap)[keyof typeof troopMap];
 
+type Production = {
+	wood: number;
+	clay: number;
+	iron: number;
+	crop: number;
+};
+export const getFarmProduction = async (page: Page) => {
 	const values = await page.locator('#production .num').allTextContents();
 
-	return Object.fromEntries(RESOURCES.map((k, i) => [k, Number(values[i])]));
+	const production = Object.fromEntries(RESOURCES.map((k, i) => [k, Number(values[i])]));
+	return production as Production;
 };
 
 export const getTroops = async (page: Page) => {
-	if (!page.url().includes(farmPath)) return [];
+	const troopsEl = await page.locator('#troops tbody tr:has(td.num)').all();
 
-	const troops = Object.fromEntries(
+	const entries = (
 		await Promise.all(
-			(await page.locator('#troops tbody tr:has(td.num)').all()).map(async row => {
+			troopsEl.map(async row => {
 				const attr = await row.locator('img').getAttribute('class');
-				const key = attr?.match(/u\w+/)![0] as keyof typeof troopMap | null;
-				return key ? [troopMap[key], Number(await row.locator('.num').textContent())] : [];
-			}) ?? [],
-		),
-	) as Partial<Record<Troop, number>>;
+				const key = attr?.match(/u\w+/)?.[0] as keyof typeof troopMap | undefined;
+
+				if (!key) return null;
+
+				return [troopMap[key], Number(await row.locator('.num').textContent())] as const;
+			}),
+		)
+	).filter((entry): entry is readonly [TroopKey, number] => entry !== null);
+
+	const troops: Partial<Record<TroopKey, number>> = Object.fromEntries(entries);
 
 	return troops;
 };
 
 export const getResourses = async (page: Page) => {
-	if (!page.url().includes(farmPath)) return [];
-
 	const values = await page.locator('#res .value').allTextContents();
 
-	return Object.fromEntries(
-		[RESOURCES, 'population'].map((k, i) => {
-			const [value, maxValue] = values[i]!.split('/').map(Number);
-			return [k, { value, maxValue }];
-		}),
-	) as Record<'wood' | 'clay' | 'iron' | 'crop', number>;
+	const resourseList = RESOURCES.map((k, i) => {
+		const [value, capacity] = values[i]!.split('/').map(Number) as [number, number];
+		return [k, { value, capacity }];
+	});
+
+	const resourses = Object.fromEntries(resourseList);
+	return resourses as Record<Resourse, { value: number; capacity: number }>;
 };
 
-export const getFarms = async (page: Page) => {
+export const getFarmLevels = async (page: Page) => {
 	if (!page.url().includes(farmPath)) return [];
 
 	const items = await page.locator('#village_map .level').allTextContents();
@@ -74,3 +86,12 @@ export const getVillages = async (page: Page) => {
 	);
 	return villages;
 };
+
+console.log(
+	Object.fromEntries([
+		['navid', { as: 2, asd: 232 }],
+		['navid2', { as: 2, asd: 232 }],
+		['navid3', { as: 2, asd: 232 }],
+		['navid4', { as: 2, asd: 232 }],
+	]),
+);

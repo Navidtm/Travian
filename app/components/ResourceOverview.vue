@@ -1,51 +1,52 @@
 <script setup lang="ts">
 import { formatNumber } from '~/composables/useVillageData';
 
-const props = defineProps<{ village: Village }>();
+const { data } = useFetch('/api/farm', {
+	key: 'farm',
+});
 
 const items = computed(() => [
 	{
 		key: 'wood',
 		label: 'Wood',
-		value: props.village.resources.wood,
-		rate: props.village.production.wood,
-		cap: props.village.warehouseCapacity,
+		value: data.value?.resourses.wood.value,
+		rate: data.value?.production.wood,
+		cap: data.value?.resourses.wood.capacity,
 		color: 'var(--color-wood)',
 		soft: 'var(--color-wood-soft)',
 	},
 	{
 		key: 'clay',
 		label: 'Clay',
-		value: props.village.resources.clay,
-		rate: props.village.production.clay,
-		cap: props.village.warehouseCapacity,
+		value: data.value?.resourses.clay.value,
+		rate: data.value?.production.clay,
+		cap: data.value?.resourses.clay.capacity,
 		color: 'var(--color-clay)',
 		soft: 'var(--color-clay-soft)',
 	},
 	{
 		key: 'iron',
 		label: 'Iron',
-		value: props.village.resources.iron,
-		rate: props.village.production.iron,
-		cap: props.village.warehouseCapacity,
+		value: data.value?.resourses.iron.value,
+		rate: data.value?.production.iron,
+		cap: data.value?.resourses.iron.capacity,
 		color: 'var(--color-iron)',
 		soft: 'var(--color-iron-soft)',
 	},
 	{
 		key: 'crop',
 		label: 'Crop',
-		value: props.village.resources.crop,
-		rate: props.village.production.crop,
-		cap: props.village.granaryCapacity,
+		value: data.value?.resourses.crop.value,
+		rate: data.value?.production.crop,
+		cap: data.value?.resourses.crop.capacity,
 		color: 'var(--color-crop)',
 		soft: 'var(--color-crop-soft)',
 	},
 ]);
 
 const population = computed(() => ({
-	value: props.village.population,
-	cap: props.village.populationCap,
-	ratio: props.village.population / props.village.populationCap,
+	value: data.value?.resourses.population.value,
+	cap: data.value?.resourses.population.capacity,
 }));
 </script>
 
