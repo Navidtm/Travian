@@ -10,14 +10,10 @@ export interface ResourceAmounts {
 export interface Village {
 	id: string;
 	name: string;
-	coordinates: string;
+	coordinates: [number, number];
+	isActive: boolean;
 	isCapital: boolean;
 	population: number;
-	populationCap: number;
-	resources: ResourceAmounts;
-	production: ResourceAmounts;
-	warehouseCapacity: number;
-	granaryCapacity: number;
 }
 
 export interface ResourceField {

@@ -1,4 +1,3 @@
-import { range } from 'es-toolkit';
 import type { Page } from 'playwright-core';
 import { farmPath, farmTypes } from '~~/shared/constants/common';
 import { RESOURCES } from '~~/shared/constants/farm';
@@ -19,13 +18,11 @@ export const getTroops = async (page: Page) => {
 
 	const troops = Object.fromEntries(
 		await Promise.all(
-			(await page.locator('#troops tbody tr').all()).map(async row => {
-				const key = (await row.locator('img').getAttribute('class'))!.match(
-					/u\w+/,
-				)![0] as keyof typeof troopMap;
-
-				return [troopMap[key], Number(await row.locator('.num').textContent())];
-			}),
+			(await page.locator('#troops tbody tr:has(td.num)').all()).map(async row => {
+				const attr = await row.locator('img').getAttribute('class');
+				const key = attr?.match(/u\w+/)![0] as keyof typeof troopMap | null;
+				return key ? [troopMap[key], Number(await row.locator('.num').textContent())] : [];
+			}) ?? [],
 		),
 	) as Partial<Record<Troop, number>>;
 
@@ -50,10 +47,10 @@ export const getFarms = async (page: Page) => {
 
 	const items = await page.locator('#village_map .level').allTextContents();
 
-	const levels = range(14).map(n => ({
-		level: +items[n - 1]!,
-		slot: n,
-		type: farmTypes[n]!,
+	const levels = items.map((level, n) => ({
+		level: +level,
+		slot: n + 1,
+		type: farmTypes[n + 1]!,
 	}));
 
 	return levels;
@@ -65,12 +62,14 @@ export const getVillages = async (page: Page) => {
 	const villages = await Promise.all(
 		villageList.map(async village => {
 			const name = (await village.textContent()) ?? '';
-			const link = (await village.getAttribute('href')) ?? '';
+			const href = await page.locator('#currentVillage').getAttribute('href');
 			const isActive = await village
 				.getAttribute('class')
 				.then(v => v == 'active')
 				.catch(() => false);
-			return { name, link, isActive };
+
+			const id = Number(href?.match(/newdid=(\d+)/)?.[1] ?? -1);
+			return { name, id, isActive };
 		}),
 	);
 	return villages;

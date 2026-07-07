@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { onClickOutside } from '~/composables/useOnClickOutside';
 
-const props = defineProps<{
-	villages: Village[];
-	activeId: string;
-}>();
+const { data } = useFetch('/api/profile');
 
 const emit = defineEmits<{ (e: 'select', id: string): void }>();
 
@@ -15,17 +12,20 @@ onClickOutside(rootEl, () => {
 	isOpen.value = false;
 });
 
-const activeVillage = () => props.villages.find(v => v.id === props.activeId)! ?? props.villages[0];
+const activeVillage = computed(() => data.value?.villages?.find(v => v.isActive));
 
 const select = (id: string) => {
 	emit('select', id);
 	isOpen.value = false;
 };
+
+const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
 </script>
 
 <template>
 	<div
 		ref="rootEl"
+		v-if="activeVillage"
 		class="relative"
 	>
 		<button
@@ -37,19 +37,19 @@ const select = (id: string) => {
 			<span
 				class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 text-[11px] font-mono font-semibold text-(--color-text-muted)"
 			>
-				{{ activeVillage().name.slice(0, 1) }}
+				{{ activeVillage.name.slice(0, 1) }}
 			</span>
 			<span class="min-w-0 flex-1">
 				<span class="flex items-center gap-1.5">
-					<span class="truncate text-sm font-medium text-text">{{ activeVillage().name }}</span>
+					<span class="truncate text-sm font-medium text-text">{{ activeVillage.name }}</span>
 					<span
-						v-if="activeVillage().isCapital"
+						v-if="activeVillage.isCapital"
 						class="rounded bg-crop-soft px-1.5 py-0.5 text-[10px] font-medium text-crop"
 						>Capital</span
 					>
 				</span>
 				<span class="block truncate font-mono text-[11px] text-(--color-text-muted)">{{
-					activeVillage().coordinates
+					toStringCoordinates(activeVillage.coordinates)
 				}}</span>
 			</span>
 			<svg
@@ -69,11 +69,11 @@ const select = (id: string) => {
 			class="absolute left-0 top-[calc(100%+6px)] z-30 w-full min-w-[16rem] overflow-hidden rounded-lg border border-border bg-surface-2 py-1 shadow-xl shadow-black/40 sm:w-72"
 		>
 			<button
-				v-for="village in villages"
+				v-for="village in data?.villages"
 				:key="village.id"
 				type="button"
 				class="flex w-full items-center gap-2 px-3 py-2 text-left transition-colors hover:bg-surface-3"
-				:class="{ 'bg-surface-3': village.id === activeId }"
+				:class="{ 'bg-surface-3': village.isActive }"
 				@click="select(village.id)"
 			>
 				<span
@@ -91,11 +91,11 @@ const select = (id: string) => {
 						>
 					</span>
 					<span class="block truncate font-mono text-[11px] text-(--color-text-muted)"
-						>{{ village.coordinates }} · Pop {{ village.population }}</span
+						>{{ toStringCoordinates(village.coordinates) }} · Pop {{ village.population }}</span
 					>
 				</span>
 				<svg
-					v-if="village.id === activeId"
+					v-if="village.isActive"
 					viewBox="0 0 24 24"
 					class="h-4 w-4 shrink-0 text-run"
 					fill="none"

@@ -1,49 +1,3 @@
-// ---------------------------------------------------------------------------
-// Mock data. In a real deployment this file would be replaced by calls into
-// the automation engine's API / websocket feed.
-// ---------------------------------------------------------------------------
-
-const villages = reactive<Village[]>([
-	{
-		id: 'v1',
-		name: 'Northreach',
-		coordinates: '(24|-12)',
-		isCapital: true,
-		population: 412,
-		populationCap: 620,
-		resources: { wood: 8420, clay: 7960, iron: 9310, crop: 5220 },
-		production: { wood: 312, clay: 298, iron: 276, crop: 190 },
-		warehouseCapacity: 12000,
-		granaryCapacity: 9000,
-	},
-	{
-		id: 'v2',
-		name: 'Millbrook',
-		coordinates: '(31|4)',
-		isCapital: false,
-		population: 218,
-		populationCap: 400,
-		resources: { wood: 3120, clay: 4110, iron: 2870, crop: 6410 },
-		production: { wood: 168, clay: 172, iron: 140, crop: 205 },
-		warehouseCapacity: 8000,
-		granaryCapacity: 8000,
-	},
-	{
-		id: 'v3',
-		name: 'Ashford',
-		coordinates: '(18|-27)',
-		isCapital: false,
-		population: 96,
-		populationCap: 250,
-		resources: { wood: 1240, clay: 980, iron: 1510, crop: 2040 },
-		production: { wood: 88, clay: 76, iron: 92, crop: 110 },
-		warehouseCapacity: 4000,
-		granaryCapacity: 4000,
-	},
-]);
-
-const activeVillageId = ref(villages[0]!.id);
-
 const tasks = reactive<AutomationTask[]>([
 	{
 		id: 't1',
@@ -180,19 +134,20 @@ export function formatDuration(seconds?: number): string {
 // ---------------------------------------------------------------------------
 
 export function useVillageData() {
-	// const profile = computed(() => {
-	// 	const { data } = useFetch('/api/profile');
-	// 	return data.value;
-	// });
+	const profile = computed(() => {
+		const { data } = useFetch('/api/profile', {
+			key: 'profile',
+		});
+
+		return data.value;
+	});
+
+	const villages = computed(() => profile.value?.villages);
 
 	const farm = computed(() => {
 		const { data } = useFetch('/api/farm');
 		return data.value;
 	});
-
-	const activeVillage = computed<Village>(
-		() => villages.find(v => v.id === activeVillageId.value)! ?? villages[0],
-	);
 
 	const resourceFields = computed(() => {
 		return farm.value?.levels.map<ResourceField>(({ slot, level, type }) => ({
@@ -219,8 +174,9 @@ export function useVillageData() {
 		}));
 	});
 
-	const villageTasks = computed<AutomationTask[]>(() =>
-		tasks.filter(t => t.villageName === activeVillage.value.name),
+	const villageTasks = computed<AutomationTask[]>(
+		() => tasks,
+		// .filter(t => t.villageName === activeVillage.value.name),
 	);
 
 	const currentTask = computed<AutomationTask | undefined>(() =>
@@ -240,7 +196,8 @@ export function useVillageData() {
 		Math.min(1, field.currentLevel / field.targetLevel);
 
 	const setActiveVillage = (id: string) => {
-		activeVillageId.value = id;
+		// activeVillageId.value = id;
+		console.log(id);
 	};
 
 	const upgradeAllFields = () => {};
@@ -271,9 +228,8 @@ export function useVillageData() {
 	};
 
 	return {
+		profile,
 		villages,
-		activeVillageId,
-		activeVillage,
 		resourceFields,
 		buildings,
 		tasks: villageTasks,

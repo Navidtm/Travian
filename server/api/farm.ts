@@ -7,7 +7,6 @@ export default defineEventHandler(async event => {
 	const products = await getFarmProducts(page);
 	const troops = await getTroops(page);
 	const resourses = await getResourses(page);
-	const villages = await getVillages(page);
 
 	await page.close();
 
@@ -16,7 +15,6 @@ export default defineEventHandler(async event => {
 		troops,
 		products,
 		resourses,
-		villages,
 		meta: {
 			url: page.url(),
 			date: Date.now(),

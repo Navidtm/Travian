@@ -1,15 +1,4 @@
-<script setup lang="ts">
-defineProps<{
-	villages: Village[];
-	activeVillage: Village;
-	activeId: string;
-}>();
-
-defineEmits<{
-	(e: 'select-village', id: string): void;
-	(e: 'upgrade-everything'): void;
-}>();
-</script>
+<script setup lang="ts"></script>
 
 <template>
 	<header class="sticky top-0 z-20 border-b border-border bg-bg/95 backdrop-blur">
@@ -35,16 +24,11 @@ defineEmits<{
 					</div>
 				</div>
 
-				<VillageSelector
-					:villages="villages"
-					:active-id="activeId"
-					@select="id => $emit('select-village', id)"
-				/>
 				<div class=""></div>
 				<!-- <button
 					type="button"
 					class="inline-flex items-center justify-center gap-2 rounded-lg bg-text px-4 py-2 text-sm font-medium text-bg transition-opacity hover:opacity-90 active:opacity-80"
-					@click="$emit('upgrade-everything')"
+					@click="$emit('upgrade')"
 				>
 					<svg
 						viewBox="0 0 24 24"
@@ -59,7 +43,7 @@ defineEmits<{
 				</button> -->
 			</div>
 
-			<ResourceOverview :village="activeVillage" />
+			<!-- <ResourceOverview :village="activeVillage" /> -->
 		</div>
 	</header>
 </template>
