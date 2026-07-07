@@ -15,7 +15,7 @@ const activeCount = computed(
 		<div class="mb-4 flex items-center justify-between gap-3">
 			<div>
 				<h2 class="text-sm font-semibold text-text">Buildings</h2>
-				<p class="text-[12px] text-(--color-text-muted)"> {{ activeCount }} in automation queue </p>
+				<p class="text-[12px] text-text-muted"> {{ activeCount }} in automation queue </p>
 			</div>
 		</div>
 

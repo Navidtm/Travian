@@ -8,7 +8,7 @@ defineEmits<{ (e: 'create-group'): void }>();
 </script>
 
 <template>
-	<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
 		<div class="mb-4 flex items-center justify-between gap-3">
 			<div>
 				<h2 class="text-sm font-semibold text-text">Target Groups</h2>

@@ -8,9 +8,7 @@ defineProps<{
 </script>
 
 <template>
-	<aside
-		class="flex flex-col gap-4 rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5"
-	>
+	<aside class="flex flex-col gap-4 rounded-card border border-border bg-surface p-4 sm:p-5">
 		<div class="flex items-center justify-between">
 			<h2 class="text-sm font-semibold text-text">Training Queue</h2>
 			<span

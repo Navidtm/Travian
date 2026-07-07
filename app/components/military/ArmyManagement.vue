@@ -38,13 +38,11 @@ const onBlacksmithUpgrade = (_troopName: string) => {};
 
 <template>
 	<div class="flex flex-col gap-5">
-		<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
+		<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
 			<div class="mb-1 flex items-center justify-between gap-3">
 				<h2 class="text-sm font-semibold text-text">Army Management</h2>
 			</div>
-			<p class="mb-3 text-[12px] text-(--color-text-muted)"
-				>Adapts automatically to the selected tribe</p
-			>
+			<p class="mb-3 text-[12px] text-text-muted">Adapts automatically to the selected tribe</p>
 			<div class="flex flex-wrap gap-1.5">
 				<button
 					v-for="tribe in tribes"
@@ -54,7 +52,7 @@ const onBlacksmithUpgrade = (_troopName: string) => {};
 					:class="
 						selectedTribe === tribe.key
 							? 'bg-text text-bg'
-							: 'border border-border bg-surface-2 text-(--color-text-muted) hover:bg-surface-3'
+							: 'border border-border bg-surface-2 text-text-muted hover:bg-surface-3'
 					"
 					@click="loadTribe(tribe.key)"
 				>
@@ -65,7 +63,7 @@ const onBlacksmithUpgrade = (_troopName: string) => {};
 
 		<MilitaryPowerOverview :stats="overviewStats" />
 
-		<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
+		<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
 			<h2 class="mb-4 text-sm font-semibold text-text">Troops</h2>
 			<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
 				<template v-if="isLoading">

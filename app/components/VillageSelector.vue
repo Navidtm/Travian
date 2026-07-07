@@ -35,7 +35,7 @@ const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
 			@click="isOpen = !isOpen"
 		>
 			<span
-				class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 text-[11px] font-mono font-semibold text-(--color-text-muted)"
+				class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 text-[11px] font-mono font-semibold text-text-muted"
 			>
 				{{ activeVillage.name.slice(0, 1) }}
 			</span>
@@ -48,13 +48,13 @@ const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
 						>Capital</span
 					>
 				</span>
-				<span class="block truncate font-mono text-[11px] text-(--color-text-muted)">{{
+				<span class="block truncate font-mono text-[11px] text-text-muted">{{
 					toStringCoordinates(activeVillage.coordinates)
 				}}</span>
 			</span>
 			<svg
 				viewBox="0 0 24 24"
-				class="h-4 w-4 shrink-0 text-(--color-text-muted) transition-transform"
+				class="h-4 w-4 shrink-0 text-text-muted transition-transform"
 				:class="{ 'rotate-180': isOpen }"
 				fill="none"
 				stroke="currentColor"
@@ -77,7 +77,7 @@ const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
 				@click="select(village.id)"
 			>
 				<span
-					class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 text-[11px] font-mono font-semibold text-(--color-text-muted)"
+					class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-surface-3 text-[11px] font-mono font-semibold text-text-muted"
 				>
 					{{ village.name.slice(0, 1) }}
 				</span>
@@ -90,7 +90,7 @@ const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
 							>Capital</span
 						>
 					</span>
-					<span class="block truncate font-mono text-[11px] text-(--color-text-muted)"
+					<span class="block truncate font-mono text-[11px] text-text-muted"
 						>{{ toStringCoordinates(village.coordinates) }} · Pop {{ village.population }}</span
 					>
 				</span>

@@ -55,7 +55,7 @@ const population = computed(() => ({
 		<div
 			v-for="item in items"
 			:key="item.key"
-			class="flex items-center gap-3 rounded-(--radius-card) border border-border bg-surface px-3 py-2.5"
+			class="flex items-center gap-3 rounded-card border border-border bg-surface px-3 py-2.5"
 		>
 			<span
 				class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
@@ -115,15 +115,13 @@ const population = computed(() => ({
 					{{ formatNumber(item.value)
 					}}<span class="text-text-faint">/{{ formatNumber(item.cap) }}</span>
 				</p>
-				<p class="truncate text-[11px] text-(--color-text-muted)">
+				<p class="truncate text-[11px] text-text-muted">
 					{{ item.label }} · <span class="font-mono">+{{ formatNumber(item.rate) }}/h</span>
 				</p>
 			</div>
 		</div>
 
-		<div
-			class="flex items-center gap-3 rounded-(--radius-card) border border-border bg-surface px-3 py-2.5"
-		>
+		<div class="flex items-center gap-3 rounded-card border border-border bg-surface px-3 py-2.5">
 			<span
 				class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
 				:style="{ backgroundColor: 'var(--color-pop-soft)', color: 'var(--color-pop)' }"
@@ -148,7 +146,7 @@ const population = computed(() => ({
 					{{ formatNumber(population.value)
 					}}<span class="text-text-faint">/{{ formatNumber(population.cap) }}</span>
 				</p>
-				<p class="truncate text-[11px] text-(--color-text-muted)">Population</p>
+				<p class="truncate text-[11px] text-text-muted">Population</p>
 			</div>
 		</div>
 	</div>

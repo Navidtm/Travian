@@ -34,7 +34,7 @@ const missing = computed(
 </script>
 
 <template>
-	<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
 		<div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 			<div>
 				<h2 class="text-sm font-semibold text-text">Troop Roster</h2>

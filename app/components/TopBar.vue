@@ -18,9 +18,7 @@
 					</div>
 					<div class="hidden sm:block">
 						<p class="text-sm font-semibold leading-tight text-text">Automation Panel</p>
-						<p class="text-[11px] leading-tight text-(--color-text-muted)"
-							>Village control console</p
-						>
+						<p class="text-[11px] leading-tight text-text-muted">Village control console</p>
 					</div>
 				</div>
 

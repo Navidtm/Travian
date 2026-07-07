@@ -16,7 +16,7 @@ defineProps<{
 </script>
 
 <template>
-	<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
 		<h2 class="mb-4 text-sm font-semibold text-text">Army Statistics</h2>
 
 		<div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -52,7 +52,7 @@ defineProps<{
 
 		<div class="mt-5 space-y-4">
 			<div>
-				<div class="mb-1 flex items-center justify-between text-[11px] text-(--color-text-muted)">
+				<div class="mb-1 flex items-center justify-between text-[11px] text-text-muted">
 					<span>Offensive vs Defensive</span>
 					<span class="font-mono"
 						>{{ Math.round(stats.offensiveRatio * 100) }}% /
@@ -68,7 +68,7 @@ defineProps<{
 			<div
 				class="flex items-center justify-between rounded-lg border border-border-soft bg-surface-2 px-3.5 py-2.5"
 			>
-				<span class="text-xs text-(--color-text-muted)">Total Crop Consumption</span>
+				<span class="text-xs text-text-muted">Total Crop Consumption</span>
 				<span class="font-mono text-sm font-semibold text-crop"
 					>{{ formatNumber(stats.totalCropConsumption) }}/h</span
 				>

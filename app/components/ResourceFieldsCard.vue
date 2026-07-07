@@ -36,7 +36,7 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 </script>
 
 <template>
-	<div class="image rounded-(--radius-card) overflow-hidden relative">
+	<div class="image rounded-card overflow-hidden relative">
 		<section class="border border-border bg-surface/40 p-4 sm:p-5">
 			<div class="mb-4 flex items-center justify-between gap-3 z-10">
 				<div>
@@ -99,7 +99,7 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 									>
 									<span
 										v-else
-										class="text-[10px] text-(--color-text-muted)"
+										class="text-[10px] text-text-muted"
 										>{{ Math.round(progress(field) * 100) }}%</span
 									>
 								</div>

@@ -21,11 +21,11 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 </script>
 
 <template>
-	<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
 		<div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 			<div>
 				<h2 class="text-sm font-semibold text-text">Village Command Center</h2>
-				<p class="text-[12px] text-(--color-text-muted)"
+				<p class="text-[12px] text-text-muted"
 					>Live overview of every troop, hero and merchant movement</p
 				>
 			</div>
@@ -33,7 +33,7 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 				<span
 					v-for="group in groups"
 					:key="group.key"
-					class="rounded-full bg-surface-2 px-2.5 py-1 text-[11px] font-medium text-(--color-text-muted)"
+					class="rounded-full bg-surface-2 px-2.5 py-1 text-[11px] font-medium text-text-muted"
 				>
 					{{ group.label }}
 					<span class="font-mono text-text">({{ groupCounts[group.key] }})</span>

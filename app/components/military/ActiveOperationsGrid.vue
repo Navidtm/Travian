@@ -9,7 +9,7 @@ defineEmits<{
 </script>
 
 <template>
-	<section class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
 		<div class="mb-4">
 			<h2 class="text-sm font-semibold text-text">Active Operations</h2>
 			<p class="text-[12px] text-text-muted">{{ operations.length }} running or queued</p>

@@ -12,7 +12,7 @@ const levelMeta: Record<LogLevel, { color: string; label: string }> = {
 </script>
 
 <template>
-	<section class="rounded-(--radius-card) border border-border bg-surface">
+	<section class="rounded-card border border-border bg-surface">
 		<button
 			type="button"
 			class="flex w-full items-center justify-between gap-3 px-4 py-3 sm:px-5"
@@ -21,14 +21,13 @@ const levelMeta: Record<LogLevel, { color: string; label: string }> = {
 		>
 			<div class="flex items-center gap-2">
 				<h2 class="text-sm font-semibold text-text">Activity Log</h2>
-				<span
-					class="rounded-full bg-surface-3 px-2 py-0.5 text-[11px] font-mono text-(--color-text-muted)"
-					>{{ entries.length }}</span
-				>
+				<span class="rounded-full bg-surface-3 px-2 py-0.5 text-[11px] font-mono text-text-muted">{{
+					entries.length
+				}}</span>
 			</div>
 			<svg
 				viewBox="0 0 24 24"
-				class="h-4 w-4 text-(--color-text-muted) transition-transform"
+				class="h-4 w-4 text-text-muted transition-transform"
 				:class="{ '-rotate-180': !isOpen }"
 				fill="none"
 				stroke="currentColor"
@@ -59,7 +58,7 @@ const levelMeta: Record<LogLevel, { color: string; label: string }> = {
 				<span class="min-w-0 flex-1 text-text">
 					<span
 						v-if="entry.villageName"
-						class="text-(--color-text-muted)"
+						class="text-text-muted"
 						>[{{ entry.villageName }}]</span
 					>
 					{{ entry.message }}

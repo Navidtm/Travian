@@ -43,9 +43,7 @@ const dotColor = (task: AutomationTask) =>
 </script>
 
 <template>
-	<aside
-		class="flex flex-col gap-4 rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5"
-	>
+	<aside class="flex flex-col gap-4 rounded-card border border-border bg-surface p-4 sm:p-5">
 		<div class="flex items-center justify-between">
 			<h2 class="text-sm font-semibold text-text">Automation</h2>
 			<span
@@ -67,13 +65,13 @@ const dotColor = (task: AutomationTask) =>
 			>
 			<template v-if="currentTask">
 				<p class="text-sm font-medium text-text">{{ currentTask.label }}</p>
-				<p class="mb-2.5 text-xs text-(--color-text-muted)">{{ currentTask.detail }}</p>
+				<p class="mb-2.5 text-xs text-text-muted">{{ currentTask.detail }}</p>
 				<ProgressBar
 					:progress="currentTask.progress ?? 0"
 					color="var(--color-run)"
 				/>
 				<div class="mt-1.5 flex items-center justify-between">
-					<span class="text-[11px] text-(--color-text-muted)"
+					<span class="text-[11px] text-text-muted"
 						>{{ Math.round((currentTask.progress ?? 0) * 100) }}% complete</span
 					>
 					<span class="font-mono text-[11px] text-run"
@@ -93,7 +91,7 @@ const dotColor = (task: AutomationTask) =>
 			<p class="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-text-faint">Next up</p>
 			<template v-if="nextTask">
 				<p class="text-sm font-medium text-text">{{ nextTask.label }}</p>
-				<p class="text-xs text-(--color-text-muted)">{{ nextTask.detail }}</p>
+				<p class="text-xs text-text-muted">{{ nextTask.detail }}</p>
 			</template>
 			<p
 				v-else
@@ -128,7 +126,7 @@ const dotColor = (task: AutomationTask) =>
 					</div>
 					<div class="min-w-0 pb-1">
 						<p class="truncate text-xs font-medium text-text">{{ task.label }}</p>
-						<p class="truncate text-[11px] text-(--color-text-muted)">{{ task.detail }}</p>
+						<p class="truncate text-[11px] text-text-muted">{{ task.detail }}</p>
 					</div>
 				</li>
 			</ol>

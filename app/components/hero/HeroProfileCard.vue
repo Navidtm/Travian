@@ -9,7 +9,7 @@ const { execute: revive } = useFetch('/api/hero/revive');
 <template>
 	<section
 		v-if="hero"
-		class="rounded-(--radius-card) border border-border bg-surface p-4 sm:p-5"
+		class="rounded-card border border-border bg-surface p-4 sm:p-5"
 	>
 		<div class="flex flex-col gap-4 sm:flex-row sm:items-center">
 			<!-- Portrait -->
@@ -68,7 +68,7 @@ const { execute: revive } = useFetch('/api/hero/revive');
 				</div>
 
 				<div class="mt-3">
-					<div class="mb-1 flex items-center justify-between text-[11px] text-(--color-text-muted)">
+					<div class="mb-1 flex items-center justify-between text-[11px] text-text-muted">
 						<span>Experience</span>
 						<span class="font-mono"
 							>{{ formatNumber(hero.experience) }} /
@@ -89,15 +89,15 @@ const { execute: revive } = useFetch('/api/hero/revive');
 		<div class="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
 			<div class="rounded-lg border border-border-soft bg-surface-2 p-3 text-center">
 				<p class="font-mono text-lg font-semibold text-text">{{ hero.power }}</p>
-				<p class="text-[10px] text-(--color-text-muted)">Power</p>
+				<p class="text-[10px] text-text-muted">Power</p>
 			</div>
 			<div class="rounded-lg border border-border-soft bg-surface-2 p-3 text-center">
 				<p class="font-mono text-lg font-semibold text-text">{{ hero.speed }}</p>
-				<p class="text-[10px] text-(--color-text-muted)">Speed</p>
+				<p class="text-[10px] text-text-muted">Speed</p>
 			</div>
 			<div class="rounded-lg border border-border-soft bg-surface-2 p-3 text-center">
 				<p class="font-mono text-lg font-semibold text-done">+{{ hero.resourceBonusPercent }}%</p>
-				<p class="text-[10px] text-(--color-text-muted)">Resource Bonus</p>
+				<p class="text-[10px] text-text-muted">Resource Bonus</p>
 			</div>
 		</div>
 
