@@ -86,12 +86,3 @@ export const getVillages = async (page: Page) => {
 	);
 	return villages;
 };
-
-console.log(
-	Object.fromEntries([
-		['navid', { as: 2, asd: 232 }],
-		['navid2', { as: 2, asd: 232 }],
-		['navid3', { as: 2, asd: 232 }],
-		['navid4', { as: 2, asd: 232 }],
-	]),
-);
