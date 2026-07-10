@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { formatDuration, formatNumber } from '~/composables/useVillageData';
 
-const props = defineProps<{ troop: TroopDefinition }>();
+const props = defineProps<{
+	troop: TroopDefinition;
+	/** Resolved via app/utils/assetMap.ts (getTroopImage); null src falls back to the icon below. */
+	image?: { src: string | null; alt: string };
+}>();
 
 defineEmits<{
 	(e: 'train', id: string): void;
@@ -54,19 +58,25 @@ const trainingStatusLabel = computed(() => {
 		<div class="flex items-start justify-between gap-2">
 			<div class="flex items-center gap-3">
 				<!-- Illustration placeholder (icon-based avatar in lieu of artwork) -->
-				<span
-					class="bg-surface-3 text-text-muted flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
-				>
-					<svg
-						viewBox="0 0 24 24"
-						class="h-6 w-6"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.6"
+				<span class="bg-surface-3 text-muted h-12 w-12 shrink-0 overflow-hidden rounded-xl">
+					<AsyncImage
+						:src="image?.src ?? null"
+						:alt="image?.alt ?? troop.name"
+						rounded="rounded-xl"
 					>
-						<path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
-						<path d="M3 7l9 5 9-5" />
-					</svg>
+						<template #fallback>
+							<svg
+								viewBox="0 0 24 24"
+								class="h-6 w-6"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.6"
+							>
+								<path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
+								<path d="M3 7l9 5 9-5" />
+							</svg>
+						</template>
+					</AsyncImage>
 				</span>
 				<div class="min-w-0">
 					<p class="text-text truncate text-sm font-medium">{{ troop.name }}</p>

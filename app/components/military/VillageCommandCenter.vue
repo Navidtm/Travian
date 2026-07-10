@@ -76,6 +76,10 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 					v-show="expanded[group.key]"
 					class="border-border-soft space-y-2 border-t p-3"
 				>
+					<HeroAdventures
+						v-if="group.key === 'hero'"
+						class="mb-1"
+					/>
 					<MovementCard
 						v-for="movement in forGroup(group.key)"
 						:key="movement.id"

@@ -17,6 +17,7 @@ const { data: hero } = useFetch('/api/hero/info');
 
 		<main class="flex max-w-150 flex-col gap-5 px-4 py-5 lg:px-8 lg:py-6">
 			<HeroProfileCard :hero />
+			<HeroAdventures />
 		</main>
 	</div>
 </template>
