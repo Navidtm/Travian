@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { onClickOutside } from '~/composables/useOnClickOutside';
 
-const { data } = useFetch('/api/profile');
-
-const emit = defineEmits<{ (e: 'select', id: string): void }>();
+const { data, refresh } = useFetch('/api/profile');
 
 const isOpen = ref(false);
-const rootEl = ref<HTMLElement | null>(null);
+const rootEl = useTemplateRef('rootEl');
 
 onClickOutside(rootEl, () => {
 	isOpen.value = false;
@@ -14,12 +12,23 @@ onClickOutside(rootEl, () => {
 
 const activeVillage = computed(() => data.value?.villages?.find(v => v.isActive));
 
-const select = (id: string) => {
-	emit('select', id);
+const select = async (id: string) => {
 	isOpen.value = false;
+	villageId.value = id;
+	await move();
+	await refresh();
 };
 
 const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
+
+const villageId = ref();
+const { execute: move } = useFetch(() => `/api/village/move`, {
+	onRequest: ({ options }) => {
+		options.body = { id: villageId.value };
+	},
+	method: 'POST',
+	immediate: false,
+});
 </script>
 
 <template>

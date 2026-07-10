@@ -74,7 +74,7 @@ export const getVillages = async (page: Page) => {
 	const villages = await Promise.all(
 		villageList.map(async village => {
 			const name = (await village.textContent()) ?? '';
-			const href = await page.locator('#currentVillage').getAttribute('href');
+			const href = await village.getAttribute('href')!;
 			const isActive = await village
 				.getAttribute('class')
 				.then(v => v == 'active')
