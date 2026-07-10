@@ -7,15 +7,11 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 
 <template>
 	<nav
-		class="border-border bg-surface hidden shrink-0 flex-col gap-1 border-r px-3 py-4 lg:flex lg:w-70"
+		class="border-border bg-surface hidden shrink-0 flex-col gap-1 border-r px-3 py-4 lg:flex lg:w-80"
 	>
 		<p class="text-text-faint mb-2 px-2 text-[11px] font-medium tracking-wide uppercase"> Panel </p>
 
 		<VillageSelector class="mb-3" />
-		<VillageNameEditor
-			name="navid"
-			@save=""
-		/>
 
 		<NuxtLink
 			to="/"

@@ -22,12 +22,10 @@ const cardRefs = ref<Record<string, HTMLElement | null>>({});
 
 const farm = useFarm();
 
-const filteredVillages = computed<Village[]>(() => {
-	return [];
-	// const q = query.value.trim().toLowerCase();
-	// if (!q) return villages.value;
-	// return villages.value;
-	// return villages.value?.filter(v => v.name.toLowerCase().includes(q));
+const filteredVillages = computed<Village[] | undefined>(() => {
+	const q = query.value.trim().toLowerCase();
+	if (!q) return villages.value;
+	return villages.value?.filter(v => v.name.toLowerCase().includes(q));
 });
 
 // Roving-tabindex keyboard navigation across the (possibly filtered) list.
@@ -48,7 +46,7 @@ const focusIndex = async (index: number) => {
 
 const onKeydown = (event: KeyboardEvent) => {
 	const list = filteredVillages.value;
-	const currentIndex = list.findIndex(v => v.id === focusedId.value);
+	const currentIndex = list?.findIndex(v => v.id === focusedId.value) ?? 0;
 
 	if (event.key === 'ArrowDown') {
 		event.preventDefault();
@@ -135,7 +133,7 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 						:on-save="handleRename(village.id)"
 					/>
 					<span
-						v-if="village.id === activeVillageId"
+						v-if="true"
 						class="bg-run mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full"
 						aria-label="Active village"
 					/>
@@ -171,7 +169,7 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 			</div>
 
 			<p
-				v-if="!filteredVillages.length"
+				v-if="!filteredVillages?.length"
 				class="text-text-faint px-1 py-3 text-center text-[11px]"
 			>
 				No villages match "{{ query }}"

@@ -89,7 +89,7 @@ const onKeydown = (event: KeyboardEvent) => {
 					v-model="draft"
 					type="text"
 					maxlength="24"
-					class="bg-surface text-text min-w-0 flex-1 rounded-md border px-2 py-1 text-sm focus:outline-none"
+					class="bg-surface text-text w-full max-w-36 min-w-0 flex-1 rounded-md border px-2 py-1 text-sm focus:outline-none"
 					:class="
 						status === 'error'
 							? 'border-error'

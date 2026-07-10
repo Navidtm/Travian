@@ -4,6 +4,7 @@ export default defineEventHandler(async event => {
 	await page.locator('#villageNameField').dblclick();
 	await page.locator('#villageNameInput').fill(name);
 	await page.locator('#dialogButtonOk').click();
+	await sleep(1000);
 	await page.close();
-	return;
+	return { success: true };
 });

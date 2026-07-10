@@ -28,6 +28,17 @@ const { execute: move } = useFetch(() => `/api/village/move`, {
 	method: 'POST',
 	immediate: false,
 });
+
+const renameVillage = async (newName: string) => {
+	const data = await $fetch('/api/village/edit-name', {
+		method: 'POST',
+		body: {
+			name: newName,
+		},
+	});
+	await profile.execute();
+	return data as { success: true };
+};
 </script>
 
 <template>
@@ -38,7 +49,7 @@ const { execute: move } = useFetch(() => `/api/village/move`, {
 	>
 		<button
 			type="button"
-			class="border-border bg-surface hover:bg-surface-2 flex w-full items-center gap-2 rounded-lg border px-3 py-2 text-left transition-colors sm:w-64"
+			class="group border-border bg-surface hover:bg-surface-2 flex w-full items-center gap-2 rounded-lg border px-3 py-2 text-left transition-colors"
 			:aria-expanded="isOpen"
 			@click="isOpen = !isOpen"
 		>
@@ -48,17 +59,23 @@ const { execute: move } = useFetch(() => `/api/village/move`, {
 				{{ activeVillage.name.slice(0, 1) }}
 			</span>
 			<span class="min-w-0 flex-1">
+				<span class="mb-0.5 flex items-center gap-1.5">
+					<!-- <span class="text-text truncate text-sm font-medium">{{ activeVillage.name }}</span> -->
+					<VillageNameEditor
+						:name="activeVillage.name"
+						:on-save="renameVillage"
+					/>
+				</span>
 				<span class="flex items-center gap-1.5">
-					<span class="text-text truncate text-sm font-medium">{{ activeVillage.name }}</span>
+					<span class="text-text-muted block truncate font-mono text-[11px]">
+						{{ toStringCoordinates(activeVillage.coordinates) }}
+					</span>
 					<span
 						v-if="activeVillage.isCapital"
 						class="bg-crop-soft text-crop rounded px-1.5 py-0.5 text-[10px] font-medium"
 						>Capital</span
 					>
 				</span>
-				<span class="text-text-muted block truncate font-mono text-[11px]">
-					{{ toStringCoordinates(activeVillage.coordinates) }}</span
-				>
 			</span>
 			<svg
 				viewBox="0 0 24 24"
