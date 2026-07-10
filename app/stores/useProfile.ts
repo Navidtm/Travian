@@ -8,5 +8,12 @@ export const useProfile = defineStore('profile', () => {
 		void execute();
 	}
 
-	return { data, pending, error, execute };
+	const farm = useFarm();
+	const building = useBuilding();
+	const updateData = async () => {
+		await building.execute();
+		await farm.execute();
+	};
+
+	return { data, pending, error, execute, updateData };
 });

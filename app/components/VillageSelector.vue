@@ -14,6 +14,7 @@ const select = async (id: string) => {
 	isOpen.value = false;
 	villageId.value = id;
 	await move();
+	await profile.updateData();
 	await profile.execute();
 };
 
