@@ -52,7 +52,7 @@ const returnTime = computed(() =>
 		<div class="mb-3 flex items-center justify-between gap-2">
 			<div>
 				<h3 class="text-text text-sm font-medium">Hero Adventures</h3>
-				<p class="text-[11px] text-(--color-text-muted)">
+				<p class="text-text-muted text-[11px]">
 					{{ currentAdventureCount }} available
 					<span v-if="nextAdventure"> &middot; next at {{ nextAdventure.coordinates }}</span>
 				</p>
@@ -73,9 +73,7 @@ const returnTime = computed(() =>
 					>{{ formatDuration(remainingSeconds) }} left</span
 				>
 			</div>
-			<p class="mb-2 text-xs text-(--color-text-muted)"
-				>Destination: {{ travelState.destination }}</p
-			>
+			<p class="text-text-muted mb-2 text-xs">Destination: {{ travelState.destination }}</p>
 			<ProgressBar
 				:progress="travelProgress"
 				color="var(--color-run)"

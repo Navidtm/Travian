@@ -71,14 +71,12 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 </script>
 
 <template>
-	<div class="flex flex-col gap-2 border-b border-[var(--color-border)] px-3 py-3">
+	<div class="border-border flex flex-col gap-2 border-b px-3 py-3">
 		<div class="flex items-center justify-between px-1">
-			<p class="text-[11px] font-medium tracking-wide text-[var(--color-text-faint)] uppercase"
-				>Villages</p
-			>
+			<p class="text-text-faint text-[11px] font-medium tracking-wide uppercase">Villages</p>
 			<button
 				type="button"
-				class="text-[10px] text-[var(--color-text-faint)] transition-colors hover:text-[var(--color-text-muted)]"
+				class="text-text-faint hover:text-text-muted text-[10px] transition-colors"
 				@click="showResources = !showResources"
 			>
 				{{ showResources ? 'Hide resources' : 'Show resources' }}
@@ -88,7 +86,7 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 		<div class="relative px-1">
 			<svg
 				viewBox="0 0 24 24"
-				class="pointer-events-none absolute top-1/2 left-3.5 h-3.5 w-3.5 -translate-y-1/2 text-[var(--color-text-faint)]"
+				class="text-text-faint pointer-events-none absolute top-1/2 left-3.5 h-3.5 w-3.5 -translate-y-1/2"
 				fill="none"
 				stroke="currentColor"
 				stroke-width="2"
@@ -104,7 +102,7 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 				v-model="query"
 				type="text"
 				placeholder="Search villages…"
-				class="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-2)] py-1.5 pr-2.5 pl-8 text-xs text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] focus:border-[var(--color-run)]"
+				class="border-border bg-surface-2 text-text placeholder:text-text-faint focus:border-run w-full rounded-lg border py-1.5 pr-2.5 pl-8 text-xs"
 				@keydown="onKeydown"
 			/>
 		</div>
@@ -125,8 +123,8 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 				class="group cursor-pointer rounded-lg border px-2.5 py-2 transition-colors focus:outline-none"
 				:class="
 					village.id === activeVillageId
-						? 'border-[var(--color-run)] bg-[var(--color-run-soft)]'
-						: 'border-transparent bg-[var(--color-surface-2)] hover:bg-[var(--color-surface-3)]'
+						? 'border-run bg-run-soft'
+						: 'bg-surface-2 hover:bg-surface-3 border-transparent'
 				"
 				@click="selectVillage(village.id)"
 				@focus="focusedId = village.id"
@@ -138,18 +136,16 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 					/>
 					<span
 						v-if="village.id === activeVillageId"
-						class="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-run)]"
+						class="bg-run mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full"
 						aria-label="Active village"
 					/>
 				</div>
 
-				<div
-					class="mt-1 flex items-center gap-2 font-mono text-[10px] text-[var(--color-text-muted)]"
-				>
+				<div class="text-text-muted mt-1 flex items-center gap-2 font-mono text-[10px]">
 					<span>{{ village.coordinates }}</span>
 					<span
 						v-if="village.isCapital"
-						class="rounded bg-[var(--color-crop-soft)] px-1 py-0.5 font-sans text-[9px] font-medium text-[var(--color-crop)]"
+						class="bg-crop-soft text-crop rounded px-1 py-0.5 font-sans text-[9px] font-medium"
 						>Capital</span
 					>
 					<span class="ml-auto">Pop {{ formatNumber(village.population) }}</span>
@@ -159,28 +155,24 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 					v-if="showResources"
 					class="mt-1.5 grid grid-cols-4 gap-1 font-mono text-[9px]"
 				>
-					<span
-						class="rounded bg-[var(--color-wood-soft)] px-1 py-0.5 text-center text-[var(--color-wood)]"
-						>{{ formatNumber(farm.data?.resourses.wood.value) }}</span
-					>
-					<span
-						class="rounded bg-[var(--color-clay-soft)] px-1 py-0.5 text-center text-[var(--color-clay)]"
-						>{{ formatNumber(farm.data?.resourses.clay.value) }}</span
-					>
-					<span
-						class="rounded bg-[var(--color-iron-soft)] px-1 py-0.5 text-center text-[var(--color-iron)]"
-						>{{ formatNumber(farm.data?.resourses.iron.value) }}</span
-					>
-					<span
-						class="rounded bg-[var(--color-crop-soft)] px-1 py-0.5 text-center text-[var(--color-crop)]"
-						>{{ formatNumber(farm.data?.resourses.crop.value) }}</span
-					>
+					<span class="bg-wood-soft text-wood rounded px-1 py-0.5 text-center">{{
+						formatNumber(farm.data?.resourses.wood.value)
+					}}</span>
+					<span class="bg-clay-soft text-clay rounded px-1 py-0.5 text-center">{{
+						formatNumber(farm.data?.resourses.clay.value)
+					}}</span>
+					<span class="bg-iron-soft text-iron rounded px-1 py-0.5 text-center">{{
+						formatNumber(farm.data?.resourses.iron.value)
+					}}</span>
+					<span class="bg-crop-soft text-crop rounded px-1 py-0.5 text-center">{{
+						formatNumber(farm.data?.resourses.crop.value)
+					}}</span>
 				</div>
 			</div>
 
 			<p
 				v-if="!filteredVillages.length"
-				class="px-1 py-3 text-center text-[11px] text-[var(--color-text-faint)]"
+				class="text-text-faint px-1 py-3 text-center text-[11px]"
 			>
 				No villages match "{{ query }}"
 			</p>

@@ -22,19 +22,19 @@ const resourceColor: Record<ResourceType, string> = {
 
 const stateMeta = computed(() => {
 	if (props.runState === 'running') {
-		return { label: 'Running', dot: 'bg-run', ring: 'ring-[var(--color-run-soft)]' };
+		return { label: 'Running', dot: 'bg-run', ring: 'ring-run-soft' };
 	}
 	if (props.runState === 'paused') {
 		return {
 			label: 'Paused',
 			dot: 'bg-paused',
-			ring: 'ring-[var(--color-paused-soft)]',
+			ring: 'ring-paused-soft',
 		};
 	}
 	return {
 		label: 'Stopped',
 		dot: 'bg-error',
-		ring: 'ring-[var(--color-error-soft)]',
+		ring: 'ring-error-soft',
 	};
 });
 

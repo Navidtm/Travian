@@ -13,26 +13,26 @@ const props = withDefaults(
 
 const toneClasses: Record<string, { bg: string; text: string; dot: string }> = {
 	red: {
-		bg: 'bg-[var(--color-error-soft)]',
-		text: 'text-[var(--color-error)]',
-		dot: 'bg-[var(--color-error)]',
+		bg: 'bg-error-soft',
+		text: 'text-error',
+		dot: 'bg-error',
 	},
 	orange: { bg: 'bg-orange-400/10', text: 'text-orange-400', dot: 'bg-orange-400' },
 	blue: {
-		bg: 'bg-[var(--color-run-soft)]',
-		text: 'text-[var(--color-run)]',
-		dot: 'bg-[var(--color-run)]',
+		bg: 'bg-run-soft',
+		text: 'text-run',
+		dot: 'bg-run',
 	},
 	purple: { bg: 'bg-purple-400/10', text: 'text-purple-400', dot: 'bg-purple-400' },
 	green: {
-		bg: 'bg-[var(--color-done-soft)]',
-		text: 'text-[var(--color-done)]',
-		dot: 'bg-[var(--color-done)]',
+		bg: 'bg-done-soft',
+		text: 'text-done',
+		dot: 'bg-done',
 	},
 	gray: {
 		bg: 'bg-surface-3',
 		text: 'text-text-faint',
-		dot: 'bg-[var(--color-text-faint)]',
+		dot: 'bg-text-faint',
 	},
 };
 

@@ -24,28 +24,28 @@ const config = computed(() => {
 			return {
 				label: 'Paused',
 				dot: 'bg-paused',
-				text: 'text-[var(--color-paused)]',
+				text: 'text-paused',
 				bg: 'bg-paused-soft',
 			};
 		case 'cooldown':
 			return {
 				label: 'On Cooldown',
 				dot: 'bg-paused',
-				text: 'text-[var(--color-paused)]',
+				text: 'text-paused',
 				bg: 'bg-paused-soft',
 			};
 		case 'error':
 			return {
 				label: 'Error',
 				dot: 'bg-error',
-				text: 'text-[var(--color-error)]',
+				text: 'text-error',
 				bg: 'bg-error-soft',
 			};
 		case 'unreachable':
 			return {
 				label: 'Unreachable',
 				dot: 'bg-error',
-				text: 'text-[var(--color-error)]',
+				text: 'text-error',
 				bg: 'bg-error-soft',
 			};
 		case 'target-reached':
@@ -53,21 +53,21 @@ const config = computed(() => {
 			return {
 				label: props.status === 'done' ? 'Done' : 'Target reached',
 				dot: 'bg-done',
-				text: 'text-[var(--color-done)]',
+				text: 'text-done',
 				bg: 'bg-done-soft',
 			};
 		case 'available':
 			return {
 				label: 'Available',
 				dot: 'bg-done',
-				text: 'text-[var(--color-done)]',
+				text: 'text-done',
 				bg: 'bg-done-soft',
 			};
 		case 'enabled':
 			return {
 				label: 'Enabled',
 				dot: 'bg-done',
-				text: 'text-[var(--color-done)]',
+				text: 'text-done',
 				bg: 'bg-done-soft',
 			};
 		case 'disabled':
