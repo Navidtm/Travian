@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const profile = useProfile();
-profile.execute();
 
 const isOpen = ref(false);
 const rootEl = useTemplateRef('rootEl');

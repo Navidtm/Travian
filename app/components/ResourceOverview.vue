@@ -4,7 +4,6 @@ import { capitalize } from 'es-toolkit';
 import { formatNumber } from '~/composables/useVillageData';
 
 const farm = useFarm();
-farm.execute();
 
 const resourses = ['wood', 'clay', 'iron', 'crop'] as const;
 const items = computed(() =>

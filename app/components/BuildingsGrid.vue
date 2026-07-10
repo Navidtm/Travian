@@ -2,7 +2,6 @@
 import { formatDuration } from '~/composables/useVillageData';
 
 const building = useBuilding();
-building.execute();
 
 const progress = (b: Building) => Math.min(1, b.currentLevel / b.targetLevel);
 
