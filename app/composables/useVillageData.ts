@@ -152,46 +152,6 @@ export function formatDuration(seconds?: number): string {
 // ---------------------------------------------------------------------------
 
 export function useVillageData() {
-	const profile = computed(() => {
-		const { data } = useFetch('/api/profile', {
-			key: 'profile',
-		});
-
-		return data.value;
-	});
-
-	const villages = computed(() => profile.value?.villages);
-
-	const farm = computed(() => {
-		const { data } = useFetch('/api/farm');
-		return data.value;
-	});
-
-	const resourceFields = computed(() => {
-		return farm.value?.levels.map<ResourceField>(({ slot, level, type }) => ({
-			id: String(slot),
-			maxLevel: 20,
-			currentLevel: level,
-			slot,
-			type,
-			targetLevel: 20,
-			etaSeconds: 2,
-		}));
-	});
-
-	const buildings = computed<Building[] | undefined>(() => {
-		const { data } = useFetch('/api/building');
-		return data.value?.levels.map<Building>(({ slot, level, name }) => ({
-			currentLevel: level,
-			id: `${name}`,
-			name: name!,
-			maxLevel: 20,
-			slot,
-			status: 'idle',
-			targetLevel: 20,
-		}));
-	});
-
 	const villageTasks = computed<AutomationTask[]>(
 		() => tasks,
 		// .filter(t => t.villageName === activeVillage.value.name),
@@ -246,10 +206,6 @@ export function useVillageData() {
 	};
 
 	return {
-		profile,
-		villages,
-		resourceFields,
-		buildings,
 		tasks: villageTasks,
 		currentTask,
 		nextTask,

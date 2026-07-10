@@ -1,53 +1,23 @@
 <script setup lang="ts">
+import { capitalize } from 'es-toolkit';
+
 import { formatNumber } from '~/composables/useVillageData';
 
-const { data } = useFetch('/api/farm', {
-	key: 'farm',
-});
+const farm = useFarm();
+farm.execute();
 
-const items = computed(() => [
-	{
-		key: 'wood',
-		label: 'Wood',
-		value: data.value?.resourses.wood.value,
-		rate: data.value?.production.wood,
-		cap: data.value?.resourses.wood.capacity,
-		color: 'var(--color-wood)',
-		soft: 'var(--color-wood-soft)',
-	},
-	{
-		key: 'clay',
-		label: 'Clay',
-		value: data.value?.resourses.clay.value,
-		rate: data.value?.production.clay,
-		cap: data.value?.resourses.clay.capacity,
-		color: 'var(--color-clay)',
-		soft: 'var(--color-clay-soft)',
-	},
-	{
-		key: 'iron',
-		label: 'Iron',
-		value: data.value?.resourses.iron.value,
-		rate: data.value?.production.iron,
-		cap: data.value?.resourses.iron.capacity,
-		color: 'var(--color-iron)',
-		soft: 'var(--color-iron-soft)',
-	},
-	{
-		key: 'crop',
-		label: 'Crop',
-		value: data.value?.resourses.crop.value,
-		rate: data.value?.production.crop,
-		cap: data.value?.resourses.crop.capacity,
-		color: 'var(--color-crop)',
-		soft: 'var(--color-crop-soft)',
-	},
-]);
-
-const population = computed(() => ({
-	value: data.value?.resourses.population.value,
-	cap: data.value?.resourses.population.capacity,
-}));
+const resourses = ['wood', 'clay', 'iron', 'crop'] as const;
+const items = computed(() =>
+	resourses.map(r => ({
+		key: r,
+		label: capitalize(r),
+		value: farm.data?.resourses[r].value,
+		rate: farm.data?.production[r],
+		cap: farm.data?.resourses[r].capacity,
+		color: `var(--color-${r})`,
+		soft: `var(--color-${r}-soft)`,
+	})),
+);
 </script>
 
 <template>
@@ -143,8 +113,10 @@ const population = computed(() => ({
 			</span>
 			<div class="min-w-0">
 				<p class="truncate font-mono text-sm font-semibold leading-tight text-text">
-					{{ formatNumber(population.value)
-					}}<span class="text-text-faint">/{{ formatNumber(population.cap) }}</span>
+					{{ formatNumber(farm.data?.resourses.population.value) }}
+					<span class="text-text-faint"
+						>/ {{ formatNumber(farm.data?.resourses.population.capacity) }}
+					</span>
 				</p>
 				<p class="truncate text-[11px] text-text-muted">Population</p>
 			</div>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { onClickOutside } from '~/composables/useOnClickOutside';
-
-const { data, refresh } = useFetch('/api/profile');
+const profile = useProfile();
+profile.execute();
 
 const isOpen = ref(false);
 const rootEl = useTemplateRef('rootEl');
@@ -10,13 +9,13 @@ onClickOutside(rootEl, () => {
 	isOpen.value = false;
 });
 
-const activeVillage = computed(() => data.value?.villages?.find(v => v.isActive));
+const activeVillage = computed(() => profile.data?.villages?.find(v => v.isActive));
 
 const select = async (id: string) => {
 	isOpen.value = false;
 	villageId.value = id;
 	await move();
-	await refresh();
+	await profile.execute();
 };
 
 const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
@@ -57,9 +56,9 @@ const { execute: move } = useFetch(() => `/api/village/move`, {
 						>Capital</span
 					>
 				</span>
-				<span class="block truncate font-mono text-[11px] text-text-muted">{{
-					toStringCoordinates(activeVillage.coordinates)
-				}}</span>
+				<span class="block truncate font-mono text-[11px] text-text-muted">
+					{{ toStringCoordinates(activeVillage.coordinates) }}</span
+				>
 			</span>
 			<svg
 				viewBox="0 0 24 24"
@@ -78,7 +77,7 @@ const { execute: move } = useFetch(() => `/api/village/move`, {
 			class="absolute left-0 top-[calc(100%+6px)] z-30 w-full min-w-[16rem] overflow-hidden rounded-lg border border-border bg-surface-2 py-1 shadow-xl shadow-black/40 sm:w-72"
 		>
 			<button
-				v-for="village in data?.villages"
+				v-for="village in profile.data?.villages"
 				:key="village.id"
 				type="button"
 				class="flex w-full items-center gap-2 px-3 py-2 text-left transition-colors hover:bg-surface-3"
@@ -92,16 +91,19 @@ const { execute: move } = useFetch(() => `/api/village/move`, {
 				</span>
 				<span class="min-w-0 flex-1">
 					<span class="flex items-center gap-1.5">
-						<span class="truncate text-sm font-medium text-text">{{ village.name }}</span>
+						<span class="truncate text-sm font-medium text-text">
+							{{ village.name }}
+						</span>
 						<span
 							v-if="village.isCapital"
 							class="rounded bg-crop-soft px-1.5 py-0.5 text-[10px] font-medium text-crop"
-							>Capital</span
 						>
+							Capital
+						</span>
 					</span>
 					<span class="block truncate font-mono text-[11px] text-text-muted"
-						>{{ toStringCoordinates(village.coordinates) }} · Pop {{ village.population }}</span
-					>
+						>{{ toStringCoordinates(village.coordinates) }} · Pop {{ village.population }}
+					</span>
 				</span>
 				<svg
 					v-if="village.isActive"

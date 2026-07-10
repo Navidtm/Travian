@@ -7,11 +7,5 @@ export default defineEventHandler(async event => {
 
 	await page.close();
 
-	return {
-		levels,
-		meta: {
-			url: page.url(),
-			date: Date.now(),
-		},
-	};
+	return levels;
 });

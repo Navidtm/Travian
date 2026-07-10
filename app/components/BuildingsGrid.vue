@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { formatDuration } from '~/composables/useVillageData';
 
-const props = defineProps<{ buildings?: Building[] }>();
+const building = useBuilding();
+building.execute();
 
 const progress = (b: Building) => Math.min(1, b.currentLevel / b.targetLevel);
 
 const activeCount = computed(
-	() => props.buildings?.filter(b => b.status === 'upgrading' || b.status === 'queued').length,
+	() => building.data?.filter(b => b.status === 'upgrading' || b.status === 'queued').length,
 );
 </script>
 
@@ -21,7 +22,7 @@ const activeCount = computed(
 
 		<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
 			<article
-				v-for="b in buildings"
+				v-for="b in building.data"
 				:key="b.id"
 				class="flex flex-col gap-3 rounded-lg border border-border-soft bg-surface-2 p-3.5"
 			>

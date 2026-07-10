@@ -1,8 +1,5 @@
 <script setup lang="ts">
 const {
-	villages,
-	resourceFields,
-	buildings,
 	currentTask,
 	nextTask,
 	queuedTasks,
@@ -19,7 +16,6 @@ const {
 <template>
 	<div>
 		<TopBar
-			:villages="villages"
 			@select-village="setActiveVillage"
 			@upgrade-everything="upgradeEverything"
 		/>
@@ -28,11 +24,8 @@ const {
 			<!-- <VillageCommandCenter /> -->
 			<div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
 				<div class="flex flex-col gap-5">
-					<ResourceFieldsCard
-						:fields="resourceFields"
-						@upgrade-all="upgradeAllFields"
-					/>
-					<BuildingsGrid :buildings="buildings" />
+					<ResourceFieldsCard @upgrade-all="upgradeAllFields" />
+					<BuildingsGrid />
 				</div>
 
 				<div class="lg:sticky lg:top-33">

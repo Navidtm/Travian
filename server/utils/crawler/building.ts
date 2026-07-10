@@ -2,7 +2,7 @@ import type { Page } from 'playwright-core';
 import { BuildingPath } from '~~/shared/constants/common';
 import { buildingMap } from '~~/shared/constants/village';
 
-export const getBuildings = async (page: Page) => {
+export const getBuildings = async (page: Page): Promise<Building[]> => {
 	if (!page.url().includes(BuildingPath)) return [];
 
 	const levels = Object.fromEntries(
@@ -30,10 +30,14 @@ export const getBuildings = async (page: Page) => {
 
 			return [
 				{
-					name: building,
+					currentLevel: levels[slot] ?? 0,
+					id: `${building}`,
+					name: building!,
+					maxLevel: 20,
 					slot,
-					level: levels[slot] ?? 0,
-				},
+					status: 'idle',
+					targetLevel: 20,
+				} satisfies Building,
 			];
 		}),
 	).then(v => v.flat());
