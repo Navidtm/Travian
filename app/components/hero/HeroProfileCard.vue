@@ -3,7 +3,10 @@ import { formatNumber } from '~/composables/useVillageData';
 
 const { hero } = defineProps<{ hero?: Hero }>();
 
-const { execute: revive } = useFetch('/api/hero/revive');
+const { execute: revive } = useFetch('/api/hero/revive', {
+	method: 'POST',
+	immediate: false,
+});
 </script>
 
 <template>

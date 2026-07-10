@@ -113,9 +113,6 @@ const items = computed(() =>
 			<div class="min-w-0">
 				<p class="truncate font-mono text-sm font-semibold leading-tight text-text">
 					{{ formatNumber(farm.data?.resourses.population.value) }}
-					<span class="text-text-faint"
-						>/ {{ formatNumber(farm.data?.resourses.population.capacity) }}
-					</span>
 				</p>
 				<p class="truncate text-[11px] text-text-muted">Population</p>
 			</div>
