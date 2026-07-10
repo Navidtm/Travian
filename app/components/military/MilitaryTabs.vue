@@ -3,7 +3,7 @@ defineProps<{ active: 'training' | 'operations' }>();
 </script>
 
 <template>
-	<div class="flex items-center gap-1 rounded-lg border border-border bg-surface-2 p-1">
+	<div class="border-border bg-surface-2 flex items-center gap-1 rounded-lg border p-1">
 		<NuxtLink
 			to="/military/training"
 			class="rounded-md px-3 py-1.5 text-sm font-medium transition-colors"

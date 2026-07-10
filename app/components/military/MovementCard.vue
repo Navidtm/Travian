@@ -68,7 +68,7 @@ const tribeLabel: Record<Tribe, string> = {
 </script>
 
 <template>
-	<article class="rounded-lg border border-border-soft bg-surface-2 transition-colors">
+	<article class="border-border-soft bg-surface-2 rounded-lg border transition-colors">
 		<button
 			type="button"
 			class="flex w-full items-center gap-3 p-3.5 text-left"
@@ -165,7 +165,7 @@ const tribeLabel: Record<Tribe, string> = {
 
 			<div class="min-w-0 flex-1">
 				<div class="flex flex-wrap items-center gap-2">
-					<p class="text-sm font-medium text-text">{{ meta.label }}</p>
+					<p class="text-text text-sm font-medium">{{ meta.label }}</p>
 					<StatusPill
 						:label="status.label"
 						:tone="status.tone"
@@ -188,22 +188,22 @@ const tribeLabel: Record<Tribe, string> = {
 						Hero
 					</span>
 				</div>
-				<p class="mt-0.5 truncate text-xs text-text-muted)">
+				<p class="text-text-muted) mt-0.5 truncate text-xs">
 					{{ movement.sourceVillage }} <span class="text-text-faint">&rarr;</span>
 					{{ movement.destinationVillage }}
-					<span class="font-mono text-text-faint">{{ movement.coordinates }}</span>
+					<span class="text-text-faint font-mono">{{ movement.coordinates }}</span>
 				</p>
 			</div>
 
 			<div class="hidden shrink-0 items-center gap-2 sm:flex">
-				<span class="rounded-md bg-surface-3 px-2 py-1 font-mono text-[10px] text-text-muted">
+				<span class="bg-surface-3 text-text-muted rounded-md px-2 py-1 font-mono text-[10px]">
 					{{ tribeLabel[movement.tribe] }}
 				</span>
 			</div>
 
 			<svg
 				viewBox="0 0 24 24"
-				class="h-4 w-4 shrink-0 text-text-muted transition-transform"
+				class="text-text-muted h-4 w-4 shrink-0 transition-transform"
 				:class="{ 'rotate-180': isExpanded }"
 				fill="none"
 				stroke="currentColor"
@@ -219,7 +219,7 @@ const tribeLabel: Record<Tribe, string> = {
 				:color="meta.color"
 			/>
 			<div
-				class="mt-1.5 flex flex-wrap items-center justify-between gap-1 font-mono text-[11px] text-text-muted"
+				class="text-text-muted mt-1.5 flex flex-wrap items-center justify-between gap-1 font-mono text-[11px]"
 			>
 				<span
 					>Departs {{ movement.departureTime }} &middot; Arrives {{ movement.arrivalTime }}</span
@@ -232,34 +232,34 @@ const tribeLabel: Record<Tribe, string> = {
 
 		<div
 			v-if="isExpanded"
-			class="space-y-3 border-t border-border-soft px-3.5 py-3.5"
+			class="border-border-soft space-y-3 border-t px-3.5 py-3.5"
 		>
 			<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
 				<div>
-					<p class="text-[10px] uppercase tracking-wide text-text-faint">Distance</p>
-					<p class="font-mono text-xs text-text">{{ movement.distance.toFixed(1) }} fields</p>
+					<p class="text-text-faint text-[10px] tracking-wide uppercase">Distance</p>
+					<p class="text-text font-mono text-xs">{{ movement.distance.toFixed(1) }} fields</p>
 				</div>
 				<div>
-					<p class="text-[10px] uppercase tracking-wide text-text-faint">Travel Duration</p>
-					<p class="font-mono text-xs text-text">{{ formatDuration(movement.durationSeconds) }}</p>
+					<p class="text-text-faint text-[10px] tracking-wide uppercase">Travel Duration</p>
+					<p class="text-text font-mono text-xs">{{ formatDuration(movement.durationSeconds) }}</p>
 				</div>
 				<div v-if="movement.attackTemplate">
-					<p class="text-[10px] uppercase tracking-wide text-text-faint">Template</p>
-					<p class="text-xs text-text">{{ movement.attackTemplate }}</p>
+					<p class="text-text-faint text-[10px] tracking-wide uppercase">Template</p>
+					<p class="text-text text-xs">{{ movement.attackTemplate }}</p>
 				</div>
 				<div v-if="movement.heroInfo">
-					<p class="text-[10px] uppercase tracking-wide text-text-faint">Hero</p>
-					<p class="text-xs text-text">{{ movement.heroInfo }}</p>
+					<p class="text-text-faint text-[10px] tracking-wide uppercase">Hero</p>
+					<p class="text-text text-xs">{{ movement.heroInfo }}</p>
 				</div>
 			</div>
 
 			<div v-if="movement.troops.length">
-				<p class="mb-1.5 text-[10px] uppercase tracking-wide text-text-faint">Troop Composition</p>
+				<p class="text-text-faint mb-1.5 text-[10px] tracking-wide uppercase">Troop Composition</p>
 				<ul class="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
 					<li
 						v-for="line in movement.troops"
 						:key="line.troopName"
-						class="flex items-center justify-between rounded-md bg-surface-3 px-2 py-1 font-mono text-[11px] text-text-muted"
+						class="bg-surface-3 text-text-muted flex items-center justify-between rounded-md px-2 py-1 font-mono text-[11px]"
 					>
 						<span>{{ line.troopName }}</span>
 						<span class="text-text">{{ line.quantity }}</span>
@@ -268,22 +268,22 @@ const tribeLabel: Record<Tribe, string> = {
 			</div>
 
 			<div v-if="movement.resourcesCarried">
-				<p class="mb-1.5 text-[10px] uppercase tracking-wide text-text-faint">Resources Carried</p>
+				<p class="text-text-faint mb-1.5 text-[10px] tracking-wide uppercase">Resources Carried</p>
 				<div class="grid grid-cols-4 gap-1.5">
 					<div
-						class="rounded-md bg-wood-soft px-2 py-1 text-center font-mono text-[11px] text-wood"
+						class="bg-wood-soft text-wood rounded-md px-2 py-1 text-center font-mono text-[11px]"
 						>{{ formatNumber(movement.resourcesCarried.wood) }}</div
 					>
 					<div
-						class="rounded-md bg-clay-soft px-2 py-1 text-center font-mono text-[11px] text-clay"
+						class="bg-clay-soft text-clay rounded-md px-2 py-1 text-center font-mono text-[11px]"
 						>{{ formatNumber(movement.resourcesCarried.clay) }}</div
 					>
 					<div
-						class="rounded-md bg-iron-soft px-2 py-1 text-center font-mono text-[11px] text-iron"
+						class="bg-iron-soft text-iron rounded-md px-2 py-1 text-center font-mono text-[11px]"
 						>{{ formatNumber(movement.resourcesCarried.iron) }}</div
 					>
 					<div
-						class="rounded-md bg-crop-soft px-2 py-1 text-center font-mono text-[11px] text-crop"
+						class="bg-crop-soft text-crop rounded-md px-2 py-1 text-center font-mono text-[11px]"
 						>{{ formatNumber(movement.resourcesCarried.crop) }}</div
 					>
 				</div>
@@ -291,7 +291,7 @@ const tribeLabel: Record<Tribe, string> = {
 
 			<p
 				v-if="movement.notes"
-				class="text-xs italic text-text-muted"
+				class="text-text-muted text-xs italic"
 				>{{ movement.notes }}</p
 			>
 		</div>

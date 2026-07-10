@@ -1,11 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-	<header class="sticky top-0 z-20 border-b border-border bg-bg/95 backdrop-blur">
+	<header class="border-border bg-bg/95 sticky top-0 z-20 border-b backdrop-blur">
 		<div class="mx-auto flex max-w-350 flex-col gap-3 px-4 py-3 lg:px-8 lg:py-4">
 			<div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
 				<div class="flex items-center gap-3">
-					<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-run-soft text-run">
+					<div class="bg-run-soft text-run flex h-8 w-8 items-center justify-center rounded-lg">
 						<svg
 							viewBox="0 0 24 24"
 							class="size-4.5"
@@ -17,8 +17,8 @@
 						</svg>
 					</div>
 					<div class="hidden sm:block">
-						<p class="text-sm font-semibold leading-tight text-text">Automation Panel</p>
-						<p class="text-[11px] leading-tight text-text-muted">Village control console</p>
+						<p class="text-text text-sm leading-tight font-semibold">Automation Panel</p>
+						<p class="text-text-muted text-[11px] leading-tight">Village control console</p>
 					</div>
 				</div>
 

@@ -49,13 +49,13 @@ const trainingStatusLabel = computed(() => {
 
 <template>
 	<article
-		class="group flex flex-col gap-3 rounded-lg border border-border-soft bg-surface-2 p-3.5 transition-transform hover:-translate-y-0.5"
+		class="group border-border-soft bg-surface-2 flex flex-col gap-3 rounded-lg border p-3.5 transition-transform hover:-translate-y-0.5"
 	>
 		<div class="flex items-start justify-between gap-2">
 			<div class="flex items-center gap-3">
 				<!-- Illustration placeholder (icon-based avatar in lieu of artwork) -->
 				<span
-					class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-surface-3 text-text-muted"
+					class="bg-surface-3 text-text-muted flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
 				>
 					<svg
 						viewBox="0 0 24 24"
@@ -69,7 +69,7 @@ const trainingStatusLabel = computed(() => {
 					</svg>
 				</span>
 				<div class="min-w-0">
-					<p class="truncate text-sm font-medium text-text">{{ troop.name }}</p>
+					<p class="text-text truncate text-sm font-medium">{{ troop.name }}</p>
 					<StatusPill
 						:label="roleMeta[troop.role].label"
 						:tone="roleMeta[troop.role].tone"
@@ -81,10 +81,10 @@ const trainingStatusLabel = computed(() => {
 		<!-- Locked / research-not-done state -->
 		<template v-if="!troop.isResearched">
 			<div
-				class="flex flex-col items-center gap-2 rounded-lg border border-dashed border-border px-3 py-5 text-center"
+				class="border-border flex flex-col items-center gap-2 rounded-lg border border-dashed px-3 py-5 text-center"
 			>
 				<span
-					class="flex h-10 w-10 items-center justify-center rounded-full bg-surface-3 text-text-faint"
+					class="bg-surface-3 text-text-faint flex h-10 w-10 items-center justify-center rounded-full"
 				>
 					<svg
 						viewBox="0 0 24 24"
@@ -103,10 +103,10 @@ const trainingStatusLabel = computed(() => {
 						<path d="M8 10V7a4 4 0 0 1 8 0v3" />
 					</svg>
 				</span>
-				<p class="text-xs font-medium text-text">Not Researched</p>
+				<p class="text-text text-xs font-medium">Not Researched</p>
 				<ul
 					v-if="troop.requirements?.length"
-					class="space-y-0.5 text-[11px] text-text-muted"
+					class="text-text-muted space-y-0.5 text-[11px]"
 				>
 					<li
 						v-for="req in troop.requirements"
@@ -116,17 +116,17 @@ const trainingStatusLabel = computed(() => {
 				</ul>
 				<p
 					v-if="troop.requiredBuildings?.length"
-					class="text-[11px] text-text-faint"
+					class="text-text-faint text-[11px]"
 				>
 					Requires: {{ troop.requiredBuildings.join(', ') }}
 				</p>
-				<p class="font-mono text-[11px] text-text-faint">
+				<p class="text-text-faint font-mono text-[11px]">
 					Est. research time {{ formatDuration(troop.estimatedResearchSeconds) }}
 				</p>
 			</div>
 			<button
 				type="button"
-				class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-text px-3 py-1.5 text-xs font-medium text-bg transition-opacity hover:opacity-90"
+				class="bg-text text-bg inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-opacity hover:opacity-90"
 				@click="$emit('research', troop.id)"
 			>
 				Research
@@ -135,41 +135,41 @@ const trainingStatusLabel = computed(() => {
 
 		<!-- Researched: stats + training -->
 		<template v-else>
-			<div class="grid grid-cols-3 gap-2 font-mono text-[11px] text-text-muted">
-				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+			<div class="text-text-muted grid grid-cols-3 gap-2 font-mono text-[11px]">
+				<div class="bg-surface-3 rounded-md px-2 py-1.5 text-center">
 					<p class="text-text">{{ troop.attack }}</p>
 					<p class="text-[10px]">Attack</p>
 				</div>
-				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+				<div class="bg-surface-3 rounded-md px-2 py-1.5 text-center">
 					<p class="text-text">{{ troop.defenseInfantry }}</p>
 					<p class="text-[10px]">Def. Inf.</p>
 				</div>
-				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+				<div class="bg-surface-3 rounded-md px-2 py-1.5 text-center">
 					<p class="text-text">{{ troop.defenseCavalry }}</p>
 					<p class="text-[10px]">Def. Cav.</p>
 				</div>
-				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+				<div class="bg-surface-3 rounded-md px-2 py-1.5 text-center">
 					<p class="text-text">{{ troop.speed }}</p>
 					<p class="text-[10px]">Speed</p>
 				</div>
-				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+				<div class="bg-surface-3 rounded-md px-2 py-1.5 text-center">
 					<p class="text-text">{{ troop.carryCapacity }}</p>
 					<p class="text-[10px]">Carry</p>
 				</div>
-				<div class="rounded-md bg-surface-3 px-2 py-1.5 text-center">
+				<div class="bg-surface-3 rounded-md px-2 py-1.5 text-center">
 					<p class="text-text">{{ troop.cropConsumption }}</p>
 					<p class="text-[10px]">Crop</p>
 				</div>
 			</div>
 
 			<div class="flex items-center justify-between">
-				<span class="text-xs text-text-muted">Current count</span>
-				<span class="font-mono text-sm font-semibold text-text">{{
+				<span class="text-text-muted text-xs">Current count</span>
+				<span class="text-text font-mono text-sm font-semibold">{{
 					formatNumber(troop.currentCount)
 				}}</span>
 			</div>
 
-			<div class="rounded-lg border border-border-soft bg-surface-3/40 p-2.5">
+			<div class="border-border-soft bg-surface-3/40 rounded-lg border p-2.5">
 				<div class="mb-1.5 flex items-center justify-between">
 					<StatusPill
 						:label="trainingStatusLabel"
@@ -177,13 +177,13 @@ const trainingStatusLabel = computed(() => {
 					/>
 					<span
 						v-if="troop.trainingStatus !== 'idle'"
-						class="font-mono text-[11px] text-text-muted"
+						class="text-text-muted font-mono text-[11px]"
 					>
 						Queue: {{ troop.queueSize }}
 					</span>
 				</div>
 				<template v-if="troop.trainingStatus === 'training'">
-					<p class="mb-1 text-[11px] text-text-muted"
+					<p class="text-text-muted mb-1 text-[11px]"
 						>Training {{ troop.currentBatchQuantity }} units</p
 					>
 					<ProgressBar
@@ -194,13 +194,13 @@ const trainingStatusLabel = computed(() => {
 						"
 						color="var(--color-run)"
 					/>
-					<p class="mt-1 font-mono text-[11px] text-run"
+					<p class="text-run mt-1 font-mono text-[11px]"
 						>ETA {{ formatDuration(troop.remainingTrainingSeconds) }}</p
 					>
 				</template>
 				<p
 					v-else
-					class="text-[11px] text-text-faint"
+					class="text-text-faint text-[11px]"
 					>No active training batch</p
 				>
 			</div>
@@ -208,14 +208,14 @@ const trainingStatusLabel = computed(() => {
 			<div class="grid grid-cols-2 gap-2">
 				<button
 					type="button"
-					class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-3 px-2.5 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface"
+					class="border-border bg-surface-3 text-text hover:bg-surface inline-flex items-center justify-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors"
 					@click="$emit('train', troop.id)"
 				>
 					Train
 				</button>
 				<button
 					type="button"
-					class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-border bg-surface-3 px-2.5 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface"
+					class="border-border bg-surface-3 text-text hover:bg-surface inline-flex items-center justify-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors"
 					@click="$emit('upgrade', troop.id)"
 				>
 					Upgrade
@@ -224,7 +224,7 @@ const trainingStatusLabel = computed(() => {
 
 			<button
 				type="button"
-				class="flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-text-muted transition-colors hover:bg-surface-3 hover:text-text"
+				class="text-text-muted hover:bg-surface-3 hover:text-text flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors"
 				@click="isExpanded = !isExpanded"
 			>
 				View Details
@@ -242,11 +242,11 @@ const trainingStatusLabel = computed(() => {
 
 			<div
 				v-if="isExpanded"
-				class="space-y-2 border-t border-border-soft pt-3 text-[11px] text-text-muted"
+				class="border-border-soft text-text-muted space-y-2 border-t pt-3 text-[11px]"
 			>
 				<div class="flex justify-between"
 					><span>Upkeep</span
-					><span class="font-mono text-text">{{ troop.cropConsumption }} crop</span></div
+					><span class="text-text font-mono">{{ troop.cropConsumption }} crop</span></div
 				>
 				<div class="flex justify-between"
 					><span>Training building</span><span class="text-text">{{ trainingBuilding }}</span></div

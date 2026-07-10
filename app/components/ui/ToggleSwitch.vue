@@ -21,13 +21,13 @@ defineEmits<{ (e: 'update:modelValue', value: boolean): void }>();
 			:class="modelValue ? 'bg-run' : 'bg-surface-3'"
 		>
 			<span
-				class="absolute top-0.5 h-4 w-4 rounded-full bg-bg transition-transform"
+				class="bg-bg absolute top-0.5 h-4 w-4 rounded-full transition-transform"
 				:class="modelValue ? 'translate-x-4' : 'translate-x-0.5'"
 			/>
 		</span>
 		<span
 			v-if="label"
-			class="text-xs font-medium text-text"
+			class="text-text text-xs font-medium"
 			>{{ label }}</span
 		>
 	</button>

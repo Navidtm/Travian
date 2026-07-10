@@ -12,7 +12,7 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 <template>
 	<section
 		v-if="hero"
-		class="rounded-card border border-border bg-surface p-4 sm:p-5"
+		class="rounded-card border-border bg-surface border p-4 sm:p-5"
 	>
 		<div class="flex flex-col gap-4 sm:flex-row sm:items-center">
 			<!-- Portrait -->
@@ -24,7 +24,7 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 					}"
 				/>
 				<div
-					class="flex h-24 w-24 items-center justify-center rounded-full border-2 overflow-hidden"
+					class="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-2"
 					:class="hero.isAlive ? 'border-run' : 'border-error'"
 					:style="{ backgroundColor: 'var(--color-surface-2)' }"
 				>
@@ -49,7 +49,7 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 					</svg>
 				</div>
 				<span
-					class="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full bg-surface-3 px-2 py-0.5 font-mono text-[10px] font-semibold text-text"
+					class="bg-surface-3 text-text absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full px-2 py-0.5 font-mono text-[10px] font-semibold"
 				>
 					Lv.{{ hero.level }}
 				</span>
@@ -57,7 +57,7 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 
 			<div class="min-w-0 flex-1 text-center sm:text-left">
 				<div class="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-					<p class="text-base font-semibold text-text">{{ hero.name }}</p>
+					<p class="text-text text-base font-semibold">{{ hero.name }}</p>
 					<StatusPill
 						v-if="hero.isAlive"
 						label="Healthy"
@@ -71,7 +71,7 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 				</div>
 
 				<div class="mt-3">
-					<div class="mb-1 flex items-center justify-between text-[11px] text-text-muted">
+					<div class="text-text-muted mb-1 flex items-center justify-between text-[11px]">
 						<span>Experience</span>
 						<span class="font-mono"
 							>{{ formatNumber(hero.experience) }} /
@@ -82,7 +82,7 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 						:progress="hero.experienceProgress"
 						color="var(--color-run)"
 					/>
-					<p class="mt-1 text-[11px] text-text-faint"
+					<p class="text-text-faint mt-1 text-[11px]"
 						>{{ formatNumber(hero.experienceRemaining) }} XP to next level</p
 					>
 				</div>
@@ -90,24 +90,24 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 		</div>
 
 		<div class="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
-			<div class="rounded-lg border border-border-soft bg-surface-2 p-3 text-center">
-				<p class="font-mono text-lg font-semibold text-text">{{ hero.power }}</p>
-				<p class="text-[10px] text-text-muted">Power</p>
+			<div class="border-border-soft bg-surface-2 rounded-lg border p-3 text-center">
+				<p class="text-text font-mono text-lg font-semibold">{{ hero.power }}</p>
+				<p class="text-text-muted text-[10px]">Power</p>
 			</div>
-			<div class="rounded-lg border border-border-soft bg-surface-2 p-3 text-center">
-				<p class="font-mono text-lg font-semibold text-text">{{ hero.speed }}</p>
-				<p class="text-[10px] text-text-muted">Speed</p>
+			<div class="border-border-soft bg-surface-2 rounded-lg border p-3 text-center">
+				<p class="text-text font-mono text-lg font-semibold">{{ hero.speed }}</p>
+				<p class="text-text-muted text-[10px]">Speed</p>
 			</div>
-			<div class="rounded-lg border border-border-soft bg-surface-2 p-3 text-center">
-				<p class="font-mono text-lg font-semibold text-done">+{{ hero.resourceBonusPercent }}%</p>
-				<p class="text-[10px] text-text-muted">Resource Bonus</p>
+			<div class="border-border-soft bg-surface-2 rounded-lg border p-3 text-center">
+				<p class="text-done font-mono text-lg font-semibold">+{{ hero.resourceBonusPercent }}%</p>
+				<p class="text-text-muted text-[10px]">Resource Bonus</p>
 			</div>
 		</div>
 
 		<button
 			v-if="!hero.isAlive"
 			type="button"
-			class="mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-error px-3 py-2 text-xs font-medium text-white transition-opacity hover:opacity-90"
+			class="bg-error mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium text-white transition-opacity hover:opacity-90"
 			@click="revive()"
 		>
 			Revive Hero

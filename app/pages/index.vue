@@ -20,7 +20,7 @@ const {
 			@upgrade-everything="upgradeEverything"
 		/>
 
-		<main class="mx-auto max-w-350 px-4 py-5 lg:px-8 lg:py-6 space-y-5">
+		<main class="mx-auto max-w-350 space-y-5 px-4 py-5 lg:px-8 lg:py-6">
 			<!-- <VillageCommandCenter /> -->
 			<div class="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-start">
 				<div class="flex flex-col gap-5">

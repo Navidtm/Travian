@@ -3,13 +3,13 @@ const { data: hero } = useFetch('/api/hero/info');
 </script>
 <template>
 	<div>
-		<header class="sticky top-0 z-20 border-b border-border bg-bg/95 backdrop-blur">
+		<header class="border-border bg-bg/95 sticky top-0 z-20 border-b backdrop-blur">
 			<div
 				class="mx-auto flex max-w-350 flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:py-4"
 			>
 				<div>
-					<p class="text-sm font-semibold leading-tight text-text">Hero</p>
-					<p class="text-[11px] leading-tight text-text-muted"></p>
+					<p class="text-text text-sm leading-tight font-semibold">Hero</p>
+					<p class="text-text-muted text-[11px] leading-tight"></p>
 				</div>
 				<MilitaryTabs active="operations" />
 			</div>

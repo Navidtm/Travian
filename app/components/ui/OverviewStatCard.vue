@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
 	<div
-		class="group rounded-lg border border-border-soft bg-surface-2 p-3.5 transition-transform hover:-translate-y-0.5"
+		class="group border-border-soft bg-surface-2 rounded-lg border p-3.5 transition-transform hover:-translate-y-0.5"
 	>
 		<div class="mb-2.5 flex items-center justify-between">
 			<span
@@ -62,8 +62,8 @@ defineProps<{
 				{{ trend.label }}
 			</span>
 		</div>
-		<p class="font-mono text-xl font-semibold leading-tight text-text">{{ value }}</p>
-		<p class="mt-0.5 truncate text-[11px] text-text-muted">{{ label }}</p>
-		<p class="truncate text-[10px] text-text-faint">{{ subtitle }}</p>
+		<p class="text-text font-mono text-xl leading-tight font-semibold">{{ value }}</p>
+		<p class="text-text-muted mt-0.5 truncate text-[11px]">{{ label }}</p>
+		<p class="text-text-faint truncate text-[10px]">{{ subtitle }}</p>
 	</div>
 </template>

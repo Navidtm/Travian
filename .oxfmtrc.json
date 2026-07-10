@@ -8,5 +8,6 @@
 	"semi": true,
 	"jsdoc": true,
 	"useTabs": true,
-	"sortImports": true
+	"sortImports": true,
+	"sortTailwindcss": true
 }

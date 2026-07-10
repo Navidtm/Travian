@@ -24,7 +24,7 @@ const items = computed(() =>
 		<div
 			v-for="item in items"
 			:key="item.key"
-			class="flex items-center gap-3 rounded-card border border-border bg-surface px-3 py-2.5"
+			class="rounded-card border-border bg-surface flex items-center gap-3 border px-3 py-2.5"
 		>
 			<span
 				class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
@@ -80,17 +80,17 @@ const items = computed(() =>
 				</svg>
 			</span>
 			<div class="min-w-0">
-				<p class="truncate font-mono text-sm font-semibold leading-tight text-text">
+				<p class="text-text truncate font-mono text-sm leading-tight font-semibold">
 					{{ formatNumber(item.value)
 					}}<span class="text-text-faint">/{{ formatNumber(item.cap) }}</span>
 				</p>
-				<p class="truncate text-[11px] text-text-muted">
+				<p class="text-text-muted truncate text-[11px]">
 					{{ item.label }} · <span class="font-mono">+{{ formatNumber(item.rate) }}/h</span>
 				</p>
 			</div>
 		</div>
 
-		<div class="flex items-center gap-3 rounded-card border border-border bg-surface px-3 py-2.5">
+		<div class="rounded-card border-border bg-surface flex items-center gap-3 border px-3 py-2.5">
 			<span
 				class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
 				:style="{ backgroundColor: 'var(--color-pop-soft)', color: 'var(--color-pop)' }"
@@ -111,10 +111,10 @@ const items = computed(() =>
 				</svg>
 			</span>
 			<div class="min-w-0">
-				<p class="truncate font-mono text-sm font-semibold leading-tight text-text">
+				<p class="text-text truncate font-mono text-sm leading-tight font-semibold">
 					{{ formatNumber(farm.data?.resourses.population.value) }}
 				</p>
-				<p class="truncate text-[11px] text-text-muted">Population</p>
+				<p class="text-text-muted truncate text-[11px]">Population</p>
 			</div>
 		</div>
 	</div>

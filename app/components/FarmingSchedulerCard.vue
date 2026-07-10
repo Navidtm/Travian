@@ -19,15 +19,15 @@ const templateName = computed(
 </script>
 
 <template>
-	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border-border bg-surface border p-4 sm:p-5">
 		<div class="mb-4 flex items-center justify-between gap-3">
 			<div>
-				<h2 class="text-sm font-semibold text-text">Farming Scheduler</h2>
-				<p class="text-[12px] text-text-muted">Automated farming runs on a fixed interval</p>
+				<h2 class="text-text text-sm font-semibold">Farming Scheduler</h2>
+				<p class="text-text-muted text-[12px]">Automated farming runs on a fixed interval</p>
 			</div>
 			<button
 				type="button"
-				class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-2 px-3 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface-3"
+				class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
 				@click="$emit('create-job')"
 			>
 				<svg
@@ -47,21 +47,21 @@ const templateName = computed(
 			<li
 				v-for="job in jobs"
 				:key="job.id"
-				class="flex flex-col gap-2.5 rounded-lg border border-border-soft bg-surface-2 p-3.5 sm:flex-row sm:items-center sm:justify-between"
+				class="border-border-soft bg-surface-2 flex flex-col gap-2.5 rounded-lg border p-3.5 sm:flex-row sm:items-center sm:justify-between"
 			>
 				<div class="min-w-0">
 					<div class="flex items-center gap-2">
-						<p class="truncate text-sm font-medium text-text">{{ job.name }}</p>
+						<p class="text-text truncate text-sm font-medium">{{ job.name }}</p>
 						<StatusBadge :status="job.status" />
 					</div>
-					<p class="mt-0.5 truncate text-[11px] text-text-muted">
+					<p class="text-text-muted mt-0.5 truncate text-[11px]">
 						{{ groupName(job.targetGroupId) }} &middot; {{ templateName(job.templateId) }} &middot;
 						every {{ job.intervalMinutes }}m
 					</p>
 				</div>
 
 				<div class="flex items-center gap-4 sm:gap-6">
-					<div class="text-right font-mono text-[11px] text-text-muted">
+					<div class="text-text-muted text-right font-mono text-[11px]">
 						<p>Last: {{ job.lastRun ?? '\u2014' }}</p>
 						<p>Next: {{ job.nextRun ?? '\u2014' }}</p>
 					</div>

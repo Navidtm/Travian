@@ -15,30 +15,30 @@ defineEmits<{
 </script>
 
 <template>
-	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border-border bg-surface border p-4 sm:p-5">
 		<div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 			<div>
-				<h2 class="text-sm font-semibold text-text">Target List</h2>
-				<p class="text-[12px] text-text-muted">{{ targets.length }} tracked villages</p>
+				<h2 class="text-text text-sm font-semibold">Target List</h2>
+				<p class="text-text-muted text-[12px]">{{ targets.length }} tracked villages</p>
 			</div>
 			<div class="flex flex-wrap items-center gap-2">
 				<button
 					type="button"
-					class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-2 px-3 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface-3"
+					class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
 					@click="$emit('import')"
 				>
 					Import
 				</button>
 				<button
 					type="button"
-					class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-2 px-3 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface-3"
+					class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
 					@click="$emit('export')"
 				>
 					Export
 				</button>
 				<button
 					type="button"
-					class="inline-flex items-center gap-1.5 rounded-lg bg-text px-3 py-1.5 text-xs font-medium text-bg transition-opacity hover:opacity-90"
+					class="bg-text text-bg inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-opacity hover:opacity-90"
 					@click="$emit('add')"
 				>
 					<svg
@@ -55,11 +55,11 @@ defineEmits<{
 			</div>
 		</div>
 
-		<div class="overflow-x-auto rounded-lg border border-border-soft">
+		<div class="border-border-soft overflow-x-auto rounded-lg border">
 			<table class="w-full min-w-180 border-collapse text-left text-sm">
 				<thead>
 					<tr
-						class="border-b border-border-soft bg-surface-2 text-[11px] uppercase tracking-wide text-text-faint"
+						class="border-border-soft bg-surface-2 text-text-faint border-b text-[11px] tracking-wide uppercase"
 					>
 						<th class="px-3 py-2 font-medium">Village</th>
 						<th class="px-3 py-2 font-medium">Coordinates</th>
@@ -68,38 +68,38 @@ defineEmits<{
 						<th class="px-3 py-2 font-medium">Status</th>
 						<th class="px-3 py-2 font-medium">Last Attack</th>
 						<th class="px-3 py-2 font-medium">Next Available</th>
-						<th class="px-3 py-2 font-medium text-right">Actions</th>
+						<th class="px-3 py-2 text-right font-medium">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr
 						v-for="target in targets"
 						:key="target.id"
-						class="border-b border-border-soft last:border-b-0 hover:bg-surface-2"
+						class="border-border-soft hover:bg-surface-2 border-b last:border-b-0"
 					>
-						<td class="px-3 py-2.5 font-medium text-text">{{ target.villageName }}</td>
-						<td class="px-3 py-2.5 font-mono text-text-muted">{{ target.coordinates }}</td>
-						<td class="px-3 py-2.5 font-mono text-text-muted">{{ target.distance.toFixed(1) }}</td>
-						<td class="px-3 py-2.5 font-mono text-text-muted">
+						<td class="text-text px-3 py-2.5 font-medium">{{ target.villageName }}</td>
+						<td class="text-text-muted px-3 py-2.5 font-mono">{{ target.coordinates }}</td>
+						<td class="text-text-muted px-3 py-2.5 font-mono">{{ target.distance.toFixed(1) }}</td>
+						<td class="text-text-muted px-3 py-2.5 font-mono">
 							{{ target.lastLoot !== null ? formatNumber(target.lastLoot) : '\u2014' }}
 						</td>
 						<td class="px-3 py-2.5"><StatusBadge :status="target.status" /></td>
-						<td class="px-3 py-2.5 text-text-muted">{{ target.lastAttack ?? '\u2014' }}</td>
-						<td class="px-3 py-2.5 font-mono text-text-muted">{{
+						<td class="text-text-muted px-3 py-2.5">{{ target.lastAttack ?? '\u2014' }}</td>
+						<td class="text-text-muted px-3 py-2.5 font-mono">{{
 							target.nextAvailable ?? '\u2014'
 						}}</td>
 						<td class="px-3 py-2.5">
 							<div class="flex justify-end gap-1.5">
 								<button
 									type="button"
-									class="rounded-md px-2 py-1 text-xs font-medium text-text-muted transition-colors hover:bg-surface-3 hover:text-text"
+									class="text-text-muted hover:bg-surface-3 hover:text-text rounded-md px-2 py-1 text-xs font-medium transition-colors"
 									@click="$emit('edit', target.id)"
 								>
 									Edit
 								</button>
 								<button
 									type="button"
-									class="rounded-md px-2 py-1 text-xs font-medium text-error transition-colors hover:bg-error-soft"
+									class="text-error hover:bg-error-soft rounded-md px-2 py-1 text-xs font-medium transition-colors"
 									@click="$emit('delete', target.id)"
 								>
 									Delete

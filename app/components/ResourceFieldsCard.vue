@@ -34,18 +34,18 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 </script>
 
 <template>
-	<div class="image rounded-card overflow-hidden relative">
-		<section class="border border-border bg-surface/40 p-4 sm:p-5">
-			<div class="mb-4 flex items-center justify-between gap-3 z-10">
+	<div class="image rounded-card relative overflow-hidden">
+		<section class="border-border bg-surface/40 border p-4 sm:p-5">
+			<div class="z-10 mb-4 flex items-center justify-between gap-3">
 				<div>
-					<h2 class="text-sm font-semibold text-text">Resource Fields</h2>
-					<p class="text-[12px] text-text">
+					<h2 class="text-text text-sm font-semibold">Resource Fields</h2>
+					<p class="text-text text-[12px]">
 						{{ totalPending }} field{{ totalPending === 1 ? '' : 's' }} below target level
 					</p>
 				</div>
 				<button
 					type="button"
-					class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-2 px-3 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface-3 disabled:cursor-not-allowed disabled:opacity-40"
+					class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
 					:disabled="totalPending === 0"
 					@click="$emit('upgrade-all')"
 				>
@@ -66,15 +66,15 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 				<div
 					v-for="group in groups"
 					:key="group.type"
-					class="rounded-lg border border-border-soft backdrop-blur-[2px] bg-surface-2/60 px-6 py-4"
+					class="border-border-soft bg-surface-2/60 rounded-lg border px-6 py-4 backdrop-blur-[2px]"
 				>
 					<div class="mb-2 flex items-center gap-2">
 						<span
 							class="h-2 w-2 rounded-full"
 							:style="{ backgroundColor: colorFor[group.type] }"
 						/>
-						<h3 class="text-xs font-medium text-text">{{ labelFor[group.type] }}</h3>
-						<span class="text-[11px] text-text-faint">{{ group.items?.length }} fields</span>
+						<h3 class="text-text text-xs font-medium">{{ labelFor[group.type] }}</h3>
+						<span class="text-text-faint text-[11px]">{{ group.items?.length }} fields</span>
 					</div>
 
 					<ul class="space-y-2">
@@ -83,21 +83,21 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 							:key="field.id"
 							class="flex items-center gap-3 py-2"
 						>
-							<span class="shrink-0 font-mono text-[11px] text-text-faint">#{{ field.slot }}</span>
+							<span class="text-text-faint shrink-0 font-mono text-[11px]">#{{ field.slot }}</span>
 							<div class="min-w-0 flex-1">
 								<div class="mb-1 flex items-baseline justify-between gap-2">
-									<span class="font-mono text-xs font-semibold text-text">
+									<span class="text-text font-mono text-xs font-semibold">
 										Lv. {{ field.currentLevel }}
 										<span class="text-text-faint">/ {{ field.targetLevel }}</span>
 									</span>
 									<span
 										v-if="field.currentLevel >= field.targetLevel"
-										class="text-[10px] font-medium text-done"
+										class="text-done text-[10px] font-medium"
 										>On target</span
 									>
 									<span
 										v-else
-										class="text-[10px] text-text-muted"
+										class="text-text-muted text-[10px]"
 										>{{ Math.round(progress(field) * 100) }}%</span
 									>
 								</div>

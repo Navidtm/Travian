@@ -7,9 +7,9 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 
 <template>
 	<nav
-		class="hidden shrink-0 flex-col gap-1 border-r border-border bg-surface px-3 py-4 lg:flex lg:w-70"
+		class="border-border bg-surface hidden shrink-0 flex-col gap-1 border-r px-3 py-4 lg:flex lg:w-70"
 	>
-		<p class="mb-2 px-2 text-[11px] font-medium uppercase tracking-wide text-text-faint"> Panel </p>
+		<p class="text-text-faint mb-2 px-2 text-[11px] font-medium tracking-wide uppercase"> Panel </p>
 
 		<VillageSelector class="mb-3" />
 
@@ -61,12 +61,12 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 			Dashboard
 		</NuxtLink>
 
-		<p class="mb-1 mt-4 px-2 text-[11px] font-medium uppercase tracking-wide text-text-faint">
+		<p class="text-text-faint mt-4 mb-1 px-2 text-[11px] font-medium tracking-wide uppercase">
 			Military
 		</p>
 
 		<div
-			class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium text-text-muted"
+			class="text-text-muted flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium"
 		>
 			<svg
 				viewBox="0 0 24 24"
@@ -82,7 +82,7 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 
 		<NuxtLink
 			to="/military/army"
-			class="ml-4 flex items-center gap-2.5 rounded-lg border-l border-border px-2.5 py-1.5 pl-3 text-sm transition-colors"
+			class="border-border ml-4 flex items-center gap-2.5 rounded-lg border-l px-2.5 py-1.5 pl-3 text-sm transition-colors"
 			:class="
 				isActive('/military/army')
 					? 'border-l-run bg-run-soft text-run'
@@ -93,7 +93,7 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 		</NuxtLink>
 		<NuxtLink
 			to="/military/hero"
-			class="ml-4 flex items-center gap-2.5 rounded-lg border-l border-border px-2.5 py-1.5 pl-3 text-sm transition-colors"
+			class="border-border ml-4 flex items-center gap-2.5 rounded-lg border-l px-2.5 py-1.5 pl-3 text-sm transition-colors"
 			:class="
 				isActive('/military/hero')
 					? 'border-l-run bg-run-soft text-run'
@@ -104,7 +104,7 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 		</NuxtLink>
 		<NuxtLink
 			to="/military/training"
-			class="ml-4 flex items-center gap-2.5 rounded-lg border-l border-border px-2.5 py-1.5 pl-3 text-sm transition-colors"
+			class="border-border ml-4 flex items-center gap-2.5 rounded-lg border-l px-2.5 py-1.5 pl-3 text-sm transition-colors"
 			:class="
 				isActive('/military/training')
 					? 'border-l-run bg-run-soft text-run'
@@ -116,7 +116,7 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 
 		<NuxtLink
 			to="/military/operations"
-			class="ml-4 flex items-center gap-2.5 rounded-lg border-l border-border px-2.5 py-1.5 pl-3 text-sm transition-colors"
+			class="border-border ml-4 flex items-center gap-2.5 rounded-lg border-l px-2.5 py-1.5 pl-3 text-sm transition-colors"
 			:class="
 				isActive('/military/operations')
 					? 'border-l-run bg-run-soft text-run'
@@ -127,7 +127,7 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 		</NuxtLink>
 	</nav>
 
-	<nav class="flex gap-1 overflow-x-auto border-b border-border bg-surface px-3 py-2 lg:hidden">
+	<nav class="border-border bg-surface flex gap-1 overflow-x-auto border-b px-3 py-2 lg:hidden">
 		<NuxtLink
 			to="/"
 			class="shrink-0 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors"

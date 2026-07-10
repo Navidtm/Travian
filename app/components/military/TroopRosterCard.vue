@@ -34,11 +34,11 @@ const missing = computed(
 </script>
 
 <template>
-	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border-border bg-surface border p-4 sm:p-5">
 		<div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 			<div>
-				<h2 class="text-sm font-semibold text-text">Troop Roster</h2>
-				<p class="text-[12px] text-text-muted">
+				<h2 class="text-text text-sm font-semibold">Troop Roster</h2>
+				<p class="text-text-muted text-[12px]">
 					{{ totalPending }} troop{{ totalPending === 1 ? '' : 's' }} below target
 				</p>
 			</div>
@@ -50,7 +50,7 @@ const missing = computed(
 				/>
 				<button
 					type="button"
-					class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-2 px-3 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface-3 disabled:cursor-not-allowed disabled:opacity-40"
+					class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
 					:disabled="totalPending === 0"
 					@click="$emit('train-missing')"
 				>
@@ -72,22 +72,22 @@ const missing = computed(
 			<article
 				v-for="troop in troops"
 				:key="troop.id"
-				class="flex flex-col gap-3 rounded-lg border border-border-soft bg-surface-2 p-3.5"
+				class="border-border-soft bg-surface-2 flex flex-col gap-3 rounded-lg border p-3.5"
 			>
 				<div class="flex items-start justify-between gap-2">
 					<div class="min-w-0">
-						<p class="truncate text-sm font-medium text-text">{{ troop.name }}</p>
-						<p class="text-[11px] text-text-faint">{{ categoryLabel[troop.category] }}</p>
+						<p class="text-text truncate text-sm font-medium">{{ troop.name }}</p>
+						<p class="text-text-faint text-[11px]">{{ categoryLabel[troop.category] }}</p>
 					</div>
 					<span
 						v-if="missing(troop) > 0"
-						class="shrink-0 rounded-full bg-paused-soft px-2 py-0.5 text-[11px] font-medium text-paused"
+						class="bg-paused-soft text-paused shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium"
 					>
 						{{ formatNumber(missing(troop)) }} missing
 					</span>
 					<span
 						v-else
-						class="shrink-0 rounded-full bg-done-soft px-2 py-0.5 text-[11px] font-medium text-done"
+						class="bg-done-soft text-done shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium"
 					>
 						On target
 					</span>
@@ -95,12 +95,12 @@ const missing = computed(
 
 				<div class="flex items-center justify-between gap-2 font-mono text-xs">
 					<span class="text-text">{{ formatNumber(troop.currentCount) }} current</span>
-					<label class="flex items-center gap-1.5 text-text-muted">
+					<label class="text-text-muted flex items-center gap-1.5">
 						Target
 						<input
 							type="number"
 							min="0"
-							class="w-20 rounded-md border border-border bg-surface px-2 py-1 text-right text-text focus:border-run"
+							class="border-border bg-surface text-text focus:border-run w-20 rounded-md border px-2 py-1 text-right"
 							:value="troop.targetCount"
 							@change="onTargetInput(troop.id, $event)"
 						/>

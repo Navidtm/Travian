@@ -5,15 +5,15 @@ defineEmits<{ (e: 'create-template'): void }>();
 </script>
 
 <template>
-	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border-border bg-surface border p-4 sm:p-5">
 		<div class="mb-4 flex items-center justify-between gap-3">
 			<div>
-				<h2 class="text-sm font-semibold text-text">Attack Templates</h2>
-				<p class="text-[12px] text-text-muted">Reusable troop compositions for operations</p>
+				<h2 class="text-text text-sm font-semibold">Attack Templates</h2>
+				<p class="text-text-muted text-[12px]">Reusable troop compositions for operations</p>
 			</div>
 			<button
 				type="button"
-				class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-2 px-3 py-1.5 text-xs font-medium text-text transition-colors hover:bg-surface-3"
+				class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
 				@click="$emit('create-template')"
 			>
 				<svg
@@ -33,13 +33,13 @@ defineEmits<{ (e: 'create-template'): void }>();
 			<article
 				v-for="template in templates"
 				:key="template.id"
-				class="flex flex-col gap-2.5 rounded-lg border border-border-soft bg-surface-2 p-3.5"
+				class="border-border-soft bg-surface-2 flex flex-col gap-2.5 rounded-lg border p-3.5"
 			>
 				<div>
-					<p class="text-sm font-medium text-text">{{ template.name }}</p>
+					<p class="text-text text-sm font-medium">{{ template.name }}</p>
 					<p
 						v-if="template.description"
-						class="text-[11px] text-text-muted"
+						class="text-text-muted text-[11px]"
 						>{{ template.description }}</p
 					>
 				</div>
@@ -47,7 +47,7 @@ defineEmits<{ (e: 'create-template'): void }>();
 					<li
 						v-for="line in template.troops"
 						:key="line.troopName"
-						class="flex items-center justify-between font-mono text-xs text-text-muted"
+						class="text-text-muted flex items-center justify-between font-mono text-xs"
 					>
 						<span>{{ line.troopName }}</span>
 						<span class="text-text">{{ line.quantity }}</span>

@@ -11,11 +11,11 @@ const activeCount = computed(
 </script>
 
 <template>
-	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border-border bg-surface border p-4 sm:p-5">
 		<div class="mb-4 flex items-center justify-between gap-3">
 			<div>
-				<h2 class="text-sm font-semibold text-text">Buildings</h2>
-				<p class="text-[12px] text-text-muted"> {{ activeCount }} in automation queue </p>
+				<h2 class="text-text text-sm font-semibold">Buildings</h2>
+				<p class="text-text-muted text-[12px]"> {{ activeCount }} in automation queue </p>
 			</div>
 		</div>
 
@@ -23,25 +23,25 @@ const activeCount = computed(
 			<article
 				v-for="b in building.data"
 				:key="b.id"
-				class="flex flex-col gap-3 rounded-lg border border-border-soft bg-surface-2 p-3.5"
+				class="border-border-soft bg-surface-2 flex flex-col gap-3 rounded-lg border p-3.5"
 			>
 				<div class="flex items-start justify-between gap-2">
-					<div class="min-w-0 flex items-baseline gap-2">
-						<span class="truncate text-sm font-medium text-text">{{ b.name }}</span>
-						<span class="font-mono text-xs text-text-faint">#{{ b.slot }}</span>
+					<div class="flex min-w-0 items-baseline gap-2">
+						<span class="text-text truncate text-sm font-medium">{{ b.name }}</span>
+						<span class="text-text-faint font-mono text-xs">#{{ b.slot }}</span>
 					</div>
 					<StatusBadge :status="b.status" />
 				</div>
 
 				<div>
 					<div class="mb-1 flex items-baseline justify-between">
-						<span class="font-mono text-xs font-semibold text-text">
+						<span class="text-text font-mono text-xs font-semibold">
 							Lv. {{ b.currentLevel }}
 							<span class="text-text-faint">/ {{ b.targetLevel }}</span>
 						</span>
 						<span
 							v-if="b.status === 'upgrading'"
-							class="font-mono text-[11px] text-run"
+							class="text-run font-mono text-[11px]"
 						>
 							ETA {{ formatDuration(b.etaSeconds) }}
 						</span>

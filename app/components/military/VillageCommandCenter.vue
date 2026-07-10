@@ -21,11 +21,11 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 </script>
 
 <template>
-	<section class="rounded-card border border-border bg-surface p-4 sm:p-5">
+	<section class="rounded-card border-border bg-surface border p-4 sm:p-5">
 		<div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 			<div>
-				<h2 class="text-sm font-semibold text-text">Village Command Center</h2>
-				<p class="text-[12px] text-text-muted"
+				<h2 class="text-text text-sm font-semibold">Village Command Center</h2>
+				<p class="text-text-muted text-[12px]"
 					>Live overview of every troop, hero and merchant movement</p
 				>
 			</div>
@@ -33,10 +33,10 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 				<span
 					v-for="group in groups"
 					:key="group.key"
-					class="rounded-full bg-surface-2 px-2.5 py-1 text-[11px] font-medium text-text-muted"
+					class="bg-surface-2 text-text-muted rounded-full px-2.5 py-1 text-[11px] font-medium"
 				>
 					{{ group.label }}
-					<span class="font-mono text-text">({{ groupCounts[group.key] }})</span>
+					<span class="text-text font-mono">({{ groupCounts[group.key] }})</span>
 				</span>
 			</div>
 		</div>
@@ -45,7 +45,7 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 			<div
 				v-for="group in groups"
 				:key="group.key"
-				class="rounded-lg border border-border-soft"
+				class="border-border-soft rounded-lg border"
 			>
 				<button
 					type="button"
@@ -53,16 +53,16 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 					:aria-expanded="expanded[group.key]"
 					@click="expanded[group.key] = !expanded[group.key]"
 				>
-					<span class="flex items-center gap-2 text-sm font-medium text-text">
+					<span class="text-text flex items-center gap-2 text-sm font-medium">
 						{{ group.label }}
 						<span
-							class="rounded-full bg-surface-3 px-1.5 py-0.5 font-mono text-[10px] text-text-muted"
+							class="bg-surface-3 text-text-muted rounded-full px-1.5 py-0.5 font-mono text-[10px]"
 							>{{ groupCounts[group.key] }}</span
 						>
 					</span>
 					<svg
 						viewBox="0 0 24 24"
-						class="h-4 w-4 text-text-muted transition-transform"
+						class="text-text-muted h-4 w-4 transition-transform"
 						:class="{ 'rotate-180': expanded[group.key] }"
 						fill="none"
 						stroke="currentColor"
@@ -74,7 +74,7 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 
 				<div
 					v-show="expanded[group.key]"
-					class="space-y-2 border-t border-border-soft p-3"
+					class="border-border-soft space-y-2 border-t p-3"
 				>
 					<MovementCard
 						v-for="movement in forGroup(group.key)"

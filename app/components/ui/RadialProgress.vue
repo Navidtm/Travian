@@ -52,12 +52,12 @@ const offset = computed(() => circumference.value * (1 - Math.max(0, Math.min(1,
 			/>
 		</svg>
 		<div class="absolute inset-0 flex flex-col items-center justify-center">
-			<span class="font-mono text-sm font-semibold text-text"
+			<span class="text-text font-mono text-sm font-semibold"
 				>{{ Math.round(progress * 100) }}%</span
 			>
 			<span
 				v-if="label"
-				class="text-[9px] text-text-faint"
+				class="text-text-faint text-[9px]"
 				>{{ label }}</span
 			>
 		</div>
