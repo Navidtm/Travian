@@ -16,7 +16,7 @@ export default defineEventHandler(async event => {
 			if (buttons.length == 1) {
 				const sec = await getSecFromClock(research);
 
-				await buttons[0].click();
+				await buttons[0]!.click();
 
 				console.log(`Upgrading: ${level} -> ${level + 1} (${sec} sec)`);
 

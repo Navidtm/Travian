@@ -7,7 +7,7 @@ export default defineEventHandler(async event => {
 	for (const research of researches) {
 		const title = research.locator('.title').first();
 		const links = await title.locator('a').all();
-		const name = (await links[1].textContent()) ?? '';
+		const name = (await links[1]!.textContent()) ?? '';
 		const level = (await title.locator('.level').textContent()) ?? '';
 
 		x.push({

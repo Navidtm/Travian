@@ -1,7 +1,6 @@
 import type { Page } from 'playwright-core';
 import { farmPath, farmTypes } from '~~/shared/constants/common';
 import { troopMap } from '~~/shared/constants/village';
-import { Farm } from '~~/shared/types/farm';
 
 const RESOURCES = ['wood', 'clay', 'iron', 'crop', 'population'] as const;
 type Resourse = Farm | 'population';

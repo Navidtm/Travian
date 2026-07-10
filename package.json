@@ -10,6 +10,8 @@
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare",
 		"release": "changelogen --release",
+		"typecheck": "nuxt typecheck",
+		"check": "pnpm lint && pnpm typecheck",
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
 		"fmt": "oxfmt",
@@ -38,7 +40,8 @@
 		"oxlint": "^1.72.0",
 		"playwright-core": "^1.61.1",
 		"typescript": "^6.0.3",
-		"vitest": "^4.1.9"
+		"vitest": "^4.1.9",
+		"vue-tsc": "^3.3.7"
 	},
 	"lint-staged": {
 		"*": "oxfmt --no-error-on-unmatched-pattern"

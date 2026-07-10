@@ -19,7 +19,7 @@ export default defineEventHandler<{
 			const input = v.locator('input').first();
 			await input.clear();
 
-			await input.fill(townNames[i]);
+			await input.fill(townNames[i]!);
 			return;
 		}),
 	);

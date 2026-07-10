@@ -26,7 +26,7 @@ export default defineNuxtConfig({
 		presets: [
 			{
 				from: 'es-toolkit',
-				imports: ['es-toolkit'],
+				imports: ['esToolkit'],
 			},
 		],
 	},

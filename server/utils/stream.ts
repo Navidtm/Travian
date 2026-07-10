@@ -1,4 +1,4 @@
-import { H3Event } from '#imports';
+import { H3Event } from 'h3';
 
 export type StreamEventHandlerContext<TMessage> = H3Event & { emit(message: TMessage): void };
 
