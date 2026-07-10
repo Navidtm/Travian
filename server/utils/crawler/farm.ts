@@ -53,18 +53,22 @@ export const getResourses = async (page: Page) => {
 	return resourses as Record<Resourse, { value: number; capacity: number }>;
 };
 
-export const getFarmLevels = async (page: Page) => {
+export const getFarmFields = async (page: Page) => {
 	if (!page.url().includes(farmPath)) return [];
 
 	const items = await page.locator('#village_map .level').allTextContents();
 
-	const levels = items.map((level, n) => ({
-		level: +level,
+	const fields = items.map<ResourceField>((level, n) => ({
+		currentLevel: +level,
 		slot: n + 1,
 		type: farmTypes[n + 1]!,
+		id: String(n + 1),
+		etaSeconds: 2,
+		targetLevel: 20,
+		maxLevel: 20,
 	}));
 
-	return levels;
+	return fields;
 };
 
 export const getVillages = async (page: Page) => {

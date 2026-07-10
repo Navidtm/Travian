@@ -2,17 +2,6 @@
 defineEmits<{ (e: 'upgrade-all'): void }>();
 
 const farm = useFarm();
-const fields = computed(() => {
-	return farm.data?.levels.map<ResourceField>(({ slot, level, type }) => ({
-		id: String(slot),
-		maxLevel: 20,
-		currentLevel: level,
-		slot,
-		type,
-		targetLevel: 20,
-		etaSeconds: 2,
-	}));
-});
 
 const colorFor: Record<ResourceType, string> = {
 	wood: 'var(--color-wood)',
@@ -31,14 +20,14 @@ const labelFor: Record<ResourceType, string> = {
 const groups = computed(() => {
 	const order: ResourceType[] = ['wood', 'clay', 'iron', 'crop'];
 	return order.map(type => {
-		const items = fields.value?.filter(f => f.type === type);
+		const items = farm.data?.fields.filter(f => f.type === type);
 		const pending = items?.filter(f => f.currentLevel < f.targetLevel).length;
 		return { type, items, pending };
 	});
 });
 
 const totalPending = computed(
-	() => fields.value?.filter(f => f.currentLevel < f.targetLevel).length,
+	() => farm.data?.fields.filter(f => f.currentLevel < f.targetLevel).length,
 );
 
 const progress = (field: ResourceField) => Math.min(1, field.currentLevel / field.targetLevel);
