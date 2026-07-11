@@ -1,19 +1,17 @@
 <script setup lang="ts">
-const props = defineProps<{
+const { name, onSave } = defineProps<{
 	name: string;
-	onSave: (newName: string) => Promise<{ success: boolean; error?: string }>;
+	onSave: (newName: string) => Promise<{ success: boolean }>;
 }>();
 
 const isEditing = ref(false);
-const draft = ref(props.name);
+const draft = ref(name);
 const status = ref<'idle' | 'saving' | 'success' | 'error'>('idle');
-const errorMessage = ref('');
-const inputRef = ref<HTMLInputElement | null>(null);
+const inputRef = useTemplateRef('inputRef');
 
 const startEditing = async () => {
-	draft.value = props.name;
+	draft.value = name;
 	status.value = 'idle';
-	errorMessage.value = '';
 	isEditing.value = true;
 	await nextTick();
 	inputRef.value?.focus();
@@ -23,26 +21,23 @@ const startEditing = async () => {
 const cancel = () => {
 	isEditing.value = false;
 	status.value = 'idle';
-	errorMessage.value = '';
 };
 
 const save = async () => {
-	if (draft.value.trim() === props.name.trim()) {
+	if (draft.value.trim() === name.trim()) {
 		cancel();
 		return;
 	}
 	status.value = 'saving';
-	errorMessage.value = '';
-	const result = await props.onSave(draft.value);
+	const result = await onSave(draft.value);
 	if (result.success) {
 		status.value = 'success';
 		setTimeout(() => {
 			isEditing.value = false;
 			status.value = 'idle';
-		}, 900);
+		}, 1500);
 	} else {
 		status.value = 'error';
-		errorMessage.value = result.error ?? 'Could not rename village';
 	}
 };
 
@@ -100,6 +95,16 @@ const onKeydown = (event: KeyboardEvent) => {
 					:disabled="status === 'saving' || status === 'success'"
 					@keydown="onKeydown"
 				/>
+				<p
+					v-if="status === 'error'"
+					class="text-error text-[11px]"
+					>error
+				</p>
+				<p
+					v-else-if="status === 'success'"
+					class="text-done text-[11px]"
+					>Saved</p
+				>
 				<button
 					type="button"
 					class="text-done hover:bg-done-soft flex h-6 w-6 shrink-0 items-center justify-center rounded transition-colors disabled:opacity-40"
@@ -147,16 +152,6 @@ const onKeydown = (event: KeyboardEvent) => {
 					</svg>
 				</button>
 			</div>
-			<p
-				v-if="status === 'error'"
-				class="text-error text-[11px]"
-				>{{ errorMessage }}</p
-			>
-			<p
-				v-else-if="status === 'success'"
-				class="text-done text-[11px]"
-				>Saved</p
-			>
 		</div>
 	</div>
 </template>

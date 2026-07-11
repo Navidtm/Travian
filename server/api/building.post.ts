@@ -12,16 +12,16 @@ export default defineEventHandler(async event => {
 	for (const name of BuildingList) {
 		const id = BuildingAddress[name];
 
-		let currentLevel = levels.find(v => v.slot === id)?.level ?? 0;
+		let currentLevel = levels.find(v => v.slot === id)?.currentLevel ?? 0;
 		const template = `${name}(id: ${id})`;
 		console.log(`Started upgrading ${template} from ${currentLevel} to ${toLevel}`);
 
 		while (currentLevel < toLevel) {
-			if (max5Levels.includes(name) && currentLevel == 5) break;
+			if (max5Levels.includes(name) && currentLevel === 5) break;
 
 			await page.goto(`${baseURL}/build.php?id=${id}`);
 
-			if (currentLevel == 0) {
+			if (currentLevel === 0) {
 				const buttons = await page.locator('button.build').all();
 
 				for (const button of buttons) {
@@ -29,14 +29,14 @@ export default defineEventHandler(async event => {
 
 					const iid = onclickAttr?.split(/'/)[1]?.match(/a=(\d+)/)?.[1] ?? 0;
 
-					if (villageId[name] == iid) {
+					if (villageId[name] === iid) {
 						console.log(`Building ${template}`);
 						await button.click();
 						break;
 					}
 				}
 			} else {
-				if (name == 'Embassy') break;
+				if (name === 'Embassy') break;
 
 				const button = page.locator('button.build').first();
 				const sec = await getSecFromClock(page);

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useMilitaryData } from '~/composables/useMilitaryData';
+
 const {
 	troopTypes,
 	currentTraining,

@@ -11,7 +11,7 @@ export default defineEventHandler(async event => {
 			const difficultyEl =
 				(await v.locator('.difficulty').locator('img').getAttribute('class')) ?? '';
 			const difficulty: 'hard' | 'normal' =
-				difficultyEl == 'adventureDifficulty0' ? 'hard' : 'normal';
+				difficultyEl === 'adventureDifficulty0' ? 'hard' : 'normal';
 			return { moveTime: calculateSec(moveTime), link, difficulty };
 		}),
 	);

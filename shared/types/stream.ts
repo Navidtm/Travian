@@ -25,7 +25,7 @@ export type StreamEvent<TMessage, TResult> =
 
 export interface StreamStartOptions {
 	method?: 'GET' | 'POST';
-	body?: Record<string, any>;
+	body?: Record<string, unknown>;
 	headers?: HeadersInit;
 }
 

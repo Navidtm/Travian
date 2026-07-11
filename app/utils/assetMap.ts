@@ -43,8 +43,8 @@ const slugify = (value: string) =>
 	value
 		.toLowerCase()
 		.trim()
-		.replace(/[^a-z0-9]+/g, '-')
-		.replace(/(^-|-$)/g, '');
+		.replace(/[^a-z0-9]+/gu, '-')
+		.replace(/(^-|-$)/gu, '');
 
 export function getTroopImage(tribe: string, troopName: string): ImageRef {
 	const key = `${tribe}/${slugify(troopName)}`;

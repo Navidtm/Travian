@@ -16,7 +16,7 @@ export function useApiStream<TMessage = Message, TResult = Result>(
 			const stream = await $fetch<ReadableStream>(url, {
 				method: startOptions.method ?? 'POST',
 				body: startOptions.body,
-				headers: startOptions.headers,
+				headers: startOptions.headers ?? {},
 				signal: controller.value.signal,
 				responseType: 'stream',
 			});

@@ -14,8 +14,8 @@ const select = async (id: string) => {
 	isOpen.value = false;
 	villageId.value = id;
 	await move();
-	await profile.updateData();
-	await profile.execute();
+	profile.execute();
+	profile.updateData();
 };
 
 const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
@@ -30,6 +30,7 @@ const { execute: move } = useFetch(() => `/api/village/move`, {
 });
 
 const renameVillage = async (newName: string) => {
+	isOpen.value = false;
 	const data = await $fetch('/api/village/edit-name', {
 		method: 'POST',
 		body: {

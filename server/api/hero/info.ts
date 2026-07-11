@@ -2,11 +2,11 @@ export default defineEventHandler(async event => {
 	const page = await launchTravian(event, '/hero_inventory.php');
 
 	const buttons = await page.locator('.regeneratebtn').count();
-	const isDead = buttons == 1;
+	const isDead = buttons === 1;
 
-	const power = !isDead
-		? await page.locator('.health').locator('span').textContent().then(Number)
-		: 0;
+	const power = isDead
+		? 0
+		: await page.locator('.health').locator('span').textContent().then(Number);
 
 	const resources = await page.locator('#setResource').locator('input').all();
 

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { formatDuration } from '~/composables/useVillageData';
-
 const props = defineProps<{
 	currentTask?: AutomationTask;
 	nextTask?: AutomationTask;

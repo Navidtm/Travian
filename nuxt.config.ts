@@ -36,12 +36,12 @@ export default defineNuxtConfig({
 	css: ['~/assets/css/main.css'],
 
 	runtimeConfig: {
-		baseURL: `https://${process.env.DOMAIN}/${process.env.SERVER_TYPE}`,
-		username: process.env.USER,
-		password: process.env.PASSWORD,
-		serverType: process.env.SERVER_TYPE,
-		domain: process.env.DOMAIN,
-		id: process.env.PHPSESSID,
+		baseURL: `https://${import.meta.env.DOMAIN}/${import.meta.env.SERVER_TYPE}`,
+		username: import.meta.env.USER,
+		password: import.meta.env.PASSWORD,
+		serverType: import.meta.env.SERVER_TYPE,
+		domain: import.meta.env.DOMAIN,
+		id: import.meta.env.PHPSESSID,
 	},
 
 	devServer: {

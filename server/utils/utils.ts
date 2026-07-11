@@ -3,15 +3,15 @@ export const extractNumber = (value?: string | null): number => {
 
 	const normalized = value
 		// فارسی → انگلیسی
-		.replace(/[۰-۹]/g, d => String(d.charCodeAt(0) - 1728))
+		.replace(/[۰-۹]/gu, d => String(d.charCodeAt(0) - 1728))
 		// عربی → انگلیسی
-		.replace(/[٠-٩]/g, d => String(d.charCodeAt(0) - 1584))
+		.replace(/[٠-٩]/gu, d => String(d.charCodeAt(0) - 1584))
 		// جداکننده اعشار فارسی
-		.replace(/٫/g, '.')
+		.replace(/٫/gu, '.')
 		// جداکننده هزارگان فارسی و انگلیسی
-		.replace(/[٬,]/g, '');
+		.replace(/[٬,]/gu, '');
 
-	const match = normalized.match(/-?\d+(?:\.\d+)?/);
+	const match = normalized.match(/-?\d+(?:\.\d+)?/u);
 
 	return match ? Number(match[0]) : 0;
 };

@@ -20,7 +20,7 @@ export default defineEventHandler(async event => {
 
 	const cookies = await page.context().cookies(`https://${domain}`);
 
-	const token = cookies.find(v => v.name == 'PHPSESSID')?.value ?? '';
+	const token = cookies.find(v => v.name === 'PHPSESSID')?.value ?? '';
 
 	page.close();
 

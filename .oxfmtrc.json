@@ -9,5 +9,12 @@
 	"jsdoc": true,
 	"useTabs": true,
 	"sortImports": true,
-	"sortTailwindcss": true
+	"sortTailwindcss": true,
+	"printWidth": 100,
+	"quoteProperties": "asNeeded",
+	"trailingComma": "all",
+	"bracketSpacing": true,
+	"bracketSameLine": false,
+	"objectWrap": "preserve",
+	"endOfLine": "lf"
 }

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { formatDuration } from '~/composables/useVillageData';
-
 defineProps<{ entries: BlacksmithState[] }>();
 
 defineEmits<{ (e: 'upgrade', troopName: string): void }>();

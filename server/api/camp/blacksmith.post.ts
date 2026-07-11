@@ -13,7 +13,7 @@ export default defineEventHandler(async event => {
 		while (level < 20) {
 			const buttons = await research.locator('button.build').all();
 
-			if (buttons.length == 1) {
+			if (buttons.length === 1) {
 				const sec = await getSecFromClock(research);
 
 				await buttons[0]!.click();
