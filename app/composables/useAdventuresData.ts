@@ -1,5 +1,3 @@
-import { computed, reactive, ref } from 'vue';
-
 export type AdventureDifficulty = 'easy' | 'medium' | 'hard';
 
 export interface Adventure {

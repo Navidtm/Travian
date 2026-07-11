@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
-
-import VillageNameEditor from '~/components/VillageNameEditor.vue';
-import { useVillageData, formatNumber } from '~/composables/useVillageData';
-
 const renameVillage = (id: string, newName: string) =>
 	new Promise(() => ({ success: true, error: 'string' })).then(v => ({
 		success: true,

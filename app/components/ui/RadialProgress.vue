@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-
 const {
 	size = 84,
 	strokeWidth = 8,

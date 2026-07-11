@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { formatNumber } from '~/composables/useVillageData';
-
 const props = defineProps<{
 	troops: TroopType[];
 	autoQueue: boolean;

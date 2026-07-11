@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { formatNumber } from '~/composables/useVillageData';
-
 defineProps<{
 	targets: FarmTarget[];
 }>();

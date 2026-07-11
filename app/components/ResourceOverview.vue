@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { capitalize } from 'es-toolkit';
 
-import { formatNumber } from '~/composables/useVillageData';
-
 const farm = useFarm();
 
 const resourses = ['wood', 'clay', 'iron', 'crop'] as const;

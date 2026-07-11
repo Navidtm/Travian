@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { formatDuration, formatNumber } from '~/composables/useVillageData';
-
 const props = defineProps<{ movement: Movement }>();
 
 const isExpanded = ref(false);

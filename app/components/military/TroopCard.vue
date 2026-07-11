@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { formatDuration, formatNumber } from '~/composables/useVillageData';
-
 const props = defineProps<{
 	troop: TroopDefinition;
 	/** Resolved via app/utils/assetMap.ts (getTroopImage); null src falls back to the icon below. */
