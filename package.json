@@ -35,6 +35,7 @@
 	},
 	"devDependencies": {
 		"@nuxt/test-utils": "^4.0.3",
+		"@playwright/test": "^1.61.1",
 		"@vue/test-utils": "^2.4.11",
 		"happy-dom": "^20.10.6",
 		"oxfmt": "^0.58.0",
