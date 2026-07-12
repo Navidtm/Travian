@@ -1,12 +1,9 @@
 export default defineEventHandler(async event => {
 	const page = await launchTravian(event, '/hero_inventory.php');
 
-	const buttons = await page.locator('.regeneratebtn').count();
-	const isDead = buttons === 1;
+	const isAlive = await page.locator('.regeneratebtn').isVisible();
 
-	const power = isDead
-		? 0
-		: await page.locator('.health').locator('span').textContent().then(Number);
+	const power = isAlive ? await getTextLocator(page, '.health span').then(Number) : 0;
 
 	const resources = await page.locator('#setResource').locator('input').all();
 
@@ -14,29 +11,19 @@ export default defineEventHandler(async event => {
 	const resourceHero =
 		(await resources[i]?.getAttribute('id').then(v => Number(v?.replace('resourceHero', '')))) ?? 0;
 
-	const experience =
-		(await page.locator('.experience').locator('.power').textContent().then(Number)) ?? 0;
+	const experience = await getTextLocator(page, '.experience .power').then(extractNumber);
 
 	await page.locator('.attribute.experience.tooltip').hover();
 
-	const experienceRemaining = await page
-		.locator('.text.elementText font')
-		.first()
-		.textContent()
-		.then(Number);
+	const experienceRemaining = await getFirstTextLocator(page, '.elementText font').then(
+		extractNumber,
+	);
 
 	const experienceForNextLevel = experienceRemaining + experience;
 	const experienceProgress = experience / experienceForNextLevel;
 
-	const level =
-		(await page.locator('.level').locator('.power').first().textContent().then(Number)) ?? 0;
-	const speed =
-		(await page
-			.locator('.level')
-			.locator('.speed')
-			.locator('span')
-			.textContent()
-			.then(extractNumber)) ?? 0;
+	const level = await getFirstTextLocator(page, '.level .power').then(extractNumber);
+	const speed = await getFirstTextLocator(page, '.level .speed span').then(extractNumber);
 
 	const { baseURL } = useRuntimeConfig(event);
 	const heroImage = await page
@@ -54,7 +41,7 @@ export default defineEventHandler(async event => {
 		experience,
 		level,
 		speed,
-		isAlive: !isDead,
+		isAlive,
 		heroImage,
 		power,
 		resourceBonusPercent: resourceHero,

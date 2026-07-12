@@ -1,6 +1,3 @@
-import { calculateSec } from '~~/server/utils/helpers/time';
-import { parseCoordinates } from '~~/server/utils/utils';
-
 const locationMap = new Map<string, AdventureLocation>([
 	['جنگل', 'Forest'],
 	['دشت', 'Plain'],
@@ -19,10 +16,10 @@ export default defineEventHandler(async event => {
 
 			const coordinates = await parseCoordinates(row);
 
-			const locationTxt = (await row.locator('.location').textContent())!.trim();
+			const locationTxt = await getTextLocator(row, '.location');
 			const location = locationMap.get(locationTxt)!;
 
-			const moveTime = (await row.locator('.moveTime').textContent())!.trim();
+			const moveTime = await getTextLocator(row, '.moveTime');
 
 			const difficultyClass = await row.locator('.difficulty img').getAttribute('class');
 

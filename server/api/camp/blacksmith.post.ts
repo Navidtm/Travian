@@ -1,5 +1,3 @@
-import { getSecFromClock } from '~~/server/utils/helpers/time';
-
 export default defineEventHandler(async event => {
 	const page = await launchTravian(event, '/build.php?id=33');
 	const researches = await page.locator('.research').all();
@@ -7,7 +5,8 @@ export default defineEventHandler(async event => {
 	console.log(`Upgrading ${researches.length} Troops`);
 
 	for (const research of researches) {
-		const title = (await research.locator('.title').first().locator('.level').textContent()) ?? '';
+		const title = await getTextLocator(research.locator('.title').first(), '.level');
+
 		let level = parseInt(title.replace('سطح', ''));
 
 		while (level < 20) {

@@ -11,7 +11,7 @@ export default defineEventHandler<farmSchemaType>(async event => {
 		await page.goto(farmRoute);
 
 		const title = page.locator('h1.titleInHeader').first();
-		const levelStr = (await title.locator('span.level').textContent()) ?? '';
+		const levelStr = await getTextLocator(title, 'span.level');
 		let level = parseInt(levelStr.replace('سطح', ''));
 
 		const template = `${type}-${id}`;

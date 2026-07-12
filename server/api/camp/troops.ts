@@ -13,13 +13,13 @@ export default defineEventHandler(async event => {
 		for (const troop of troops) {
 			const name = (await troop.locator('img.unit').first().getAttribute('alt')) ?? '';
 			const maxTrain = (await troop.locator('a').last().textContent()) ?? '';
-			const count = (await troop.locator('.furtherInfo').textContent()) ?? '0';
+			const count = await getTextLocator(troop, '.furtherInfo').then(extractNumber);
 
 			army.push({
 				name,
 				maxTrain,
 				id,
-				count: extractNumber(count),
+				count,
 			});
 		}
 	}

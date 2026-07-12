@@ -18,15 +18,11 @@ export const extractNumber = (value?: string | null): number => {
 	return match ? Number(match[0]) : 0;
 };
 
-export const parseCoordinates = (row: Locator): Promise<string> => {
-	return row
-		.locator('.coords')
-		.textContent()
-		.then(text =>
-			text!
-				.replace(/[()\s]/g, '')
-				.split('|')
-				.reverse()
-				.join('|'),
-		);
+export const parseCoordinates = async (row: Locator): Promise<string> => {
+	const text = await getTextLocator(row, '.coords');
+	return text!
+		.replace(/[()\s]/g, '')
+		.split('|')
+		.reverse()
+		.join('|');
 };

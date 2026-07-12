@@ -10,11 +10,11 @@ export default defineEventHandler(async event => {
 	const villageStates = await getVillages(page);
 	const villages = await Promise.all(
 		townList.map(async v => {
-			const name = await v.locator('.name a').textContent().then(String);
-			const isCapital = await v.locator('.mainVillage').count().then(Boolean);
-			const population = await v.locator('.inhabitants').textContent().then(Number);
-			const x = await v.locator('.coordinateX').textContent().then(extractNumber);
-			const y = await v.locator('.coordinateY').textContent().then(extractNumber);
+			const name = await getTextLocator(v, '.name a');
+			const isCapital = await getTextLocator(v, '.name .mainVillage').then(Boolean);
+			const population = await getTextLocator(v, '.name .inhabitants').then(Number);
+			const x = await getTextLocator(v, '.name .coordinateX').then(extractNumber);
+			const y = await getTextLocator(v, '.name .coordinateY').then(extractNumber);
 
 			return {
 				name,
@@ -40,11 +40,7 @@ export default defineEventHandler(async event => {
 			}) as unknown as Village,
 	);
 
-	const username = await page
-		.locator('#side_info .wrap')
-		.textContent()
-		.then(v => String(v).trim());
-
+	const username = await getTextLocator(page.locator('#side_info'), '.wrap');
 	await page.close();
 
 	return {
