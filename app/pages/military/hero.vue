@@ -1,6 +1,3 @@
-<script setup lang="ts">
-const { data: hero } = useFetch('/api/hero/info');
-</script>
 <template>
 	<div>
 		<header class="border-border bg-bg/95 sticky top-0 z-20 border-b backdrop-blur">
@@ -15,8 +12,8 @@ const { data: hero } = useFetch('/api/hero/info');
 			</div>
 		</header>
 
-		<main class="flex max-w-150 flex-col gap-5 px-4 py-5 lg:px-8 lg:py-6">
-			<HeroProfileCard :hero />
+		<main class="flex max-w-250 flex-col gap-5 space-y-4 px-4 py-5 lg:px-8 lg:py-6">
+			<HeroProfileCard />
 			<HeroAdventures />
 		</main>
 	</div>

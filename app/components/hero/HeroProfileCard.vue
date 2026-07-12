@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { formatNumber } from '~/composables/useVillageData';
-
-const { hero } = defineProps<{ hero?: Hero }>();
+const { data: hero, pending } = useFetch('/api/hero/info');
 
 const { execute: revive } = useFetch('/api/hero/revive', {
 	method: 'POST',
@@ -10,11 +8,12 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 </script>
 
 <template>
-	<section
-		v-if="hero"
-		class="rounded-card border-border bg-surface border p-4 sm:p-5"
-	>
-		<div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+	<section class="rounded-card border-border bg-surface border p-4 sm:p-5">
+		<SkeletonCard v-if="pending" />
+		<div
+			v-else-if="hero"
+			class="flex flex-col gap-4 sm:flex-row sm:items-center"
+		>
 			<!-- Portrait -->
 			<div class="relative mx-auto sm:mx-0">
 				<div
@@ -91,21 +90,25 @@ const { execute: revive } = useFetch('/api/hero/revive', {
 
 		<div class="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
 			<div class="border-border-soft bg-surface-2 rounded-lg border p-3 text-center">
-				<p class="text-text font-mono text-lg font-semibold">{{ hero.power }}</p>
+				<p class="text-text font-mono text-lg font-semibold">{{ hero?.power ?? '??' }}</p>
 				<p class="text-text-muted text-[10px]">Power</p>
 			</div>
 			<div class="border-border-soft bg-surface-2 rounded-lg border p-3 text-center">
-				<p class="text-text font-mono text-lg font-semibold">{{ hero.speed }}</p>
+				<p class="text-text font-mono text-lg font-semibold">{{ hero?.speed ?? '??' }}</p>
 				<p class="text-text-muted text-[10px]">Speed</p>
 			</div>
 			<div class="border-border-soft bg-surface-2 rounded-lg border p-3 text-center">
-				<p class="text-done font-mono text-lg font-semibold">+{{ hero.resourceBonusPercent }}%</p>
+				<p
+					v-if="hero"
+					class="text-done font-mono text-lg font-semibold"
+					>+{{ hero.resourceBonusPercent }}%</p
+				>
 				<p class="text-text-muted text-[10px]">Resource Bonus</p>
 			</div>
 		</div>
 
 		<button
-			v-if="!hero.isAlive"
+			v-if="hero && !hero.isAlive"
 			type="button"
 			class="bg-error mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium text-white transition-opacity hover:opacity-90"
 			@click="revive()"

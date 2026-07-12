@@ -1,14 +1,3 @@
-export type AdventureDifficulty = 'easy' | 'medium' | 'hard';
-
-export interface Adventure {
-	id: string;
-	coordinates: string;
-	distance: number;
-	durationSeconds: number;
-	difficulty: AdventureDifficulty;
-	rewardPreview: string;
-}
-
 export interface HeroTravelState {
 	isTraveling: boolean;
 	destination: string;
@@ -22,26 +11,20 @@ const availableAdventures = reactive<Adventure[]>([
 	{
 		id: 'adv1',
 		coordinates: '(41|3)',
-		distance: 19.4,
 		durationSeconds: 3600,
 		difficulty: 'medium',
-		rewardPreview: '~1,200 resources + item',
 	},
 	{
 		id: 'adv2',
 		coordinates: '(12|-8)',
-		distance: 8.1,
 		durationSeconds: 1500,
-		difficulty: 'easy',
-		rewardPreview: '~400 resources',
+		difficulty: 'hard',
 	},
 	{
 		id: 'adv3',
 		coordinates: '(55|22)',
-		distance: 34.0,
 		durationSeconds: 6200,
 		difficulty: 'hard',
-		rewardPreview: '~3,000 resources + rare item',
 	},
 ]);
 
@@ -55,7 +38,6 @@ const travelState = ref<HeroTravelState>({
 
 export function useAdventuresData() {
 	const currentAdventureCount = computed(() => availableAdventures.length);
-	const nextAdventure = computed(() => availableAdventures[0]);
 
 	const startAdventure = async (id: string) => {
 		const adventure = availableAdventures.find(a => a.id === id);
@@ -96,9 +78,7 @@ export function useAdventuresData() {
 	};
 
 	return {
-		availableAdventures,
 		currentAdventureCount,
-		nextAdventure,
 		travelState,
 		startAdventure,
 	};

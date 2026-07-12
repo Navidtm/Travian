@@ -1,3 +1,5 @@
+import { Locator } from 'playwright-core';
+
 export const extractNumber = (value?: string | null): number => {
 	if (!value) return 0;
 
@@ -14,4 +16,17 @@ export const extractNumber = (value?: string | null): number => {
 	const match = normalized.match(/-?\d+(?:\.\d+)?/u);
 
 	return match ? Number(match[0]) : 0;
+};
+
+export const parseCoordinates = (row: Locator): Promise<string> => {
+	return row
+		.locator('.coords')
+		.textContent()
+		.then(text =>
+			text!
+				.replace(/[()\s]/g, '')
+				.split('|')
+				.reverse()
+				.join('|'),
+		);
 };
