@@ -3,7 +3,7 @@ export default defineEventHandler(async event => {
 	await page.locator('a.signLink').first().click();
 	await page.waitForEvent('load');
 
-	const userId = page.url().split('=')[1];
+	const userId = page.url().split('=')[1]!;
 
 	const townList = await page.locator('#villages tbody tr').all();
 
@@ -11,10 +11,10 @@ export default defineEventHandler(async event => {
 	const villages = await Promise.all(
 		townList.map(async v => {
 			const name = await getTextLocator(v, '.name a');
-			const isCapital = await getTextLocator(v, '.name .mainVillage').then(Boolean);
-			const population = await getTextLocator(v, '.name .inhabitants').then(Number);
-			const x = await getTextLocator(v, '.name .coordinateX').then(extractNumber);
-			const y = await getTextLocator(v, '.name .coordinateY').then(extractNumber);
+			const isCapital = await v.locator('.mainVillage').count().then(Boolean);
+			const population = await getTextLocator(v, '.inhabitants').then(Number);
+			const x = await getTextLocator(v, '.coordinateX').then(extractNumber);
+			const y = await getTextLocator(v, '.coordinateY').then(extractNumber);
 
 			return {
 				name,
@@ -40,8 +40,9 @@ export default defineEventHandler(async event => {
 			}) as unknown as Village,
 	);
 
-	const username = await getTextLocator(page.locator('#side_info'), '.wrap');
+	const username = await getTextLocator(page, '#side_info .wrap');
 	await page.close();
+	console.log('naivd');
 
 	return {
 		userId,
