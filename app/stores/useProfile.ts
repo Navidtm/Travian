@@ -1,8 +1,5 @@
 export const useProfile = defineStore('profile', () => {
-	const { data, pending, error, execute } = useFetch('/api/profile', {
-		key: 'profile',
-		immediate: false,
-	});
+	const { data, pending, error, execute } = useApi('/api/profile');
 
 	if (!data.value && !pending.value && !error.value) {
 		void execute();

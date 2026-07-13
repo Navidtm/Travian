@@ -5,10 +5,11 @@ import { capitalize } from 'es-toolkit';
 
 const startingId = ref<string | null>(null);
 
-const { data: adventures, refresh } = useFetch('/api/hero/adventures');
-const { execute: startAdventure } = useFetch(() => '/api/hero/adventures?id=' + startingId.value, {
+const { data: adventures, refresh } = useApi('/api/hero/adventures', {
+	immediate: true,
+});
+const { execute: startAdventure } = useApi(() => '/api/hero/adventures?id=' + startingId.value, {
 	method: 'post',
-	immediate: false,
 });
 
 const onStart = async (id: string) => {

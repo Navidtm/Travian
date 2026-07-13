@@ -37,11 +37,9 @@ export default defineNuxtConfig({
 
 	runtimeConfig: {
 		baseURL: `https://${import.meta.env.DOMAIN}/${import.meta.env.SERVER_TYPE}`,
-		username: import.meta.env.USER,
 		password: import.meta.env.PASSWORD,
 		serverType: import.meta.env.SERVER_TYPE,
 		domain: import.meta.env.DOMAIN,
-		id: import.meta.env.PHPSESSID,
 	},
 
 	devServer: {
@@ -61,7 +59,7 @@ export default defineNuxtConfig({
 	vite: {
 		plugins: [tailwindcss()],
 		optimizeDeps: {
-			include: ['es-toolkit'],
+			include: ['@vue/devtools-core', '@vue/devtools-kit', 'es-toolkit'],
 		},
 	},
 

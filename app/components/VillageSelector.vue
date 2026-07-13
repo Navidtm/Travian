@@ -21,12 +21,11 @@ const select = async (id: string) => {
 const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
 
 const villageId = ref();
-const { execute: move } = useFetch(() => `/api/village/move`, {
+const { execute: move } = useApi(() => `/api/village/move`, {
 	onRequest: ({ options }) => {
 		options.body = { id: villageId.value };
 	},
 	method: 'POST',
-	immediate: false,
 });
 
 const renameVillage = async (newName: string) => {

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-const { data: hero, pending } = useFetch('/api/hero/info');
+const { data: hero, pending } = useApi('/api/hero/info', {
+	immediate: true,
+});
 
-const { execute: revive } = useFetch('/api/hero/revive', {
+const { execute: revive } = useApi('/api/hero/revive', {
 	method: 'POST',
-	immediate: false,
 });
 </script>
 

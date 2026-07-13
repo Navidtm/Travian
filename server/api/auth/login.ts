@@ -2,11 +2,10 @@ import { webkit } from 'playwright-core';
 import { loginPath } from '~~/shared/constants/common';
 
 export default defineEventHandler(async event => {
-	const { username, baseURL, password, domain } = useRuntimeConfig(event);
+	const { username } = await readBody(event);
+	const { baseURL, password, domain } = useRuntimeConfig(event);
 
-	const browser = await webkit.launch({
-		headless: false,
-	});
+	const browser = await webkit.launch({ headless: false });
 
 	const context = await browser.newContext();
 	const page = await context.newPage();
@@ -15,6 +14,13 @@ export default defineEventHandler(async event => {
 
 	await page.fill('input[name=user]', username);
 	await page.fill('input[name=pw]', password);
+
+	const image = await page.locator('table img').screenshot();
+	const code = await recognizeNumber(image);
+
+	await page.fill('input[name=captcha]', String(code));
+
+	await page.locator('.button-container').first().click();
 
 	await page.waitForURL(/dorf1/);
 
@@ -25,6 +31,7 @@ export default defineEventHandler(async event => {
 	page.close();
 
 	return {
+		page: page.url(),
 		token,
 	};
 });

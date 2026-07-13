@@ -2,16 +2,16 @@ import type { H3Event } from 'h3';
 import { webkit } from 'playwright-core';
 
 export const launchTravian = async (event: H3Event, path: string) => {
-	const { id } = useRuntimeConfig(event);
+	const id = getHeader(event, 'token');
 
 	if (!id) {
 		throw createError({
-			statusCode: 400,
+			statusCode: 401,
 			message: 'Token Header is required',
 		});
 	}
 
-	const { username, domain, baseURL } = useRuntimeConfig(event);
+	const { domain, baseURL } = useRuntimeConfig(event);
 
 	const browser = await webkit.launch();
 	const context = await browser.newContext();
@@ -22,10 +22,7 @@ export const launchTravian = async (event: H3Event, path: string) => {
 		else route.continue();
 	});
 
-	const cookies = {
-		COOKUSR: username,
-		PHPSESSID: id,
-	};
+	const cookies = { PHPSESSID: id };
 
 	await page.context().addCookies(
 		Object.entries(cookies).map(([name, value]) => ({
