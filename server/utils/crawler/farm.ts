@@ -83,7 +83,7 @@ export const getVillages = async (page: Page) => {
 				.then(v => v === 'active')
 				.catch(() => false);
 
-			const id = Number(href?.match(/newdid=(\d+)/)?.[1] ?? -1);
+			const id = String(href?.match(/newdid=(\d+)/)?.[1] ?? -1);
 			return { name, id, isActive };
 		}),
 	);
