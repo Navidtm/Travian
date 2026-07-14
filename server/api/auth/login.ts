@@ -5,10 +5,15 @@ export default defineEventHandler(async event => {
 	const { username } = await readBody(event);
 	const { baseURL, password, domain } = useRuntimeConfig(event);
 
-	const browser = await webkit.launch({ headless: false });
+	const browser = await webkit.launch();
 
 	const context = await browser.newContext();
 	const page = await context.newPage();
+
+	await page.route('**/*', route => {
+		if (['stylesheet', 'font'].includes(route.request().resourceType())) route.abort();
+		else route.continue();
+	});
 
 	await page.goto(baseURL + loginPath);
 
@@ -22,7 +27,15 @@ export default defineEventHandler(async event => {
 
 	await page.locator('.button-container').first().click();
 
-	await page.waitForURL(/dorf1/);
+	await page.waitForEvent('load');
+
+	if (page.url().includes('/login')) {
+		page.close();
+		createError({
+			statusCode: 401,
+			message: 'Can not login',
+		});
+	}
 
 	const cookies = await page.context().cookies(`https://${domain}`);
 
@@ -30,8 +43,5 @@ export default defineEventHandler(async event => {
 
 	page.close();
 
-	return {
-		page: page.url(),
-		token,
-	};
+	return { token };
 });

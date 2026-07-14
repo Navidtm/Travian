@@ -1,17 +1,13 @@
 <script setup lang="ts">
-const username = ref('');
-const token = useCookie<string>('token');
+const body = ref({ username: '' });
+const token = useCookie<string>('token', { refresh: true });
 
 const { pending, execute } = useApi('/api/auth/login', {
 	method: 'POST',
-
-	onRequest: ({ options }) => {
-		options.body = { username: username.value };
-	},
+	body,
 
 	onResponse: ({ response }) => {
-		// oxlint-disable-next-line no-underscore-dangle
-		token.value = response._data!.token;
+		if (response._data?.token) token.value = response._data.token;
 	},
 });
 
@@ -64,7 +60,7 @@ onUnmounted(() => {
 					<input
 						id="username"
 						ref="usernameInput"
-						v-model.trim="username"
+						v-model.trim="body.username"
 						type="text"
 						autocomplete="username"
 						placeholder="Enter your username"
@@ -74,7 +70,7 @@ onUnmounted(() => {
 
 					<button
 						type="submit"
-						:disabled="pending || !username"
+						:disabled="pending || !body.username"
 						class="bg-primary text-primary-foreground hover:bg-primary/90 flex h-11 w-full items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 active:scale-[0.98] disabled:scale-100 disabled:cursor-not-allowed disabled:opacity-50"
 					>
 						<svg

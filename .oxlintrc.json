@@ -15,6 +15,7 @@
 	},
 
 	"rules": {
+		"no-underscore-dangle": "allow",
 		"tailwindcss/no-unknown-classes": "error",
 		"tailwindcss/no-duplicate-classes": "error",
 		"tailwindcss/no-conflicting-classes": "error",
