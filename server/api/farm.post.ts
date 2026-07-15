@@ -1,54 +1,39 @@
-import { farmPath } from '~~/shared/constants/common';
-import type { farmSchemaType } from '~~/shared/schemas/farm.schema';
+import z from 'zod';
 
-export default defineEventHandler<farmSchemaType>(async event => {
+export default defineStreamEventHandler<ResourceField[]>(async event => {
 	const baseURL = getBaseURL(event);
-	const page = await launchTravian(event, farmPath);
-	const { items } = await readBody(event);
+	const page = await launchTravian(event, '/dorf1.php');
 
-	for (const { id, type } of items) {
-		const farmRoute = `${baseURL}/build.php?id=${id}`;
-		await page.goto(farmRoute);
+	let fields = await getFarmFields(page);
+	const levels = fields.map(v => v.currentLevel);
 
-		const title = page.locator('h1.titleInHeader').first();
-		const levelStr = await getTextLocator(title, 'span.level');
-		let level = parseInt(levelStr.replace('سطح', ''));
+	const schema = z.object({ target: z.int().optional().default(getBucket(levels)) });
+	let { target } = await readValidatedBody(event, schema.parse);
 
-		const template = `${type}-${id}`;
+	for (const { id } of fields) {
+		await page.goto(`${baseURL}/build.php?id=${id}`);
+		let level = await getTextLocator(page, 'h1.titleInHeader span.level').then(extractNumber);
 
-		let toLevel = 20;
-		if (level < 10) {
-			toLevel = 10;
-		} else if (level < 15) {
-			toLevel = 15;
-		}
+		while (level < target) {
+			const sec = await getSecFromClock(page);
 
-		if (level < toLevel) {
-			console.log(`Started Upgrading ${template}:${level} -> ${toLevel}`);
-		}
+			await page.locator('button.build').click();
+			await page.waitForEvent('load');
 
-		while (level < toLevel) {
-			try {
-				const sec = await getSecFromClock(page);
+			getFarmFields(page).then(event.emit);
 
-				await page.locator('.button-contents').click();
+			await sleep(sec * 1000);
 
-				console.log(`Upgrading ${level} -> ${level + 1} (${sec} sec)`);
-
-				await sleep(sec * 1000);
-
-				if (page.url().includes('/dorf1')) {
-					level++;
-					await page.goto(farmRoute);
-				}
-			} catch {
-				console.log('Got Error');
+			if (page.url().includes('/dorf1')) {
+				level++;
+				await page.goto(`${baseURL}/build.php?id=${id}`);
 			}
 		}
 	}
 
-	console.log('Finished All Upgrading');
+	await page.goto(`${baseURL}/dorf1.php`);
+	fields = await getFarmFields(page);
 	await page.close();
 
-	return {};
+	return fields;
 });

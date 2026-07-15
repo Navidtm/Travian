@@ -47,7 +47,7 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 					type="button"
 					class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
 					:disabled="totalPending === 0"
-					@click="$emit('upgrade-all')"
+					@click="farm.upgrade()"
 				>
 					<Icon name="mdi:arrow-up" />
 					Upgrade All

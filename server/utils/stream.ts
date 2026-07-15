@@ -1,9 +1,7 @@
 import type { H3Event } from 'h3';
 
-export type StreamEventHandlerContext<TMessage> = H3Event & { emit(message: TMessage): void };
-
-export function defineStreamEventHandler<TMessage = Message, TResult = Result>(
-	handler: (event: StreamEventHandlerContext<TMessage>) => TResult | Promise<TResult>,
+export function defineStreamEventHandler<T>(
+	handler: (event: H3Event & { emit(data: T): void }) => T | Promise<T>,
 ) {
 	return defineEventHandler(async event => {
 		const res = event.node.res;
@@ -12,18 +10,15 @@ export function defineStreamEventHandler<TMessage = Message, TResult = Result>(
 		res.setHeader('Cache-Control', 'no-cache');
 		res.setHeader('Connection', 'keep-alive');
 
-		const send = (payload: StreamEvent<TMessage, TResult>) => {
+		const send = (payload: StreamEvent<T>) => {
 			res.write(`data: ${JSON.stringify(payload)}\n\n`);
 		};
 
 		const ctx = Object.assign(event, {
-			emit(message: TMessage) {
-				send({
-					type: 'message',
-					data: message,
-				});
+			emit(data: T) {
+				send({ type: 'data', data });
 			},
-		}) satisfies StreamEventHandlerContext<TMessage>;
+		});
 
 		try {
 			const result = await handler(ctx);

@@ -1,6 +1,14 @@
-export function useApiStream<TMessage = Message, TResult = Result>(
-	options: UseApiStreamOptions<TMessage, TResult> = {},
-) {
+export interface StreamStartOptions {
+	body?: Record<string, unknown>;
+}
+
+export interface UseApiStreamOptions<T> {
+	onData?(message: T): void | Promise<void>;
+	onDone?(result: T): void | Promise<void>;
+	onError?(error: Error): void | Promise<void>;
+}
+
+export const useApiStream = <T>(options: UseApiStreamOptions<T> = {}) => {
 	const pending = ref(false);
 	const error = ref<Error>();
 
@@ -14,9 +22,8 @@ export function useApiStream<TMessage = Message, TResult = Result>(
 
 		try {
 			const stream = await $fetch<ReadableStream>(url, {
-				method: startOptions.method ?? 'POST',
+				method: 'POST',
 				body: startOptions.body,
-				headers: startOptions.headers ?? {},
 				signal: controller.value.signal,
 				responseType: 'stream',
 			});
@@ -27,7 +34,6 @@ export function useApiStream<TMessage = Message, TResult = Result>(
 
 			while (true) {
 				const { done, value } = await reader.read();
-
 				if (done) break;
 
 				buffer += value;
@@ -41,11 +47,11 @@ export function useApiStream<TMessage = Message, TResult = Result>(
 					const line = raw.split('\n').find(v => v.startsWith('data:'));
 					if (!line) continue;
 
-					const event = JSON.parse(line.slice(5).trim()) as StreamEvent<TMessage, TResult>;
+					const event = JSON.parse(line.slice(5).trim()) as StreamEvent<T>;
 
 					switch (event.type) {
-						case 'message':
-							await options.onMessage?.(event.data);
+						case 'data':
+							await options.onData?.(event.data);
 							break;
 
 						case 'done':
@@ -84,4 +90,4 @@ export function useApiStream<TMessage = Message, TResult = Result>(
 		pending: readonly(pending),
 		error: readonly(error),
 	};
-}
+};
