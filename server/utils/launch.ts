@@ -2,7 +2,7 @@ import type { H3Event } from 'h3';
 import { webkit } from 'playwright-core';
 
 export const launchTravian = async (event: H3Event, path: string) => {
-	const id = getHeader(event, 'token');
+	const id = getCookie(event, 'token');
 
 	if (!id) {
 		throw createError({
@@ -38,6 +38,7 @@ export const launchTravian = async (event: H3Event, path: string) => {
 	await page.goto(baseURL + path);
 
 	if (page.url().includes('/login')) {
+		deleteCookie(event, 'token', { path: '/' });
 		throw createError({
 			statusCode: 401,
 			message: 'You Are Not Login',

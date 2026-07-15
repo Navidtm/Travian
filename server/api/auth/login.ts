@@ -43,7 +43,13 @@ export default defineEventHandler(async event => {
 
 	const token = cookies.find(v => v.name === 'PHPSESSID')?.value ?? '';
 
+	setCookie(event, 'token', token, {
+		sameSite: 'lax',
+		path: '/',
+		maxAge: 60 * 60 * 3,
+	});
+
 	page.close();
 
-	return { token };
+	return;
 });

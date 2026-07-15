@@ -1,14 +1,9 @@
 <script setup lang="ts">
 const body = ref({ username: '' });
-const token = useCookie<string>('token', { refresh: true });
 
 const { pending, execute } = useApi('/api/auth/login', {
 	method: 'POST',
 	body,
-
-	onResponse: ({ response }) => {
-		if (response._data?.token) token.value = response._data.token;
-	},
 });
 
 const input = useTemplateRef('usernameInput');
