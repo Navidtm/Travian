@@ -25,15 +25,6 @@ export default defineNuxtConfig({
 		},
 	],
 
-	imports: {
-		presets: [
-			{
-				from: 'es-toolkit',
-				imports: ['esToolkit'],
-			},
-		],
-	},
-
 	devtools: { enabled: true },
 
 	css: ['~/assets/css/main.css'],
