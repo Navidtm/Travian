@@ -22,42 +22,10 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 					: 'text-text-muted hover:bg-surface-2 hover:text-text'
 			"
 		>
-			<svg
-				viewBox="0 0 24 24"
-				class="h-4 w-4 shrink-0"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.8"
-			>
-				<rect
-					x="3"
-					y="3"
-					width="8"
-					height="8"
-					rx="1.5"
-				/>
-				<rect
-					x="13"
-					y="3"
-					width="8"
-					height="8"
-					rx="1.5"
-				/>
-				<rect
-					x="3"
-					y="13"
-					width="8"
-					height="8"
-					rx="1.5"
-				/>
-				<rect
-					x="13"
-					y="13"
-					width="8"
-					height="8"
-					rx="1.5"
-				/>
-			</svg>
+			<Icon
+				name="material-symbols:dashboard-customize-outline-rounded"
+				class="shrink-0 text-lg!"
+			/>
 			Dashboard
 		</NuxtLink>
 

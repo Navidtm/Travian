@@ -36,6 +36,9 @@
 		"zod": "^4.4.3"
 	},
 	"devDependencies": {
+		"@iconify-json/lucide": "^1.2.117",
+		"@iconify-json/material-symbols": "^1.2.84",
+		"@iconify-json/mdi": "^1.2.3",
 		"@nuxt/test-utils": "^4.0.3",
 		"@playwright/test": "^1.61.1",
 		"@vue/test-utils": "^2.4.11",

@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import tailwindcss from '@tailwindcss/vite';
+import { createResolver } from 'nuxt/kit';
+
+const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
 	dev: true,
@@ -72,6 +75,22 @@ export default defineNuxtConfig({
 		optimizeDeps: {
 			include: ['@vue/devtools-core', '@vue/devtools-kit', 'es-toolkit'],
 		},
+	},
+
+	icon: {
+		mode: 'css',
+		cssLayer: 'base',
+		provider: 'none',
+		clientBundle: {
+			scan: true,
+		},
+		size: '16px',
+		customCollections: [
+			{
+				prefix: 'icon',
+				dir: resolve('./assets/icons'),
+			},
+		],
 	},
 
 	fonts: {

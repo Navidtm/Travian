@@ -25,16 +25,10 @@ const levelMeta: Record<LogLevel, { color: string; label: string }> = {
 					entries.length
 				}}</span>
 			</div>
-			<svg
-				viewBox="0 0 24 24"
-				class="text-text-muted h-4 w-4 transition-transform"
+			<Icon
+				name="material-symbols:keyboard-arrow-down-rounded"
 				:class="{ '-rotate-180': !isOpen }"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-			>
-				<path d="m6 9 6 6 6-6" />
-			</svg>
+			/>
 		</button>
 
 		<div

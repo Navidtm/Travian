@@ -49,15 +49,7 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 					:disabled="totalPending === 0"
 					@click="$emit('upgrade-all')"
 				>
-					<svg
-						viewBox="0 0 24 24"
-						class="h-3.5 w-3.5"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="M12 19V5M5 12l7-7 7 7" />
-					</svg>
+					<Icon name="mdi:arrow-up" />
 					Upgrade All
 				</button>
 			</div>
