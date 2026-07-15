@@ -47,11 +47,8 @@ export default defineNuxtConfig({
 		port: 3001,
 	},
 
-	future: {
-		compatibilityVersion: 5,
-	},
-
 	experimental: {
+		viteEnvironmentApi: true,
 		typedPages: true,
 		asyncContext: true,
 		buildCache: true,
