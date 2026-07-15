@@ -11,7 +11,8 @@ export const launchTravian = async (event: H3Event, path: string) => {
 		});
 	}
 
-	const { domain, baseURL } = useRuntimeConfig(event);
+	const baseURL = getBaseURL(event);
+	const { domain } = useRuntimeConfig(event);
 
 	const browser = await webkit.launch();
 	const context = await browser.newContext();

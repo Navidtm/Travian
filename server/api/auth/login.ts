@@ -3,7 +3,9 @@ import { loginPath } from '~~/shared/constants/common';
 
 export default defineEventHandler(async event => {
 	const { username } = await readBody(event);
-	const { baseURL, password, domain } = useRuntimeConfig(event);
+
+	const baseURL = getBaseURL(event);
+	const { password, domain } = useRuntimeConfig(event);
 
 	const browser = await webkit.launch();
 

@@ -2,7 +2,7 @@ import { villagePath } from '~~/shared/constants/common';
 import { BuildingList, max5Levels, BuildingAddress, villageId } from '~~/shared/constants/village';
 
 export default defineEventHandler(async event => {
-	const { baseURL } = useRuntimeConfig(event);
+	const baseURL = getBaseURL(event);
 	const page = await launchTravian(event, villagePath);
 
 	const levels = await getBuildings(page);

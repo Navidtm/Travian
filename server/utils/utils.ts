@@ -1,3 +1,4 @@
+import type { H3Event } from 'h3';
 import { Locator } from 'playwright-core';
 
 export const extractNumber = (value?: string | null): number => {
@@ -25,4 +26,21 @@ export const parseCoordinates = async (row: Locator): Promise<string> => {
 		.split('|')
 		.reverse()
 		.join('|');
+};
+
+type WeekType = 'ts1' | 'ts2';
+
+const REFERENCE = new Date('2025-07-11T00:00:00');
+
+const WEEK = 7 * 24 * 60 * 60 * 1000;
+
+export const getTSWeek = (date = new Date()): WeekType => {
+	const weeks = Math.floor((date.getTime() - REFERENCE.getTime()) / WEEK);
+
+	return weeks % 2 === 0 ? 'ts1' : 'ts2';
+};
+
+export const getBaseURL = (e: H3Event) => {
+	const { domain } = useRuntimeConfig(e);
+	return `https://${domain}/${getTSWeek()}`;
 };

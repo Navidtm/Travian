@@ -39,9 +39,7 @@ export default defineNuxtConfig({
 	css: ['~/assets/css/main.css'],
 
 	runtimeConfig: {
-		baseURL: `https://${import.meta.env.DOMAIN}/${import.meta.env.SERVER_TYPE}`,
 		password: import.meta.env.PASSWORD,
-		serverType: import.meta.env.SERVER_TYPE,
 		domain: import.meta.env.DOMAIN,
 	},
 

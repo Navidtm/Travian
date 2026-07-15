@@ -25,7 +25,7 @@ export default defineEventHandler(async event => {
 	const level = await getFirstTextLocator(page, '.level .power').then(extractNumber);
 	const speed = await getFirstTextLocator(page, '.level .speed span').then(extractNumber);
 
-	const { baseURL } = useRuntimeConfig(event);
+	const baseURL = getBaseURL(event);
 	const heroImage = await page
 		.locator('#heroImage')
 		.getAttribute('src')

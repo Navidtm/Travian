@@ -1,7 +1,7 @@
 export default defineEventHandler(async event => {
 	const army = [];
 	const page = await launchTravian(event, `/dorf2.php`);
-	const { baseURL } = useRuntimeConfig(event);
+	const baseURL = getBaseURL(event);
 
 	const levels = await getBuildings(page);
 	const troopsIdList = [35, 27, 29].filter(id => levels.map(v => v.slot).includes(id));
