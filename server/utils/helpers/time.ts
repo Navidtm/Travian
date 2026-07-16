@@ -12,7 +12,7 @@ export const calculateSec = (clock: string) =>
 	);
 
 export const getSecFromClock = async (locator: Locator | Page) => {
-	const clock = await locator.locator('.clocks').first().innerText();
+	const clock = (await locator.locator('span.clocks').first().textContent()) ?? '0';
 
 	return calculateSec(clock);
 };

@@ -20,12 +20,11 @@ export default defineStreamEventHandler<ResourceField[]>(async event => {
 			await page.locator('button.build').click();
 			await page.waitForEvent('load');
 
-			getFarmFields(page).then(event.emit);
-
 			await sleep(sec * 1000);
 
 			if (page.url().includes('/dorf1')) {
 				level++;
+				getFarmFields(page).then(event.emit);
 				await page.goto(`${baseURL}/build.php?id=${id}`);
 			}
 		}

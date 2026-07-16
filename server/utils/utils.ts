@@ -44,3 +44,17 @@ export const getBaseURL = (e: H3Event) => {
 	const { domain } = useRuntimeConfig(e);
 	return `https://${domain}/${getTSWeek()}`;
 };
+
+export const max5Levels: BuildingName[] = [
+	'Bakery',
+	'Grain_Mill',
+	'Iron_Foundry',
+	'Brickyard',
+	'Sawmill',
+];
+
+export const getMaxLevel = (name: BuildingName) => {
+	if (name === 'Cranny') return 10;
+	if (max5Levels.includes(name)) return 5;
+	return 20;
+};

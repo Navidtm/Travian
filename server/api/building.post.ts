@@ -1,60 +1,75 @@
 import { villagePath } from '~~/shared/constants/common';
-import { BuildingList, max5Levels, BuildingAddress, villageId } from '~~/shared/constants/village';
+import { BuildingList, BuildingAddress, villageId } from '~~/shared/constants/village';
 
-export default defineEventHandler(async event => {
+import { getMaxLevel } from '../utils/utils';
+
+export default defineStreamEventHandler<Building[]>(async event => {
 	const baseURL = getBaseURL(event);
 	const page = await launchTravian(event, villagePath);
 
-	const levels = await getBuildings(page);
+	let buildings = await getBuildings(page);
 
-	const toLevel = 10;
+	const target = 20;
 
 	for (const name of BuildingList) {
-		const id = BuildingAddress[name];
+		const slot = BuildingAddress[name]!;
+		const id = villageId[name];
 
-		let currentLevel = levels.find(v => v.slot === id)?.currentLevel ?? 0;
-		const template = `${name}(id: ${id})`;
-		console.log(`Started upgrading ${template} from ${currentLevel} to ${toLevel}`);
+		let level = buildings.find(v => v.slot === slot)?.currentLevel ?? 0;
 
-		while (currentLevel < toLevel) {
-			if (max5Levels.includes(name) && currentLevel === 5) break;
+		while (level < target) {
+			if (level == getMaxLevel(name)) break;
 
-			await page.goto(`${baseURL}/build.php?id=${id}`);
+			await page.goto(`${baseURL}/build.php?id=${slot}`);
 
-			if (currentLevel === 0) {
-				const buttons = await page.locator('button.build').all();
+			if (level === 0) {
+				const button = page.locator('button.build').first();
 
-				for (const button of buttons) {
-					const onclickAttr = await button.getAttribute('onclick');
+				const attr = (await button.getAttribute('onclick')) ?? '';
+				const c = attr.match(/[?&]c=([^&'"]+)/)?.[1];
 
-					const iid = onclickAttr?.split(/'/)[1]?.match(/a=(\d+)/)?.[1] ?? 0;
-
-					if (villageId[name] === iid) {
-						console.log(`Building ${template}`);
-						await button.click();
-						break;
-					}
-				}
+				await page.goto(`${baseURL}/dorf2.php?a=${id}&id=${slot}&c=${c}`);
+				getBuildings(page).then(event.emit);
 			} else {
 				if (name === 'Embassy') break;
 
 				const button = page.locator('button.build').first();
-				const sec = await getSecFromClock(page);
+
+				const etaSeconds = await getSecFromClock(page);
 
 				await button.click();
-				await sleep(sec * 1000);
+				await page.waitForEvent('load');
 
-				console.log(`Upgrading ${name} to ${currentLevel + 1}(${sec} sec)`);
+				buildings = await getBuildings(page);
+
+				const buildingIdx = buildings.findIndex(v => v.name === name);
+
+				buildings[buildingIdx] = {
+					etaSeconds,
+					currentLevel: level,
+					status: 'upgrading',
+					targetLevel: 20,
+					name,
+					maxLevel: getMaxLevel(name),
+					id,
+					slot,
+				};
+
+				event.emit(buildings);
+
+				await sleep(etaSeconds * 1000);
 			}
 
 			if (page.url().includes('/dorf2')) {
-				currentLevel++;
+				level++;
 			}
 		}
 	}
 
-	console.log('Finished upgrading');
+	await page.goto(`${baseURL}/dorf2.php`);
+	buildings = await getBuildings(page);
+
 	await page.close();
 
-	return {};
+	return buildings;
 });

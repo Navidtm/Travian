@@ -123,6 +123,7 @@ export const villageId: Record<BuildingName, number> = {
 	Trade_Office: 28,
 	Great_Barracks: 29,
 	Great_Stable: 30,
+	Wall: 31,
 	Stonemason_Lodge: 32,
 	Brewery: 33,
 	Trapper: 36,
@@ -131,20 +132,11 @@ export const villageId: Record<BuildingName, number> = {
 	Great_Granary: 39,
 	World_Wonder: 41,
 	Horse_Drinking_Trough: 41,
-	Wall: -1,
 };
 
 export const buildingMap = Object.fromEntries(
 	Object.entries(villageId).map(([building, id]) => [id, building]),
 ) as Record<number, BuildingName>;
-
-export const max5Levels: BuildingName[] = [
-	'Bakery',
-	'Grain_Mill',
-	'Iron_Foundry',
-	'Brickyard',
-	'Sawmill',
-];
 
 export const troopMap = {
 	uhero: 'hero',

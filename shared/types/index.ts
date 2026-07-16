@@ -29,7 +29,7 @@ export interface ResourceField {
 export type BuildingStatus = 'idle' | 'queued' | 'upgrading' | 'target-reached' | 'error';
 
 export interface Building {
-	id: string;
+	id: number;
 	name: string;
 	slot: number;
 	currentLevel: number;

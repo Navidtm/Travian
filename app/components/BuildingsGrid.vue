@@ -15,6 +15,14 @@ const activeCount = computed(
 				<h2 class="text-text text-sm font-semibold">Buildings</h2>
 				<p class="text-text-muted text-[12px]"> {{ activeCount }} in automation queue </p>
 			</div>
+			<button
+				type="button"
+				class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+				@click="building.upgrade()"
+			>
+				<Icon name="mdi:arrow-up" />
+				Upgrade All
+			</button>
 		</div>
 
 		<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
