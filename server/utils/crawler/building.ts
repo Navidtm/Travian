@@ -40,6 +40,7 @@ export const getBuildings = async (page: Page): Promise<Building[]> => {
 					slot: BuildingAddress[name]!,
 					status: level === getMaxLevel(name) ? 'target-reached' : 'idle',
 					targetLevel: getMaxLevel(name),
+					etaSeconds: 0,
 				} satisfies Building,
 			];
 		}),
@@ -56,6 +57,7 @@ export const getBuildings = async (page: Page): Promise<Building[]> => {
 			maxLevel: 20,
 			slot: 40,
 			targetLevel: 20,
+			etaSeconds: 0,
 		});
 	}
 

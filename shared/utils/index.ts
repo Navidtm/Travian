@@ -1,4 +1,4 @@
-export const getBucket = (numbers: readonly number[]): 5 | 10 | 20 => {
+export const getBucket = (numbers: readonly number[]): 5 | 10 | 15 | 20 => {
 	if (numbers.length === 0) {
 		throw new Error('The array must contain at least one number.');
 	}
@@ -6,6 +6,7 @@ export const getBucket = (numbers: readonly number[]): 5 | 10 | 20 => {
 
 	if (min < 5) return 5;
 	if (min < 10) return 10;
+	if (min < 15) return 15;
 
 	return 20;
 };

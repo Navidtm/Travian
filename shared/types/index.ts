@@ -36,7 +36,7 @@ export interface Building {
 	targetLevel: number;
 	maxLevel: number;
 	status: BuildingStatus;
-	etaSeconds?: number;
+	etaSeconds: number;
 }
 
 export type TaskStatus = 'running' | 'queued' | 'paused' | 'error' | 'done';

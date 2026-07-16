@@ -48,7 +48,7 @@ export default defineStreamEventHandler<Building[]>(async event => {
 					etaSeconds,
 					currentLevel: level,
 					status: 'upgrading',
-					targetLevel: 20,
+					targetLevel: getMaxLevel(name),
 					name,
 					maxLevel: getMaxLevel(name),
 					id,
