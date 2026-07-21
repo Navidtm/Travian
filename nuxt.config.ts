@@ -46,7 +46,7 @@ export default defineNuxtConfig({
 		headNext: true,
 		lazyHydration: true,
 		componentIslands: 'auto',
-		watcher: 'parcel',
+		watcher: 'builder',
 		typescriptPlugin: true,
 	},
 
@@ -59,7 +59,7 @@ export default defineNuxtConfig({
 	vite: {
 		plugins: [tailwindcss()],
 		optimizeDeps: {
-			include: ['@vue/devtools-core', '@vue/devtools-kit', 'es-toolkit'],
+			include: ['es-toolkit'],
 		},
 	},
 
