@@ -1,4 +1,4 @@
-import z from 'zod';
+import { farmUpgradeBodySchema } from '~~/server/schema/farm.post';
 
 export default defineStreamEventHandler<ResourceField[]>(async event => {
 	const baseURL = getBaseURL(event);
@@ -7,8 +7,7 @@ export default defineStreamEventHandler<ResourceField[]>(async event => {
 	let fields = await getFarmFields(page);
 	const levels = fields.map(v => v.currentLevel);
 
-	const schema = z.object({ target: z.int().optional().default(getBucket(levels)) });
-	let { target } = await readValidatedBody(event, schema.parse);
+	let { target = getBucket(levels) } = await readValidatedBody(event, farmUpgradeBodySchema.parse);
 
 	for (const { id, currentLevel } of fields) {
 		let level = currentLevel;

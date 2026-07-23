@@ -14,5 +14,6 @@ export default defineEventHandler(async event => {
 			level: parseInt(level.replace('سطح', '')),
 		});
 	}
+	await page.close();
 	return x;
 });

@@ -1,9 +1,11 @@
+import { profileBodySchema } from '~~/server/schema/profile.post';
+
 export default defineEventHandler<{
 	body: {
 		townNames: string[];
 	};
 }>(async event => {
-	const { townNames } = await readBody(event);
+	const { townNames } = await readValidatedBody(event, profileBodySchema.parse);
 	const page = await launchTravian(event, '/spieler.php?s=1');
 
 	const textarea1 = page.locator('textarea[name=be1]');

@@ -10,18 +10,21 @@ export interface HeroTravelState {
 const availableAdventures = reactive<Adventure[]>([
 	{
 		id: 'adv1',
+		location: 'Forest',
 		coordinates: '(41|3)',
 		durationSeconds: 3600,
 		difficulty: 'medium',
 	},
 	{
 		id: 'adv2',
+		location: 'Plain',
 		coordinates: '(12|-8)',
 		durationSeconds: 1500,
 		difficulty: 'hard',
 	},
 	{
 		id: 'adv3',
+		location: 'Mountain',
 		coordinates: '(55|22)',
 		durationSeconds: 6200,
 		difficulty: 'hard',

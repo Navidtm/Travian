@@ -93,18 +93,18 @@ export async function replaceWithWhite(buffer: Buffer): Promise<Buffer> {
 
 export async function recognizeNumber(image: Buffer): Promise<number> {
 	const worker = await createWorker('eng');
+	try {
+		await worker.setParameters({
+			tessedit_char_whitelist: '0123456789',
+			tessedit_pageseg_mode: PSM.SINGLE_WORD,
+		});
 
-	await worker.setParameters({
-		tessedit_char_whitelist: '0123456789',
-		tessedit_pageseg_mode: PSM.SINGLE_WORD,
-	});
+		const processed = await replaceWithWhite(image);
+		const { data } = await worker.recognize(processed);
+		const text = data.text.replace(/\D/g, '');
 
-	const processed = await replaceWithWhite(image);
-	const { data } = await worker.recognize(processed);
-
-	const text = data.text.replace(/\D/g, '');
-
-	console.log('Confidence:', data.confidence);
-
-	return Number(text);
+		return Number(text);
+	} finally {
+		await worker.terminate();
+	}
 }

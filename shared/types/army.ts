@@ -1,7 +1,7 @@
 // New types for the Army / Movements / Hero components.
 // Kept in a separate file so the existing app/types/index.ts is untouched.
 
-export type Tribe = 'Romans' | 'Gauls' | 'Teutons';
+export type Tribe = 'romans' | 'gauls' | 'teutons';
 
 export type MovementType =
 	| 'attack'

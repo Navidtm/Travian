@@ -1,5 +1,5 @@
 import type { H3Event } from 'h3';
-import { Locator } from 'playwright-core';
+import type { Locator } from 'playwright-core';
 
 export const extractNumber = (value?: string | null): number => {
 	if (!value) return 0;

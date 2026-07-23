@@ -60,8 +60,6 @@ const tribeLabel: Record<Tribe, string> = {
 	romans: 'Romans',
 	gauls: 'Gauls',
 	teutons: 'Teutons',
-	egyptians: 'Egyptians',
-	huns: 'Huns',
 };
 </script>
 
