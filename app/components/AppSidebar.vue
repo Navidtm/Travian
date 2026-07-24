@@ -36,15 +36,10 @@ const isMilitary = computed(() => route.path.startsWith('/military'));
 		<div
 			class="text-text-muted flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium"
 		>
-			<svg
-				viewBox="0 0 24 24"
+			<Icon
 				class="h-4 w-4 shrink-0"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.8"
-			>
-				<path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
-			</svg>
+				name="icon:military"
+			/>
 			<span :class="isMilitary ? 'text-text' : ''">Military</span>
 		</div>
 

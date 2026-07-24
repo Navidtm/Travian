@@ -68,17 +68,11 @@ onUnmounted(() => {
 						:disabled="pending || !body.username"
 						class="bg-primary text-primary-foreground hover:bg-primary/90 flex h-11 w-full items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 active:scale-[0.98] disabled:scale-100 disabled:cursor-not-allowed disabled:opacity-50"
 					>
-						<svg
+						<Icon
 							v-if="pending"
-							viewBox="0 0 24 24"
 							class="size-4 animate-spin"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path d="M20 11A8 8 0 1 0 18 16" />
-							<path d="M20 5v6h-6" />
-						</svg>
+							name="icon:refresh"
+						/>
 
 						<Transition
 							mode="out-in"

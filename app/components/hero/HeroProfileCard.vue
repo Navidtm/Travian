@@ -31,22 +31,12 @@ const { execute: revive } = useApi('/api/hero/revive', {
 					<div v-if="hero.heroImage">
 						<img :src="hero.heroImage" />
 					</div>
-					<svg
+					<Icon
 						v-else
-						viewBox="0 0 24 24"
 						class="h-11 w-11"
 						:class="hero.isAlive ? 'text-run' : 'text-error'"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.6"
-					>
-						<circle
-							cx="12"
-							cy="8"
-							r="3.6"
-						/>
-						<path d="M5 20a7 7 0 0 1 14 0" />
-					</svg>
+						name="icon:hero-profile"
+					/>
 				</div>
 				<span
 					class="bg-surface-3 text-text absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full px-2 py-0.5 font-mono text-[10px] font-semibold"

@@ -110,16 +110,10 @@ onBeforeUnmount(() => {
 					{{ adventure.location }}
 				</p>
 				<div class="flex gap-2">
-					<svg
-						viewBox="0 0 24 24"
+					<Icon
 						class="h-4 w-4"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.8"
-					>
-						<path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
-						<path d="M12 8v4l3 2" />
-					</svg>
+						name="icon:adventure"
+					/>
 					<div
 						class="flex items-center justify-between font-mono text-[11px]"
 						:class="adventureColor(adventure)"
@@ -140,17 +134,11 @@ onBeforeUnmount(() => {
 					:disabled="startingId === adventure.id"
 					@click="onStart(adventure.id)"
 				>
-					<svg
+					<Icon
 						v-if="startingId === adventure.id"
-						viewBox="0 0 24 24"
 						class="h-3.5 w-3.5 animate-spin"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="M20 11A8 8 0 1 0 18 16" />
-						<path d="M20 5v6h-6" />
-					</svg>
+						name="icon:refresh"
+					/>
 					Start Adventure
 				</button>
 			</article>

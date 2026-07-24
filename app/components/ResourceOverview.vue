@@ -28,54 +28,26 @@ const items = computed(() =>
 				class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
 				:style="{ backgroundColor: item.soft, color: item.color }"
 			>
-				<svg
+				<Icon
 					v-if="item.key === 'wood'"
-					viewBox="0 0 24 24"
 					class="h-4 w-4"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<rect
-						x="3"
-						y="9"
-						width="18"
-						height="6"
-						rx="1.5"
-					/>
-					<path d="M3 12h18" />
-				</svg>
-				<svg
+					name="icon:wood"
+				/>
+				<Icon
 					v-else-if="item.key === 'clay'"
-					viewBox="0 0 24 24"
 					class="h-4 w-4"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<path d="M12 3c3 3.5 6 7 6 10.5A6 6 0 0 1 6 13.5C6 10 9 6.5 12 3Z" />
-				</svg>
-				<svg
+					name="icon:clay"
+				/>
+				<Icon
 					v-else-if="item.key === 'iron'"
-					viewBox="0 0 24 24"
 					class="h-4 w-4"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
-					<path d="M3 7l9 5 9-5M12 12v10" />
-				</svg>
-				<svg
+					name="icon:iron"
+				/>
+				<Icon
 					v-else
 					class="h-4 w-4"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<path d="M12 3v10M12 3c-2 1.5-3 3-3 5s1 2.5 3 3M12 3c2 1.5 3 3 3 5s-1 2.5-3 3M12 13v8" />
-				</svg>
+					name="icon:crop"
+				/>
 			</span>
 			<div class="min-w-0">
 				<p class="text-text truncate font-mono text-sm leading-tight font-semibold">
@@ -93,20 +65,10 @@ const items = computed(() =>
 				class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
 				:style="{ backgroundColor: 'var(--color-pop-soft)', color: 'var(--color-pop)' }"
 			>
-				<svg
-					viewBox="0 0 24 24"
+				<Icon
 					class="h-4 w-4"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<circle
-						cx="12"
-						cy="8"
-						r="3.2"
-					/>
-					<path d="M5.5 20a6.5 6.5 0 0 1 13 0" />
-				</svg>
+					name="icon:population"
+				/>
 			</span>
 			<div class="min-w-0">
 				<p class="text-text truncate font-mono text-sm leading-tight font-semibold">

@@ -60,16 +60,11 @@ const forGroup = (key: MovementGroupKey) => movements.filter(m => m.group === ke
 							>{{ groupCounts[group.key] }}</span
 						>
 					</span>
-					<svg
-						viewBox="0 0 24 24"
+					<Icon
 						class="text-text-muted h-4 w-4 transition-transform"
 						:class="{ 'rotate-180': expanded[group.key] }"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="m6 9 6 6 6-6" />
-					</svg>
+						name="icon:chevron-down"
+					/>
 				</button>
 
 				<div

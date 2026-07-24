@@ -76,87 +76,36 @@ const tribeLabel: Record<Tribe, string> = {
 				class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
 				:style="{ backgroundColor: meta.color + '1a', color: meta.color }"
 			>
-				<svg
+				<Icon
 					v-if="meta.icon === 'sword'"
-					viewBox="0 0 24 24"
 					class="h-5 w-5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<path d="M14.5 2 22 9.5 12 19.5 9 21l1.5-3L20.5 8" />
-					<path d="M3 21l4-4" />
-				</svg>
-				<svg
+					name="icon:sword"
+				/>
+				<Icon
 					v-else-if="meta.icon === 'shield'"
-					viewBox="0 0 24 24"
 					class="h-5 w-5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z" />
-				</svg>
-				<svg
+					name="icon:shield"
+				/>
+				<Icon
 					v-else-if="meta.icon === 'hero'"
-					viewBox="0 0 24 24"
 					class="h-5 w-5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<circle
-						cx="12"
-						cy="8"
-						r="3.5"
-					/>
-					<path d="M5 20a7 7 0 0 1 14 0" />
-				</svg>
-				<svg
+					name="icon:hero-mark"
+				/>
+				<Icon
 					v-else-if="meta.icon === 'cart'"
-					viewBox="0 0 24 24"
 					class="h-5 w-5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<circle
-						cx="9"
-						cy="20"
-						r="1.4"
-					/>
-					<circle
-						cx="18"
-						cy="20"
-						r="1.4"
-					/>
-					<path d="M3 4h2l2.2 11h11l1.8-7H6.4" />
-				</svg>
-				<svg
+					name="icon:cart"
+				/>
+				<Icon
 					v-else-if="meta.icon === 'flag'"
-					viewBox="0 0 24 24"
 					class="h-5 w-5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<path d="M5 21V4h13l-3 4 3 4H5" />
-				</svg>
-				<svg
+					name="icon:flag"
+				/>
+				<Icon
 					v-else
-					viewBox="0 0 24 24"
 					class="h-5 w-5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z" />
-					<circle
-						cx="12"
-						cy="12"
-						r="2.5"
-					/>
-				</svg>
+					name="icon:eye"
+				/>
 			</span>
 
 			<div class="min-w-0 flex-1">
@@ -170,17 +119,10 @@ const tribeLabel: Record<Tribe, string> = {
 						v-if="movement.hasHero"
 						class="inline-flex items-center gap-1 rounded-full bg-purple-400/10 px-2 py-0.5 text-[10px] font-medium text-purple-400"
 					>
-						<svg
-							viewBox="0 0 24 24"
+						<Icon
 							class="h-2.5 w-2.5"
-							fill="currentColor"
-						>
-							<circle
-								cx="12"
-								cy="12"
-								r="10"
-							/>
-						</svg>
+							name="icon:dot"
+						/>
 						Hero
 					</span>
 				</div>
@@ -197,16 +139,11 @@ const tribeLabel: Record<Tribe, string> = {
 				</span>
 			</div>
 
-			<svg
-				viewBox="0 0 24 24"
+			<Icon
 				class="text-text-muted h-4 w-4 shrink-0 transition-transform"
 				:class="{ 'rotate-180': isExpanded }"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-			>
-				<path d="m6 9 6 6 6-6" />
-			</svg>
+				name="icon:chevron-down"
+			/>
 		</button>
 
 		<div class="px-3.5 pb-3.5">

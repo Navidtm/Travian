@@ -45,28 +45,10 @@ defineEmits<{
 						class="border-border bg-surface text-text hover:bg-surface-3 flex flex-1 items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
 						@click="$emit('pause', op.id)"
 					>
-						<svg
-							viewBox="0 0 24 24"
+						<Icon
 							class="h-3.5 w-3.5"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<rect
-								x="6"
-								y="4"
-								width="4"
-								height="16"
-								rx="1"
-							/>
-							<rect
-								x="14"
-								y="4"
-								width="4"
-								height="16"
-								rx="1"
-							/>
-						</svg>
+							name="icon:pause"
+						/>
 						Pause
 					</button>
 					<button
@@ -75,15 +57,10 @@ defineEmits<{
 						class="border-border bg-surface text-text hover:bg-surface-3 flex flex-1 items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
 						@click="$emit('resume', op.id)"
 					>
-						<svg
-							viewBox="0 0 24 24"
+						<Icon
 							class="h-3.5 w-3.5"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path d="M6 4l14 8-14 8V4Z" />
-						</svg>
+							name="icon:play"
+						/>
 						Resume
 					</button>
 					<button
@@ -91,21 +68,10 @@ defineEmits<{
 						class="border-error-soft bg-error-soft text-error hover:bg-error/20 flex flex-1 items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
 						@click="$emit('stop', op.id)"
 					>
-						<svg
-							viewBox="0 0 24 24"
+						<Icon
 							class="h-3.5 w-3.5"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<rect
-								x="5"
-								y="5"
-								width="14"
-								height="14"
-								rx="1.5"
-							/>
-						</svg>
+							name="icon:stop"
+						/>
 						Stop
 					</button>
 				</div>

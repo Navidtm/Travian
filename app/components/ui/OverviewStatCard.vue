@@ -19,19 +19,10 @@ defineProps<{
 				:style="{ backgroundColor: colorVar + '1a', color: colorVar }"
 			>
 				<slot name="icon">
-					<svg
-						viewBox="0 0 24 24"
+					<Icon
 						class="h-4 w-4"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.8"
-					>
-						<circle
-							cx="12"
-							cy="12"
-							r="8"
-						/>
-					</svg>
+						name="icon:circle"
+					/>
 				</slot>
 			</span>
 			<span
@@ -39,26 +30,16 @@ defineProps<{
 				class="inline-flex items-center gap-1 text-[10px] font-medium"
 				:class="trend.direction === 'up' ? 'text-done' : 'text-error'"
 			>
-				<svg
+				<Icon
 					v-if="trend.direction === 'up'"
-					viewBox="0 0 24 24"
 					class="h-3 w-3"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2.5"
-				>
-					<path d="M6 15l6-6 6 6" />
-				</svg>
-				<svg
+					name="icon:chevron-up"
+				/>
+				<Icon
 					v-else
-					viewBox="0 0 24 24"
 					class="h-3 w-3"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2.5"
-				>
-					<path d="M6 9l6 6 6-6" />
-				</svg>
+					name="icon:chevron-down-small"
+				/>
 				{{ trend.label }}
 			</span>
 		</div>

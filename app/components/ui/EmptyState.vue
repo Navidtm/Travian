@@ -18,15 +18,10 @@ withDefaults(
 			class="bg-surface-3 text-text-faint flex h-10 w-10 items-center justify-center rounded-full"
 		>
 			<slot name="icon">
-				<svg
-					viewBox="0 0 24 24"
+				<Icon
 					class="h-5 w-5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.6"
-				>
-					<path d="M4 12h16M4 6h16M4 18h10" />
-				</svg>
+					name="icon:menu"
+				/>
 			</slot>
 		</span>
 		<p class="text-text text-xs font-medium">{{ title }}</p>

@@ -31,16 +31,10 @@ defineEmits<{ (e: 'retry'): void }>();
 			v-if="isRefreshing && status === 'success'"
 			class="text-text-muted bg-surface-2 absolute top-0 right-0 z-10 flex items-center gap-1.5 rounded-full px-2 py-1 text-[10px] shadow-sm"
 		>
-			<svg
-				viewBox="0 0 24 24"
+			<Icon
 				class="h-3 w-3 animate-spin"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-			>
-				<path d="M20 11A8 8 0 1 0 18 16" />
-				<path d="M20 5v6h-6" />
-			</svg>
+				name="icon:refresh"
+			/>
 			Refreshing
 		</div>
 

@@ -60,16 +60,10 @@ const onKeydown = (event: KeyboardEvent) => {
 				class="text-text-faint hover:text-text flex h-5 w-5 shrink-0 items-center justify-center rounded opacity-0 transition-opacity group-hover:opacity-100"
 				@click.stop="startEditing"
 			>
-				<svg
-					viewBox="0 0 24 24"
+				<Icon
 					class="h-3.5 w-3.5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="1.8"
-				>
-					<path d="M12 20h9" />
-					<path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
-				</svg>
+					name="icon:edit"
+				/>
 			</button>
 		</div>
 
@@ -112,27 +106,16 @@ const onKeydown = (event: KeyboardEvent) => {
 					aria-label="Save"
 					@click="save"
 				>
-					<svg
+					<Icon
 						v-if="status === 'saving'"
-						viewBox="0 0 24 24"
 						class="h-3.5 w-3.5 animate-spin"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="M20 11A8 8 0 1 0 18 16" />
-						<path d="M20 5v6h-6" />
-					</svg>
-					<svg
+						name="icon:refresh"
+					/>
+					<Icon
 						v-else
-						viewBox="0 0 24 24"
 						class="h-3.5 w-3.5"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="M20 6 9 17l-5-5" />
-					</svg>
+						name="icon:check"
+					/>
 				</button>
 				<button
 					type="button"
@@ -141,15 +124,10 @@ const onKeydown = (event: KeyboardEvent) => {
 					aria-label="Cancel"
 					@click="cancel"
 				>
-					<svg
-						viewBox="0 0 24 24"
+					<Icon
 						class="h-3.5 w-3.5"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="M18 6 6 18M6 6l12 12" />
-					</svg>
+						name="icon:close"
+					/>
 				</button>
 			</div>
 		</div>

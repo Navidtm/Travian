@@ -77,20 +77,10 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 		</div>
 
 		<div class="relative px-1">
-			<svg
-				viewBox="0 0 24 24"
+			<Icon
 				class="text-text-faint pointer-events-none absolute top-1/2 left-3.5 h-3.5 w-3.5 -translate-y-1/2"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-			>
-				<circle
-					cx="11"
-					cy="11"
-					r="7"
-				/>
-				<path d="m21 21-4.3-4.3" />
-			</svg>
+				name="icon:search"
+			/>
 			<input
 				v-model="query"
 				type="text"

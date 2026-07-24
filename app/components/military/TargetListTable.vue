@@ -39,15 +39,10 @@ defineEmits<{
 					class="bg-text text-bg inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-opacity hover:opacity-90"
 					@click="$emit('add')"
 				>
-					<svg
-						viewBox="0 0 24 24"
+					<Icon
 						class="h-3.5 w-3.5"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="M12 5v14M5 12h14" />
-					</svg>
+						name="icon:plus"
+					/>
 					Add Target
 				</button>
 			</div>

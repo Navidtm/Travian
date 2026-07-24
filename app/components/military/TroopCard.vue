@@ -63,16 +63,10 @@ const trainingStatusLabel = computed(() => {
 						rounded="rounded-xl"
 					>
 						<template #fallback>
-							<svg
-								viewBox="0 0 24 24"
+							<Icon
 								class="h-6 w-6"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="1.6"
-							>
-								<path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z" />
-								<path d="M3 7l9 5 9-5" />
-							</svg>
+								name="icon:troop"
+							/>
 						</template>
 					</AsyncImage>
 				</span>
@@ -94,22 +88,10 @@ const trainingStatusLabel = computed(() => {
 				<span
 					class="bg-surface-3 text-text-faint flex h-10 w-10 items-center justify-center rounded-full"
 				>
-					<svg
-						viewBox="0 0 24 24"
+					<Icon
 						class="h-5 w-5"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.8"
-					>
-						<rect
-							x="5"
-							y="10"
-							width="14"
-							height="10"
-							rx="2"
-						/>
-						<path d="M8 10V7a4 4 0 0 1 8 0v3" />
-					</svg>
+						name="icon:lock"
+					/>
 				</span>
 				<p class="text-text text-xs font-medium">Not Researched</p>
 				<ul
@@ -236,16 +218,11 @@ const trainingStatusLabel = computed(() => {
 				@click="isExpanded = !isExpanded"
 			>
 				View Details
-				<svg
-					viewBox="0 0 24 24"
+				<Icon
 					class="h-3.5 w-3.5 transition-transform"
 					:class="{ 'rotate-180': isExpanded }"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-				>
-					<path d="m6 9 6 6 6-6" />
-				</svg>
+					name="icon:chevron-down"
+				/>
 			</button>
 
 			<div

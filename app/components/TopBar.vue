@@ -6,15 +6,10 @@
 			<div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
 				<div class="flex items-center gap-3">
 					<div class="bg-run-soft text-run flex h-8 w-8 items-center justify-center rounded-lg">
-						<svg
-							viewBox="0 0 24 24"
+						<Icon
 							class="size-4.5"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.8"
-						>
-							<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
-						</svg>
+							name="icon:lightning"
+						/>
 					</div>
 					<div class="hidden sm:block">
 						<p class="text-text text-sm leading-tight font-semibold">Automation Panel</p>
@@ -28,15 +23,7 @@
 					class="inline-flex items-center justify-center gap-2 rounded-lg bg-text px-4 py-2 text-sm font-medium text-bg transition-opacity hover:opacity-90 active:opacity-80"
 					@click="$emit('upgrade')"
 				>
-					<svg
-						viewBox="0 0 24 24"
-						class="h-4 w-4"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="M12 19V5M5 12l7-7 7 7" />
-					</svg>
+					<Icon class="h-4 w-4" name="icon:arrow-up" />
 					Upgrade Everything to Target
 				</button> -->
 			</div>

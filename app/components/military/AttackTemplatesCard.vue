@@ -16,15 +16,10 @@ defineEmits<{ (e: 'create-template'): void }>();
 				class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
 				@click="$emit('create-template')"
 			>
-				<svg
-					viewBox="0 0 24 24"
+				<Icon
 					class="h-3.5 w-3.5"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-				>
-					<path d="M12 5v14M5 12h14" />
-				</svg>
+					name="icon:plus"
+				/>
 				New Template
 			</button>
 		</div>
