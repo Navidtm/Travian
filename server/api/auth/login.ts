@@ -46,7 +46,6 @@ export default defineEventHandler(async event => {
 		if (!token) throw createError({ statusCode: 401, message: 'Session cookie was not returned' });
 
 		setCookie(event, 'token', token, {
-			httpOnly: true,
 			secure: !import.meta.dev,
 			sameSite: 'lax',
 			path: '/',
