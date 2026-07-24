@@ -68,6 +68,7 @@ level for the attacker, defense level for the defender), since the other
 wouldn't affect this particular battle's outcome.
 
 **Visual and UX redesign.**
+
 - Migrated to Tailwind CSS v4's CSS-first `@theme` configuration and the
   official Vite plugin, dropping the old `tailwind.config.js`/PostCSS setup.
 - Added `@lucide/vue` icons throughout (roles, hero, wall, attack type,
