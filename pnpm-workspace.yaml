@@ -4,5 +4,7 @@ allowBuilds:
   sharp: true
   tesseract.js: false
 
+minimumReleaseAge: 0
+
 packages:
   - /sim
