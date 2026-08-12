@@ -1,5 +1,5 @@
 import type { H3Event } from 'h3';
-import { webkit } from 'playwright-core';
+import { chromium } from 'playwright-core';
 
 export const launchTravian = async (event: H3Event, path: string) => {
 	const id = getCookie(event, 'token');
@@ -14,7 +14,7 @@ export const launchTravian = async (event: H3Event, path: string) => {
 	const baseURL = getBaseURL(event);
 	const { domain } = useRuntimeConfig(event);
 
-	const browser = await webkit.launch();
+	const browser = await chromium.launch();
 
 	try {
 		const context = await browser.newContext();

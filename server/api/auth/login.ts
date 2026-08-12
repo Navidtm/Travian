@@ -1,4 +1,4 @@
-import { webkit } from 'playwright-core';
+import { chromium } from 'playwright-core';
 import { loginBodySchema } from '~~/server/schema/auth/login';
 import { loginPath } from '~~/shared/constants/common';
 
@@ -8,7 +8,7 @@ export default defineEventHandler(async event => {
 	const baseURL = getBaseURL(event);
 	const { password, domain } = useRuntimeConfig(event);
 
-	const browser = await webkit.launch();
+	const browser = await chromium.launch();
 
 	try {
 		const context = await browser.newContext();
