@@ -56,10 +56,19 @@ export const getResourses = async (page: Page) => {
 export const getFarmFields = async (page: Page) => {
 	if (!page.url().includes(farmPath)) return [];
 
-	const items = await page.locator('#village_map .level').allTextContents();
+	const elements = await page.locator('#village_map .level').all();
+
+	const items = await Promise.all(
+		elements.map(el =>
+			el
+				.textContent()
+				.then(Number)
+				.catch(_ => 0),
+		),
+	);
 
 	const fields = items.map<ResourceField>((level, n) => ({
-		currentLevel: +level,
+		currentLevel: level,
 		slot: n + 1,
 		type: farmTypes[n + 1]!,
 		id: String(n + 1),
