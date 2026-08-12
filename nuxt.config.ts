@@ -7,14 +7,7 @@ const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
 	dev: true,
-	modules: [
-		'@pinia/nuxt',
-		'@nuxt/fonts',
-		'@nuxt/icon',
-		'@vueuse/nuxt',
-		'@nuxt/image',
-		'@nuxt/test-utils',
-	],
+	modules: ['@pinia/nuxt', '@nuxt/fonts', '@nuxt/icon', '@vueuse/nuxt', '@nuxt/test-utils'],
 
 	ssr: false,
 
