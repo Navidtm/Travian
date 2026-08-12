@@ -1,7 +1,10 @@
 export default defineEventHandler(async event => {
 	const page = await launchTravian(event, '/hero_inventory.php');
 
-	const isAlive = await page.locator('.regeneratebtn').isVisible();
+	const isAlive = await page
+		.locator('.regeneratebtn')
+		.isVisible()
+		.then(v => !v);
 
 	const power = isAlive ? await getTextLocator(page, '.health span').then(Number) : 0;
 

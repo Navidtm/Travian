@@ -7,7 +7,10 @@ export default defineStreamEventHandler<ResourceField[]>(async event => {
 	let fields = await getFarmFields(page);
 	const levels = fields.map(v => v.currentLevel);
 
-	let { target = getBucket(levels) } = await readValidatedBody(event, farmUpgradeBodySchema.parse);
+	const { target = getBucket(levels) } = await readValidatedBody(
+		event,
+		farmUpgradeBodySchema.parse,
+	);
 
 	for (const { id, currentLevel } of fields) {
 		let level = currentLevel;
@@ -18,7 +21,6 @@ export default defineStreamEventHandler<ResourceField[]>(async event => {
 			const sec = await getSecFromClock(page);
 
 			await page.locator('button.build').click();
-			await page.waitForEvent('load');
 
 			await sleep(sec * 1000);
 			await page.reload();

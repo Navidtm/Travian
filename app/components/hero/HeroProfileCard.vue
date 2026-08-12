@@ -1,10 +1,17 @@
 <script setup lang="ts">
-const { data: hero, pending } = useApi('/api/hero/info', {
+const {
+	data: hero,
+	pending,
+	refresh,
+} = useApi('/api/hero/info', {
 	immediate: true,
 });
 
 const { execute: revive } = useApi('/api/hero/revive', {
 	method: 'POST',
+	onResponse: () => {
+		refresh();
+	},
 });
 </script>
 
