@@ -27,7 +27,7 @@ export default defineStreamEventHandler<ResourceField[]>(async event => {
 
 			if (page.url().includes('/dorf1')) {
 				level++;
-				getFarmFields(page).then(event.emit);
+				await getFarmFields(page).then(event.emit);
 			}
 		}
 	}
