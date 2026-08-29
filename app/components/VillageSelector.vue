@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const profile = useProfile();
+const { data: profile, execute, update } = useProfile();
 
 const isOpen = ref(false);
 const rootEl = useTemplateRef('rootEl');
@@ -8,14 +8,14 @@ onClickOutside(rootEl, () => {
 	isOpen.value = false;
 });
 
-const activeVillage = computed(() => profile.data?.villages?.find(v => v.isActive));
+const activeVillage = computed(() => profile.value?.villages?.find(v => v.isActive));
 
 const select = async (id: string) => {
 	isOpen.value = false;
 	villageId.value = id;
 	await move();
-	profile.execute();
-	profile.updateData();
+	execute();
+	update();
 };
 
 const toStringCoordinates = ([x, y]: [number, number]) => `(${x}|${y})`;
@@ -36,7 +36,7 @@ const renameVillage = async (newName: string) => {
 			name: newName,
 		},
 	});
-	await profile.execute();
+	await execute();
 	return data as { success: true };
 };
 </script>
@@ -89,7 +89,7 @@ const renameVillage = async (newName: string) => {
 			class="border-border bg-surface-2 absolute top-[calc(100%+6px)] left-0 z-30 w-full min-w-[16rem] overflow-hidden rounded-lg border py-1 shadow-xl shadow-black/40 sm:w-72"
 		>
 			<button
-				v-for="village in profile.data?.villages"
+				v-for="village in profile?.villages"
 				:key="village.id"
 				type="button"
 				class="hover:bg-surface-3 flex w-full items-center gap-2 px-3 py-2 text-left transition-colors"

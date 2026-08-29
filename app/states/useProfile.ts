@@ -7,10 +7,10 @@ export const useProfile = defineState(() => {
 
 	const farm = useFarm();
 	const building = useBuilding();
-	const updateData = async () => {
+	const update = async () => {
 		await building.execute();
 		await farm.execute();
 	};
 
-	return { data, pending, error, execute, updateData };
+	return { data, pending, error, execute, update };
 });
