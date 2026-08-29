@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineEmits<{ (e: 'upgrade-all'): void }>();
 
-const farm = useFarm();
+const { data, upgrade } = useFarm();
 
 const colorFor: Record<ResourceType, string> = {
 	wood: 'var(--color-wood)',
@@ -20,14 +20,14 @@ const labelFor: Record<ResourceType, string> = {
 const groups = computed(() => {
 	const order: ResourceType[] = ['wood', 'clay', 'iron', 'crop'];
 	return order.map(type => {
-		const items = farm.data?.fields.filter(f => f.type === type);
+		const items = data.value?.fields.filter(f => f.type === type);
 		const pending = items?.filter(f => f.currentLevel < f.targetLevel).length;
 		return { type, items, pending };
 	});
 });
 
 const totalPending = computed(
-	() => farm.data?.fields.filter(f => f.currentLevel < f.targetLevel).length,
+	() => data.value?.fields.filter(f => f.currentLevel < f.targetLevel).length,
 );
 
 const progress = (field: ResourceField) => Math.min(1, field.currentLevel / field.targetLevel);
@@ -47,7 +47,7 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 					type="button"
 					class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
 					:disabled="totalPending === 0"
-					@click="farm.upgrade()"
+					@click="upgrade()"
 				>
 					<Icon name="mdi:arrow-up" />
 					Upgrade All

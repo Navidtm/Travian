@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { capitalize } from 'es-toolkit';
 
-const farm = useFarm();
+const { data: farm } = useFarm();
 
 const resourses = ['wood', 'clay', 'iron', 'crop'] as const;
 const items = computed(() =>
 	resourses.map(r => ({
 		key: r,
 		label: capitalize(r),
-		value: farm.data?.resourses[r].value,
-		rate: farm.data?.production[r],
-		cap: farm.data?.resourses[r].capacity,
+		value: farm.value?.resourses[r].value,
+		rate: farm.value?.production[r],
+		cap: farm.value?.resourses[r].capacity,
 		color: `var(--color-${r})`,
 		soft: `var(--color-${r}-soft)`,
 	})),
@@ -72,7 +72,7 @@ const items = computed(() =>
 			</span>
 			<div class="min-w-0">
 				<p class="text-text truncate font-mono text-sm leading-tight font-semibold">
-					{{ formatNumber(farm.data?.resourses.population.value) }}
+					{{ formatNumber(farm?.resourses.population.value) }}
 				</p>
 				<p class="text-text-muted truncate text-[11px]">Population</p>
 			</div>

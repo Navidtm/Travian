@@ -1,4 +1,4 @@
-export const useProfile = defineStore('profile', () => {
+export const useProfile = defineState(() => {
 	const { data, pending, error, execute } = useApi('/api/profile');
 
 	if (!data.value && !pending.value && !error.value) {

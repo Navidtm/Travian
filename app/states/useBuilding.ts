@@ -1,4 +1,4 @@
-export const useBuilding = defineStore('building', () => {
+export const useBuilding = defineState(() => {
 	const { data, pending, error, execute } = useApi('/api/building');
 
 	const { start } = useApiStream<Building[]>({

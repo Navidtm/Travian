@@ -21,12 +21,12 @@
 	"dependencies": {
 		"@nuxt/fonts": "^0.14.0",
 		"@nuxt/icon": "^2.5.0",
-		"@pinia/nuxt": "^1.0.1",
 		"@tailwindcss/vite": "^4.3.3",
 		"@vueuse/core": "^14.4.0",
 		"@vueuse/nuxt": "^14.4.0",
 		"es-toolkit": "^1.50.0",
 		"nuxt": "^4.5.2",
+		"nuxt-state": "^0.0.2",
 		"sharp": "^0.35.3",
 		"tailwindcss": "^4.3.3",
 		"tesseract.js": "^7.0.0",

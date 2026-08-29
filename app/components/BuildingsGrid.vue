@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const building = useBuilding();
+const { data: building, upgrade } = useBuilding();
 
 const progress = (b: Building) => Math.min(1, b.currentLevel / b.targetLevel);
 
 const activeCount = computed(
-	() => building.data?.filter(b => b.status === 'upgrading' || b.status === 'queued').length,
+	() => building.value?.filter(b => b.status === 'upgrading' || b.status === 'queued').length,
 );
 </script>
 
@@ -18,7 +18,7 @@ const activeCount = computed(
 			<button
 				type="button"
 				class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-				@click="building.upgrade()"
+				@click="upgrade()"
 			>
 				<Icon name="mdi:arrow-up" />
 				Upgrade All
@@ -27,7 +27,7 @@ const activeCount = computed(
 
 		<div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
 			<article
-				v-for="b in building.data"
+				v-for="b in building"
 				:key="b.id"
 				class="border-border-soft bg-surface-2 flex flex-col gap-3 rounded-lg border p-3.5"
 			>

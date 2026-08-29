@@ -1,4 +1,4 @@
-export const useFarm = defineStore('farm', () => {
+export const useFarm = defineState(() => {
 	const { data, pending, error, execute } = useApi('/api/farm');
 
 	const { start } = useApiStream<ResourceField[]>({

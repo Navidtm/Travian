@@ -6,8 +6,8 @@ const renameVillage = (id: string, newName: string) =>
 	}));
 const activeVillageId = computed(() => '');
 
-const profile = useProfile();
-const villages = computed(() => profile.data?.villages);
+const { data: profile } = useProfile();
+const villages = computed(() => profile.value?.villages);
 
 const { setActiveVillage } = useVillageData();
 
@@ -15,7 +15,7 @@ const query = ref('');
 const showResources = ref(false);
 const cardRefs = ref<Record<string, HTMLElement | null>>({});
 
-const farm = useFarm();
+const { data: farm } = useFarm();
 
 const filteredVillages = computed<Village[] | undefined>(() => {
 	const q = query.value.trim().toLowerCase();
@@ -139,16 +139,16 @@ const handleRename = (id: string) => (newName: string) => renameVillage(id, newN
 					class="mt-1.5 grid grid-cols-4 gap-1 font-mono text-[9px]"
 				>
 					<span class="bg-wood-soft text-wood rounded px-1 py-0.5 text-center">{{
-						formatNumber(farm.data?.resourses.wood.value)
+						formatNumber(farm?.resourses.wood.value)
 					}}</span>
 					<span class="bg-clay-soft text-clay rounded px-1 py-0.5 text-center">{{
-						formatNumber(farm.data?.resourses.clay.value)
+						formatNumber(farm?.resourses.clay.value)
 					}}</span>
 					<span class="bg-iron-soft text-iron rounded px-1 py-0.5 text-center">{{
-						formatNumber(farm.data?.resourses.iron.value)
+						formatNumber(farm?.resourses.iron.value)
 					}}</span>
 					<span class="bg-crop-soft text-crop rounded px-1 py-0.5 text-center">{{
-						formatNumber(farm.data?.resourses.crop.value)
+						formatNumber(farm?.resourses.crop.value)
 					}}</span>
 				</div>
 			</div>
