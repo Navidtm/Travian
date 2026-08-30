@@ -63,7 +63,7 @@ export const getFarmFields = async (page: Page) => {
 			el
 				.textContent()
 				.then(Number)
-				.catch(_ => 0),
+				.catch(() => 0),
 		),
 	);
 

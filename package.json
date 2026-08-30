@@ -12,7 +12,7 @@
 		"postinstall": "nuxt prepare",
 		"release": "changelogen --release",
 		"typecheck": "nuxt typecheck",
-		"check": "pnpm lint && pnpm typecheck",
+		"check": "pnpm fmt && pnpm lint && pnpm typecheck",
 		"lint": "oxlint",
 		"lint:fix": "oxlint --fix",
 		"fmt": "oxfmt",

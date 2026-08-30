@@ -6,7 +6,7 @@ export const getTextLocator = async (el: Locator | Page, selector: string) =>
 			.locator(selector)
 			.textContent()
 			.then(String)
-			.catch(_ => '')
+			.catch(() => '')
 	).trim();
 
 export const getFirstTextLocator = async (el: Locator | Page, selector: string) =>
@@ -16,5 +16,5 @@ export const getFirstTextLocator = async (el: Locator | Page, selector: string) 
 			.first()
 			.textContent()
 			.then(String)
-			.catch(_ => '')
+			.catch(() => '')
 	).trim();

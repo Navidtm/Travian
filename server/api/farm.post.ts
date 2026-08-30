@@ -1,4 +1,4 @@
-import { farmUpgradeBodySchema } from '~~/server/schema/farm.post';
+import { farmUpgradeBodySchema as schema } from '~~/server/schema/farm.post';
 
 export default defineStreamEventHandler<ResourceField[]>(async event => {
 	const baseURL = getBaseURL(event);
@@ -7,10 +7,7 @@ export default defineStreamEventHandler<ResourceField[]>(async event => {
 	let fields = await getFarmFields(page);
 	const levels = fields.map(v => v.currentLevel);
 
-	const { target = getBucket(levels) } = await readValidatedBody(
-		event,
-		farmUpgradeBodySchema.parse,
-	);
+	const { target = getBucket(levels) } = await readValidatedBody(event, schema.parse);
 
 	for (const { id, currentLevel } of fields) {
 		let level = currentLevel;
