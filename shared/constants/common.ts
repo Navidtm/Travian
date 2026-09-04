@@ -1,7 +1,6 @@
 export const villagePath = '/dorf2.php';
 export const BuildingPath = '/dorf2.php';
 export const farmPath = '/dorf1.php';
-export const loginPath = '/login.php';
 
 export const villageLevelsId = '#levels';
 export const farmLevelsId = '#village_map';
