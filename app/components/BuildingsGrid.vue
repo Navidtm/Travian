@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: building, upgrade } = useBuilding();
+const { data: building, upgrade, cancel, loading } = useBuilding();
 
 const progress = (b: Building) => Math.min(1, b.currentLevel / b.targetLevel);
 
@@ -17,11 +17,20 @@ const activeCount = computed(
 			</div>
 			<button
 				type="button"
-				class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-				@click="upgrade()"
+				class="border-border bg-surface-2 text-text hover:bg-surface-3/80 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
+				@click="loading ? cancel() : upgrade()"
 			>
-				<Icon name="mdi:arrow-up" />
-				Upgrade All
+				<Icon
+					v-if="loading"
+					class="h-3.5 w-3.5"
+					name="icon:pause"
+				/>
+				<Icon
+					v-else
+					class="h-3.5 w-3.5"
+					name="mdi:arrow-up"
+				/>
+				{{ loading ? 'Stop' : 'Upgrade All' }}
 			</button>
 		</div>
 

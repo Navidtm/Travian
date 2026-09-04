@@ -1,31 +1,29 @@
-import { farmUpgradeBodySchema as schema } from '~~/server/schema/farm.post';
+import { ResourceField } from '~~/shared/types';
 
 export default defineStreamEventHandler<ResourceField[]>(async event => {
 	const baseURL = getBaseURL(event);
 	const page = await launchTravian(event, '/dorf1.php');
 
 	let fields = await getFarmFields(page);
-	const levels = fields.map(v => v.currentLevel);
 
-	const { target = getBucket(levels) } = await readValidatedBody(event, schema.parse);
+	while (true) {
+		const minLevel = Math.min(...fields.map(field => field.currentLevel));
+		if (minLevel == 20) break;
 
-	for (const { id, currentLevel } of fields) {
-		let level = currentLevel;
+		const { id } = fields.find(f => f.currentLevel === minLevel)!;
 
-		while (level < target) {
-			await page.goto(`${baseURL}/build.php?id=${id}`);
+		await page.goto(`${baseURL}/build.php?id=${id}`);
 
-			const sec = await getSecFromClock(page);
+		const sec = await getSecFromClock(page);
 
-			await page.locator('button.build').click();
+		await page.locator('button.build').click();
 
-			await sleep(sec * 1000);
-			await page.reload();
+		await sleep(sec * 1000);
+		await page.reload();
 
-			if (page.url().includes('/dorf1')) {
-				level++;
-				await getFarmFields(page).then(event.emit);
-			}
+		if (page.url().includes('/dorf1')) {
+			fields = await getFarmFields(page);
+			event.emit(fields);
 		}
 	}
 

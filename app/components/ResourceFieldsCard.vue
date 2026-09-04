@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineEmits<{ (e: 'upgrade-all'): void }>();
 
-const { data, upgrade } = useFarm();
+const { data, upgrade, cancel, loading } = useFarm();
 
 const colorFor: Record<ResourceType, string> = {
 	wood: 'var(--color-wood)',
@@ -45,12 +45,20 @@ const progress = (field: ResourceField) => Math.min(1, field.currentLevel / fiel
 				</div>
 				<button
 					type="button"
-					class="border-border bg-surface-2 text-text hover:bg-surface-3 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-					:disabled="totalPending === 0"
-					@click="upgrade()"
+					class="border-border bg-surface-2 text-text hover:bg-surface-3/80 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
+					@click="loading ? cancel() : upgrade()"
 				>
-					<Icon name="mdi:arrow-up" />
-					Upgrade All
+					<Icon
+						v-if="loading"
+						class="h-3.5 w-3.5"
+						name="icon:pause"
+					/>
+					<Icon
+						v-else
+						class="h-3.5 w-3.5"
+						name="mdi:arrow-up"
+					/>
+					{{ loading ? 'Stop' : 'Upgrade All' }}
 				</button>
 			</div>
 

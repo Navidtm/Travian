@@ -1,7 +1,11 @@
 export const useBuilding = defineState(() => {
 	const { data, pending, error, execute } = useApi('/api/building');
 
-	const { start } = useApiStream<Building[]>({
+	const {
+		start,
+		cancel,
+		pending: loading,
+	} = useApiStream<Building[]>({
 		onData: building => {
 			if (data.value) data.value = building;
 		},
@@ -18,5 +22,5 @@ export const useBuilding = defineState(() => {
 		await start('/api/building', { body: { target } });
 	};
 
-	return { data, pending, error, execute, upgrade };
+	return { data, pending, error, execute, upgrade, cancel, loading };
 });
